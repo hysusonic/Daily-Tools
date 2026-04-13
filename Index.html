@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Daily Tools">
+<meta name="theme-color" content="#1D9E75">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231D9E75'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🌿</text></svg>">
+<title>Daily Tools</title>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    const sw=`
+const CACHE='daily-tools-v1';
+const URLS=[location.href];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));
+self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{const rc=res.clone();caches.open(CACHE).then(c=>c.put(e.request,rc));return res;}))));
+`;
+    const blob=new Blob([sw],{type:'application/javascript'});
+    const url=URL.createObjectURL(blob);
+    navigator.serviceWorker.register(url).catch(()=>{});
+  });
+}
+</script>
+<style>
+:root{
+  --green:#1D9E75;--gl:#E1F5EE;--gd:#085041;
+  --blue:#1B5FA6;--bl:#E6F1FB;--bd:#0C447C;
+  --amber:#BA7517;--al:#FAEEDA;--ad:#633806;
+  --purple:#7F77DD;--pl:#EEEDFE;--pd:#3C3489;
+  --pink:#D4537E;--pkl:#F4C0D1;--pkd:#72243E;
+  --red:#E24B4A;--rl:#FCEBEB;--rd:#791F1F;
+  --bg:#F7F7F5;--card:#FFF;--border:#E8E8E4;
+  --tx:#1A1A1A;--t2:#666;--t3:#AAA;
+  --r:16px;--rs:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--tx);font-family:-apple-system,'SF Pro Text',sans-serif;font-size:16px;min-height:100vh}
+body{padding-bottom:96px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:6px 0 max(10px,env(safe-area-inset-bottom));z-index:100}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 1px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit}
+.nb.on{color:var(--green)}
+.nb-ic{font-size:19px;line-height:1}
+.nb-lb{font-size:9px;font-weight:600}
+.pg{display:none;padding:16px 16px 8px}
+.pg.on{display:block}
+.ptitle{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:3px}
+.psub{font-size:14px;color:var(--t2);margin-bottom:16px;line-height:1.5}
+.card{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.ctitle{font-size:17px;font-weight:600;margin-bottom:3px}
+.csub{font-size:13px;color:var(--t2);margin-bottom:12px;line-height:1.5}
+.btn{padding:13px 18px;border-radius:var(--rs);border:1px solid var(--border);background:var(--card);font-size:15px;font-weight:600;cursor:pointer;color:var(--tx);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;transition:opacity .1s}
+.btn:active{opacity:.7}
+.bp{background:var(--green);color:#fff;border-color:var(--green)}
+.bg2{background:none;color:var(--t2);border-color:var(--border)}
+.bfull{width:100%;display:flex}
+.dstrip{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.dnav{display:flex;gap:8px}
+.dnav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--card);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);font-family:inherit}
+.pbar{height:8px;background:var(--border);border-radius:8px;overflow:hidden;margin:8px 0}
+.pfill{height:100%;border-radius:8px;transition:width .4s}
+.ibox{border-radius:var(--rs);padding:12px 14px;font-size:14px;line-height:1.6;margin-bottom:12px;border:1px solid}
+.sectitle{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin:20px 0 8px;padding-bottom:6px;border-bottom:.5px solid var(--border)}
+.wrap{border-radius:var(--r);overflow:hidden;border:.5px solid var(--border);margin-bottom:12px}
+
+/* SUPPS */
+.sghd{display:flex;align-items:center;justify-content:space-between;padding:0 2px 8px;border-bottom:.5px solid var(--border);margin-bottom:4px}
+.sgname{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3)}
+.sgbadge{font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px}
+.si{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border-bottom:.5px solid var(--border);cursor:pointer;-webkit-user-select:none;user-select:none}
+.si:last-child{border-bottom:none}
+.si:active{background:#f5f5f3}
+.si.tk .sin{text-decoration:line-through;color:var(--t3)}
+.si.tk .sidose{color:var(--t3)}
+.sicb{width:30px;height:30px;min-width:30px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.sin{font-size:16px;font-weight:500;line-height:1.3}
+.sidose{font-size:13px;color:var(--t2);margin-top:3px}
+.sinote{font-size:12px;color:var(--t3);margin-top:2px;font-style:italic}
+
+/* WATER */
+.wring{position:relative;width:190px;height:190px;margin:0 auto 16px}
+.wrc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.wroz{font-size:40px;font-weight:700;line-height:1}
+.wrlbl{font-size:13px;color:var(--t2);margin-top:3px}
+.wbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.wbtn{padding:16px 8px;border-radius:var(--r);border:2px solid var(--border);background:var(--card);font-size:16px;font-weight:700;cursor:pointer;text-align:center;font-family:inherit;transition:opacity .1s}
+.wbtn:active{opacity:.7}
+.wbtn .wsub{font-size:11px;font-weight:500;color:var(--t2);display:block;margin-top:3px}
+.wbtn.wfill{background:var(--blue);border-color:var(--blue);color:#fff}
+.wbtn.wfill .wsub{color:rgba(255,255,255,.75)}
+.wlogrow{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--card);border-radius:var(--rs);border:.5px solid var(--border);margin-bottom:6px}
+
+/* WEIGHT */
+.wtin-row{display:flex;gap:12px;align-items:flex-end;margin-bottom:12px}
+.wtlbl{font-size:13px;font-weight:600;color:var(--t2);margin-bottom:6px;display:block}
+.wtin{font-size:36px;font-weight:700;border:none;border-bottom:2.5px solid var(--border);background:none;width:100%;padding:4px 0;font-family:inherit;outline:none;transition:border-color .2s;color:var(--tx)}
+.wtin:focus{border-color:var(--green)}
+.wtstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.wtstat{background:var(--card);border:.5px solid var(--border);border-radius:var(--rs);padding:12px;text-align:center}
+.wtstatv{font-size:20px;font-weight:700}
+.wtstath{font-size:11px;color:var(--t2);margin-top:2px}
+.wtentry{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--card);border-radius:var(--rs);border:.5px solid var(--border);margin-bottom:6px}
+
+/* JOURNAL */
+.pc{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px}
+.pnum{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
+.pq{font-size:18px;font-weight:600;line-height:1.4;color:var(--tx);margin-bottom:8px}
+.ph{font-size:12px;color:var(--t2);margin-bottom:10px;line-height:1.5;font-style:italic}
+.pta{width:100%;min-height:88px;border:.5px solid var(--border);border-radius:var(--rs);padding:12px;font-size:15px;line-height:1.6;font-family:inherit;resize:none;background:var(--bg);color:var(--tx);outline:none;transition:border-color .2s}
+.pta:focus{border-color:var(--green)}
+
+/* THERAPY + REVIEW */
+.trow{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--card);border-bottom:.5px solid var(--border)}
+.trow:last-child{border-bottom:none}
+.ttag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;margin-top:2px;flex-shrink:0}
+.tq{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.4}
+.thint{font-size:12px;color:var(--t2);margin-bottom:7px;line-height:1.4;font-style:italic}
+.tarea{width:100%;border:.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:15px;line-height:1.5;font-family:inherit;resize:none;background:var(--bg);color:var(--tx);outline:none;min-height:72px}
+
+/* HUMMUS */
+.rhdr{background:linear-gradient(135deg,#FAEEDA,#FFF8EE);border-radius:var(--r);padding:20px;margin-bottom:12px;border:.5px solid #FAC775}
+.ingrow{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 16px;background:var(--card);border-bottom:.5px solid var(--border)}
+.ingrow:last-child{border-bottom:none}
+.ingname{font-size:15px;font-weight:500;flex:1}
+.ingamt{font-size:14px;font-weight:700;color:var(--ad);white-space:nowrap;margin-left:12px}
+.steprow{display:flex;gap:14px;padding:14px 16px;background:var(--card);border-bottom:.5px solid var(--border)}
+.steprow:last-child{border-bottom:none}
+.stepnum{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--al);color:var(--ad);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.macrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.mac{background:var(--card);border:.5px solid var(--border);border-radius:var(--rs);padding:10px;text-align:center}
+.macv{font-size:18px;font-weight:700}
+.macl{font-size:11px;color:var(--t2);margin-top:2px}
+.srvrow{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.srvbtn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--card);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+
+.empty{text-align:center;padding:36px 16px;color:var(--t2)}
+
+/* ─── MEALS ─── */
+.meal-slot{margin-bottom:20px}
+.slot-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.slot-name{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.slot-time-badge{font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--bg);color:var(--t2)}
+.meal-opt{border:.5px solid var(--border);border-radius:var(--rs);padding:14px;background:var(--card);cursor:pointer;-webkit-user-select:none;user-select:none;transition:opacity .1s;margin-bottom:8px}
+.meal-opt:last-child{margin-bottom:0}
+.meal-opt:active{opacity:.7}
+.meal-opt.picked{border-width:2px}
+.mo-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.mo-name{font-size:16px;font-weight:600;line-height:1.3;color:var(--tx)}
+.mo-desc{font-size:13px;color:var(--t2);margin-top:3px;line-height:1.4}
+.mo-btn{font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0}
+.mpill{font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--bg);color:var(--t2);display:inline-block}
+.tpill{font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-block}
+.day-totals{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;margin-top:4px}
+.dt-macgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.dtm{background:var(--bg);border-radius:var(--rs);padding:10px}
+.dtm-v{font-size:20px;font-weight:700}
+.dtm-l{font-size:11px;color:var(--t2);margin-top:2px}
+.cal-bar-wrap{margin-bottom:4px}
+.cal-bar-lbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.log-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--card);border-radius:var(--rs);border:.5px solid var(--border);margin-bottom:6px}
+.log-name{font-size:14px;font-weight:600;flex:1;color:var(--tx)}
+.log-meta{font-size:12px;color:var(--t2)}
+.log-cal{font-size:14px;font-weight:700;color:var(--green)}
+.log-del{font-size:16px;color:var(--t3);cursor:pointer;padding:4px 8px}
+
+/* ─── FOOD SUB-TAB ─── */
+.ftab{flex:1;padding:9px 8px;border-radius:12px;border:none;background:none;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--t2);transition:all .15s}
+.ftab.ftab-on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+</style>
+</head>
+<body>
+
+<!-- FOOD (MEALS + SUPPLEMENTS COMBINED) -->
+<div class="pg on" id="pg-food">
+  <!-- internal sub-tab toggle -->
+  <div style="display:flex;gap:0;background:var(--bg);border-radius:var(--r);padding:3px;margin-bottom:16px;border:.5px solid var(--border)">
+    <button id="food-tab-meals" class="ftab ftab-on" onclick="switchFoodTab('meals')">🍽️ Meals</button>
+    <button id="food-tab-supps" class="ftab" onclick="switchFoodTab('supps')">💊 Supplements</button>
+  </div>
+
+  <!-- MEALS SECTION -->
+  <div id="food-meals">
+    <div class="psub" style="margin-bottom:12px">Pick a meal for each slot. Calorie and macro totals update live. Tap "Log eaten" to track what you actually ate.</div>
+    <div id="meal-slots"></div>
+    <div class="day-totals" id="day-totals"></div>
+    <div class="sectitle" style="margin-top:16px">Today's food log</div>
+    <div id="meal-log"></div>
+    <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearMealLog()">Clear log</button>
+  </div>
+
+  <!-- SUPPLEMENTS SECTION -->
+  <div id="food-supps" style="display:none">
+    <div class="dstrip">
+      <div id="sd-lbl" style="font-size:14px;color:var(--t2)"></div>
+      <div class="dnav"><button onclick="sNav(-1)">‹</button><button onclick="sNav(1)">›</button></div>
+    </div>
+    <div id="s-score"></div>
+    <div id="s-list"></div>
+    <button class="btn bg2 bfull" style="margin-top:8px" onclick="resetSupps()">Reset today</button>
+  </div>
+</div>
+
+<!-- WATER -->
+<div class="pg" id="pg-water">
+  <div class="dstrip">
+    <div><div class="ptitle">Water</div><div id="wd-lbl" style="font-size:14px;color:var(--t2);margin-top:2px"></div></div>
+    <div class="dnav"><button onclick="wNav(-1)">‹</button><button onclick="wNav(1)">›</button></div>
+  </div>
+  <div id="w-ring"></div>
+  <div class="wbtns">
+    <button class="wbtn wfill" onclick="addWater(8)">+8 oz<span class="wsub">1 cup</span></button>
+    <button class="wbtn wfill" onclick="addWater(16)">+16 oz<span class="wsub">standard cup</span></button>
+    <button class="wbtn" onclick="addWater(20)">+20 oz<span class="wsub">water bottle</span></button>
+    <button class="wbtn" onclick="addWater(32)">+32 oz<span class="wsub">large bottle</span></button>
+  </div>
+  <div class="card"><div class="ctitle" style="margin-bottom:10px">Log</div><div id="w-log"></div></div>
+</div>
+
+<!-- WEIGHT -->
+<div class="pg" id="pg-weight">
+  <div class="ptitle">Weight</div>
+  <div class="psub">Log weekly — Sunday mornings, after waking, before eating.</div>
+  <div class="card">
+    <div class="ctitle">Log weight</div>
+    <div class="csub">Same day, same time every week for accurate trend data.</div>
+    <div class="wtin-row">
+      <div style="flex:1">
+        <span class="wtlbl">Weight (lbs)</span>
+        <div style="display:flex;align-items:baseline;gap:6px">
+          <input class="wtin" id="wt-in" type="number" placeholder="227" step="0.1" min="100" max="500">
+          <span style="font-size:15px;color:var(--t2);font-weight:500">lbs</span>
+        </div>
+      </div>
+      <button class="btn bp" onclick="logWeight()" style="margin-bottom:4px">Log it</button>
+    </div>
+    <div style="font-size:13px;color:var(--t2)">Start: 227 · Goal: 180 · Pace: ~1 lb/week</div>
+  </div>
+  <div class="wtstats" id="wt-stats"></div>
+  <div class="card" style="padding:16px"><div style="font-size:14px;font-weight:600;color:var(--t2);margin-bottom:12px">Progress chart</div><canvas id="wt-chart" height="180"></canvas></div>
+  <div class="card"><div class="ctitle" style="margin-bottom:10px">History</div><div id="wt-log"></div></div>
+</div>
+
+<!-- JOURNAL -->
+<div class="pg" id="pg-journal">
+  <div class="ptitle">Journal</div>
+  <div class="psub">3 prompts, ~10 min. Rotate weekly so they stay fresh.</div>
+  <div class="dstrip" style="margin-bottom:8px">
+    <div id="j-badge"></div>
+    <div class="dnav"><button onclick="jNav(-1)">‹</button><button onclick="jNav(1)">›</button></div>
+  </div>
+  <div id="j-datelbl" style="font-size:14px;color:var(--t2);margin-bottom:14px"></div>
+  <div id="j-prompts"></div>
+  <button class="btn bp bfull" onclick="saveJournal()">Save entries</button>
+  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearJournal()">Clear today</button>
+</div>
+
+<!-- THERAPY PREP -->
+<div class="pg" id="pg-therapy">
+  <div class="ptitle">Therapy Prep</div>
+  <div class="psub">Fill out Thursday night or Friday morning. 10 minutes makes the hour count.</div>
+  <div id="th-badge" style="margin-bottom:14px"></div>
+  <div id="th-content"></div>
+  <button class="btn bp bfull" onclick="saveTherapy()">Save</button>
+  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearTherapy()">Clear this week</button>
+</div>
+
+<!-- WEEKLY REVIEW -->
+<div class="pg" id="pg-review">
+  <div class="ptitle">Weekly Review</div>
+  <div class="psub">Sunday morning — 20 min, no judgment, one adjustment.</div>
+  <div id="rv-badge" style="margin-bottom:14px"></div>
+  <div id="rv-content"></div>
+  <button class="btn bp bfull" onclick="saveReview()">Save review</button>
+  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearReview()">Clear this week</button>
+</div>
+
+<!-- RECIPES -->
+<div class="pg" id="pg-recipes">
+  <div class="ptitle">Recipes</div>
+  <div class="psub">Tap a recipe to open it. Swap ingredients to match how you make it, and scale servings.</div>
+  <div id="recipe-list"></div>
+  <div id="recipe-detail" style="display:none">
+    <button class="btn bg2" style="margin-bottom:14px;padding:10px 16px" onclick="closeRecipe()">← All recipes</button>
+    <div id="recipe-content"></div>
+  </div>
+</div>
+
+<nav class="bnav">
+  <button class="nb on" onclick="gp('food',this)"><span class="nb-ic">🍽️</span><span class="nb-lb">Food</span></button>
+  <button class="nb" onclick="gp('water',this)"><span class="nb-ic">💧</span><span class="nb-lb">Water</span></button>
+  <button class="nb" onclick="gp('weight',this)"><span class="nb-ic">⚖️</span><span class="nb-lb">Weight</span></button>
+  <button class="nb" onclick="gp('journal',this)"><span class="nb-ic">📓</span><span class="nb-lb">Journal</span></button>
+  <button class="nb" onclick="gp('therapy',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Therapy</span></button>
+  <button class="nb" onclick="gp('review',this)"><span class="nb-ic">📋</span><span class="nb-lb">Review</span></button>
+  <button class="nb" onclick="gp('recipes',this)"><span class="nb-ic">📖</span><span class="nb-lb">Recipes</span></button>
+</nav>
+
+<script>
+// ─── UTILS ───
+const pad=n=>String(n).padStart(2,'0');
+function dKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function now(){return new Date();}
+function addD(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function fmtDate(d){return d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});}
+function fmtTime(ts){return new Date(ts).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+function wkNum(d){const j=new Date(d.getFullYear(),0,1);return Math.ceil(((d-j)/86400000+j.getDay()+1)/7);}
+function wkKey(d){return d.getFullYear()+'W'+pad(wkNum(d));}
+async function sg(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
+async function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function gp(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  if(btn)btn.classList.add('on');
+  window.scrollTo(0,0);
+  // When switching to food tab, re-render both sections
+  if(id==='food'){renderMeals();renderSupps();}
+  if(id==='recipes'){closeRecipe();renderRecipes();}
+}
+function switchFoodTab(tab){
+  document.getElementById('food-meals').style.display=tab==='meals'?'block':'none';
+  document.getElementById('food-supps').style.display=tab==='supps'?'block':'none';
+  document.getElementById('food-tab-meals').classList.toggle('ftab-on',tab==='meals');
+  document.getElementById('food-tab-supps').classList.toggle('ftab-on',tab==='supps');
+}
+function chkSvg(){return'<svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M1.5 6L5.5 10L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
+function saveFeedback(btnSel){
+  const b=document.querySelector(btnSel+' .btn.bp');
+  if(!b)return;const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+}
+
+// ─── SUPPLEMENTS ───
+const SUPPS=[
+  {g:'Morning — with breakfast',t:'7:40 AM',c:'#1D9E75',bg:'#E1F5EE',items:[
+    {id:'d3',n:'Vitamin D3 2000 IU',dose:'1 capsule',note:'NatureWise plant-based — take with fat'},
+    {id:'bc',n:'B-Complex (Jarrow B-Right)',dose:'1 capsule',note:'Methylfolate — NOT folic acid'},
+    {id:'zn',n:'Zinc 30mg',dose:'1 tablet',note:'Nature Made — counters Losartan depletion'},
+    {id:'o3',n:'Omega-3 Fish Oil',dose:'2 softgels',note:'Kirkland EPA-dominant — verify gelatin source'},
+  ]},
+  {g:'Lunch — with food',t:'1:30 PM',c:'#BA7517',bg:'#FAEEDA',items:[
+    {id:'coq',n:'CoQ10 Ubiquinol 100mg',dose:'1 softgel',note:'Qunol — must take with a fat-containing meal'},
+  ]},
+  {g:'Dinner — 2+ hrs from Losartan',t:'7:00 PM',c:'#7F77DD',bg:'#EEEDFE',items:[
+    {id:'los',n:'Losartan 50mg',dose:'1 tablet',note:'Same time every day'},
+    {id:'mg1',n:'Magnesium Glycinate 200mg',dose:'2 capsules',note:"Nature's Bounty — first dose with dinner"},
+  ]},
+  {g:'Bedtime',t:'10:30 PM',c:'#1B5FA6',bg:'#E6F1FB',items:[
+    {id:'mg2',n:'Magnesium Glycinate 200mg',dose:'2 capsules',note:'Second dose — sleep and anxiety support'},
+  ]},
+];
+let sDay=now(),sState={};
+async function initSupps(){const v=await sg('supps-v1');if(v)sState=v;renderSupps();}
+async function saveSupps(){await ss('supps-v1',sState);}
+function sNav(n){sDay=addD(sDay,n);renderSupps();}
+function skKey(d,id){return dKey(d)+'|'+id;}
+function toggleSupp(id){sState[skKey(sDay,id)]=!sState[skKey(sDay,id)];saveSupps();renderSupps();}
+function resetSupps(){SUPPS.forEach(g=>g.items.forEach(s=>{sState[skKey(sDay,s.id)]=false;}));saveSupps();renderSupps();}
+function renderSupps(){
+  const isT=dKey(sDay)===dKey(now());
+  document.getElementById('sd-lbl').textContent=isT?'Today — '+fmtDate(sDay):fmtDate(sDay);
+  let tot=0,tk=0;
+  SUPPS.forEach(g=>g.items.forEach(s=>{tot++;if(sState[skKey(sDay,s.id)])tk++;}));
+  const pct=tot?Math.round(tk/tot*100):0;
+  const sc=pct===100?'#1D9E75':pct>=50?'#BA7517':'#E24B4A';
+  document.getElementById('s-score').innerHTML=`
+    <div class="card" style="margin-bottom:16px;padding:14px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:15px;font-weight:600">${tk} of ${tot} taken</div>
+        <div style="font-size:16px;font-weight:700;color:${sc}">${pct}%</div>
+      </div>
+      <div class="pbar"><div class="pfill" style="width:${pct}%;background:${sc}"></div></div>
+      ${pct===100?'<div style="font-size:13px;color:#1D9E75;margin-top:6px;font-weight:600">✓ All supplements taken</div>':''}
+    </div>`;
+  let html='';
+  SUPPS.forEach(g=>{
+    const gtk=g.items.filter(s=>sState[skKey(sDay,s.id)]).length;
+    html+=`<div style="margin-bottom:20px"><div class="sghd">
+      <span class="sgname">${g.g}</span>
+      <span class="sgbadge" style="background:${g.bg};color:${g.c}">${g.t} · ${gtk}/${g.items.length}</span>
+    </div><div class="wrap" style="margin-bottom:0">`;
+    g.items.forEach(s=>{
+      const tk=!!sState[skKey(sDay,s.id)];
+      html+=`<div class="si${tk?' tk':''}" onclick="toggleSupp('${s.id}')">
+        <div class="sicb" style="${tk?'background:'+g.c+';border-color:'+g.c:''}">
+          ${tk?chkSvg():''}
+        </div>
+        <div style="flex:1">
+          <div class="sin">${s.n}</div>
+          <div class="sidose">${s.dose}</div>
+          ${s.note?'<div class="sinote">'+s.note+'</div>':''}
+        </div>
+      </div>`;
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('s-list').innerHTML=html;
+}
+
+// ─── WATER ───
+const WGOAL=128;
+let wDay=now(),wLog={};
+async function initWater(){const v=await sg('water-v1');if(v)wLog=v;renderWater();}
+async function saveWater(){await ss('water-v1',wLog);}
+function wNav(n){wDay=addD(wDay,n);renderWater();}
+function getDayW(d){return wLog[dKey(d)]||[];}
+function totOz(d){return getDayW(d).reduce((a,e)=>a+e.oz,0);}
+function addWater(oz){
+  const k=dKey(wDay);if(!wLog[k])wLog[k]=[];
+  wLog[k].push({oz,ts:Date.now()});saveWater();renderWater();
+}
+function removeW(idx){
+  const k=dKey(wDay);if(wLog[k])wLog[k].splice(idx,1);
+  saveWater();renderWater();
+}
+function renderWater(){
+  const isT=dKey(wDay)===dKey(now());
+  document.getElementById('wd-lbl').textContent=isT?'Today — '+fmtDate(wDay):fmtDate(wDay);
+  const oz=totOz(wDay);
+  const pct=Math.min(100,Math.round(oz/WGOAL*100));
+  const gal=(oz/128).toFixed(2);
+  const rem=Math.max(0,WGOAL-oz);
+  const c=pct>=100?'#1D9E75':pct>=50?'#1B5FA6':'#BA7517';
+  const R=80,circ=2*Math.PI*R,dash=circ*(pct/100);
+  document.getElementById('w-ring').innerHTML=`
+    <div class="wring">
+      <svg width="190" height="190" viewBox="0 0 190 190" style="display:block">
+        <circle cx="95" cy="95" r="${R}" fill="none" stroke="#E8E8E4" stroke-width="14" transform="rotate(-90 95 95)"/>
+        <circle cx="95" cy="95" r="${R}" fill="none" stroke="${c}" stroke-width="14" stroke-linecap="round"
+          stroke-dasharray="${dash} ${circ}" transform="rotate(-90 95 95)" style="transition:stroke-dasharray .4s"/>
+      </svg>
+      <div class="wrc">
+        <div class="wroz" style="color:${c}">${oz}</div>
+        <div class="wrlbl">oz · ${gal} gal<br>${pct}% of goal</div>
+      </div>
+    </div>
+    <div class="ibox" style="background:${pct>=100?'#E1F5EE':'#E6F1FB'};border-color:${pct>=100?'#9FE1CB':'#B5D4F4'};color:${pct>=100?'#085041':'#0C447C'}">
+      ${pct>=100?'✓ 1 gallon hit! Great work.':'<strong>'+rem+' oz</strong> left to hit 1 gallon. You\'re already great at hydration — keep going.'}
+    </div>`;
+  const entries=getDayW(wDay);
+  let lh='';
+  if(!entries.length){
+    lh='<div style="text-align:center;padding:18px;color:var(--t3);font-size:14px">No water logged yet.</div>';
+  } else {
+    [...entries].reverse().forEach((e,ri)=>{
+      const idx=entries.length-1-ri;
+      lh+=`<div class="wlogrow">
+        <span style="font-size:14px;font-weight:600">${fmtTime(e.ts)}</span>
+        <span style="font-size:15px;font-weight:700;color:#1B5FA6">+${e.oz} oz</span>
+        ${isT?'<span style="font-size:16px;color:var(--t3);cursor:pointer;padding:4px 8px" onclick="removeW('+idx+')">✕</span>':''}
+      </div>`;
+    });
+  }
+  document.getElementById('w-log').innerHTML=lh;
+}
+
+// ─── WEIGHT ───
+const WTGOAL=180,WTSTART=227;
+let wtLog=[];
+async function initWeight(){const v=await sg('weight-v1');if(v)wtLog=v;renderWeight();}
+async function saveWeight(){await ss('weight-v1',wtLog);}
+function logWeight(){
+  const inp=document.getElementById('wt-in');
+  const val=parseFloat(inp.value);
+  if(isNaN(val)||val<100||val>500){inp.style.borderColor='#E24B4A';return;}
+  inp.style.borderColor='#1D9E75';
+  const entry={date:dKey(now()),weight:val,ts:Date.now()};
+  const ti=wtLog.findIndex(e=>e.date===dKey(now()));
+  if(ti>=0)wtLog[ti]=entry; else wtLog.push(entry);
+  wtLog.sort((a,b)=>a.date.localeCompare(b.date));
+  saveWeight();inp.value='';
+  setTimeout(()=>{inp.style.borderColor='var(--border)';},1200);
+  renderWeight();
+}
+function delWt(i){wtLog.splice(i,1);saveWeight();renderWeight();}
+function renderWeight(){
+  const cur=wtLog.length?wtLog[wtLog.length-1].weight:WTSTART;
+  const lost=WTSTART-cur;const toGo=Math.max(0,cur-WTGOAL);
+  document.getElementById('wt-stats').innerHTML=`
+    <div class="wtstat"><div class="wtstatv" style="color:#1D9E75">${cur.toFixed(1)}</div><div class="wtstath">Current lbs</div></div>
+    <div class="wtstat"><div class="wtstatv" style="color:${lost>0?'#1D9E75':'var(--t2)'}">${lost>0?'−':''}${Math.abs(lost).toFixed(1)}</div><div class="wtstath">Lost</div></div>
+    <div class="wtstat"><div class="wtstatv" style="color:#BA7517">${toGo.toFixed(1)}</div><div class="wtstath">To goal</div></div>`;
+  drawChart();
+  let lh='';
+  if(!wtLog.length){
+    lh='<div class="empty"><div style="font-size:40px;margin-bottom:10px">⚖️</div><div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:6px">No weigh-ins yet</div><div style="font-size:14px;line-height:1.5">Log your first weight above.<br>Weigh in Sunday mornings — same time, same conditions.</div></div>';
+  } else {
+    [...wtLog].reverse().forEach((e,ri)=>{
+      const i=wtLog.length-1-ri;
+      const prev=i>0?wtLog[i-1].weight:null;
+      const d=prev!==null?e.weight-prev:null;
+      const ds=d!==null?(d>0?'+':'')+d.toFixed(1)+' lbs':'start';
+      const dc=d===null?'var(--t3)':d<=0?'#1D9E75':'#E24B4A';
+      const ds2=new Date(e.date+'T12:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      lh+=`<div class="wtentry">
+        <div style="font-size:14px;font-weight:600">${ds2}</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:13px;font-weight:600;color:${dc}">${ds}</span>
+          <span style="font-size:17px;font-weight:700;color:#1D9E75">${e.weight.toFixed(1)}</span>
+          <span style="font-size:16px;color:var(--t3);cursor:pointer;padding:4px 8px" onclick="delWt(${i})">✕</span>
+        </div>
+      </div>`;
+    });
+  }
+  document.getElementById('wt-log').innerHTML=lh;
+}
+function drawChart(){
+  const canvas=document.getElementById('wt-chart');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.parentElement.clientWidth-32;
+  const H=180;
+  canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
+  ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
+  if(wtLog.length<2){
+    ctx.fillStyle='#AAA';ctx.font='14px -apple-system,sans-serif';ctx.textAlign='center';
+    ctx.fillText('Log 2+ weigh-ins to see your chart',W/2,H/2);return;
+  }
+  const vals=wtLog.map(e=>e.weight);
+  const minV=Math.min(...vals,WTGOAL)-3,maxV=Math.max(...vals,WTSTART)+3;
+  const p={t:20,b:28,l:42,r:16},cW=W-p.l-p.r,cH=H-p.t-p.b;
+  const xP=i=>p.l+(i/(wtLog.length-1))*cW;
+  const yP=v=>p.t+((maxV-v)/(maxV-minV))*cH;
+  // Goal line
+  ctx.beginPath();ctx.strokeStyle='#1D9E7550';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+  const gy=yP(WTGOAL);ctx.moveTo(p.l,gy);ctx.lineTo(W-p.r,gy);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#1D9E75';ctx.font='11px -apple-system,sans-serif';ctx.textAlign='left';
+  ctx.fillText('Goal 180',p.l+3,gy-5);
+  // Y labels
+  ctx.fillStyle='#AAA';ctx.font='10px -apple-system,sans-serif';ctx.textAlign='right';
+  [180,190,200,210,220,227].forEach(v=>{if(v>=minV&&v<=maxV)ctx.fillText(v,p.l-4,yP(v)+4);});
+  // Line
+  ctx.beginPath();
+  wtLog.forEach((e,i)=>i===0?ctx.moveTo(xP(i),yP(e.weight)):ctx.lineTo(xP(i),yP(e.weight)));
+  ctx.strokeStyle='#1B5FA6';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+  // Dots
+  wtLog.forEach((e,i)=>{
+    const x=xP(i),y=yP(e.weight);
+    ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);ctx.fillStyle='#1B5FA6';ctx.fill();
+    ctx.fillStyle='#1B5FA6';ctx.font='bold 11px -apple-system,sans-serif';ctx.textAlign='center';
+    if(i===0||i===wtLog.length-1||wtLog.length<=8)ctx.fillText(e.weight.toFixed(1),x,y-10);
+  });
+  // X dates
+  ctx.fillStyle='#AAA';ctx.font='10px -apple-system,sans-serif';ctx.textAlign='center';
+  const step=Math.max(1,Math.floor(wtLog.length/5));
+  wtLog.forEach((e,i)=>{
+    if(i%step===0||i===wtLog.length-1)
+      ctx.fillText(new Date(e.date+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}),xP(i),H-6);
+  });
+}
+
+// ─── JOURNAL ───
+const JSETS=[
+  [
+    {q:'How am I feeling right now — physically and emotionally?',h:'Be honest, even if it\'s "scattered" or "flat." Name it to start processing it.'},
+    {q:'What\'s one thing I\'m genuinely grateful for today?',h:'Doesn\'t have to be big. Your dog, your coffee, a quiet morning counts.'},
+    {q:'What is my one real priority today?',h:'Just one. Not a list. The single thing that matters most right now.'},
+  ],
+  [
+    {q:'What\'s been weighing on me lately that I haven\'t said out loud?',h:'This is the page. No performance here. Just you.'},
+    {q:'What did I do well yesterday or this week?',h:'Your brain edits out your wins. Force it to name one.'},
+    {q:'What would make today feel like a success by 10 PM?',h:'Specific and realistic — not "be productive." Something real and achievable.'},
+  ],
+  [
+    {q:'What\'s my energy level, and what does my body actually need today?',h:'Rest, movement, food, connection — tune in before you plan the day.'},
+    {q:'Who do I want to be today — not what do I want to do?',h:'A quality: patient, curious, present, kind to yourself.'},
+    {q:'What pattern am I noticing in myself this week?',h:'A thought loop, a behavior, an emotion that keeps showing up.'},
+  ],
+  [
+    {q:'What am I avoiding, and what would it look like to face it even a little?',h:'You don\'t have to fix it today. Just acknowledging it counts.'},
+    {q:'What would I tell a close friend who was having the same kind of day I\'m having?',h:'Then try telling yourself that same thing.'},
+    {q:'What\'s one thing I can do in the next hour that future me will appreciate?',h:'Can be tiny. Drink water. Reply to that message. Stretch for 5 minutes.'},
+  ],
+];
+let jDay=now(),jState={};
+async function initJournal(){const v=await sg('journal-v1');if(v)jState=v;renderJournal();}
+async function saveJournal(){
+  const wk=wkKey(jDay),dk=dKey(jDay);
+  if(!jState[wk])jState[wk]={};
+  if(!jState[wk][dk])jState[wk][dk]={};
+  document.querySelectorAll('.jta').forEach((ta,i)=>{jState[wk][dk][i]=ta.value;});
+  await ss('journal-v1',jState);
+  const b=document.querySelector('#pg-journal .btn.bp');
+  const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+}
+async function clearJournal(){
+  const wk=wkKey(jDay),dk=dKey(jDay);
+  if(jState[wk])delete jState[wk][dk];
+  await ss('journal-v1',jState);renderJournal();
+}
+function jNav(n){jDay=addD(jDay,n);renderJournal();}
+function renderJournal(){
+  const isT=dKey(jDay)===dKey(now());
+  document.getElementById('j-datelbl').textContent=isT?'Today — '+fmtDate(jDay):fmtDate(jDay);
+  const si=wkNum(jDay)%JSETS.length;
+  const prompts=JSETS[si];
+  const names=['A','B','C','D'];
+  document.getElementById('j-badge').innerHTML=
+    `<span style="font-size:12px;font-weight:700;background:#EEEDFE;color:#3C3489;padding:4px 12px;border-radius:20px">Week ${wkNum(jDay)} · Set ${names[si]}</span>`;
+  const saved=(jState[wkKey(jDay)]&&jState[wkKey(jDay)][dKey(jDay)])||{};
+  let html='';
+  prompts.forEach((p,i)=>{
+    html+=`<div class="pc">
+      <div class="pnum">Prompt ${i+1} of 3</div>
+      <div class="pq">${p.q}</div>
+      <div class="ph">${p.h}</div>
+      <textarea class="pta jta" placeholder="Write anything — even just a word…">${saved[i]||''}</textarea>
+    </div>`;
+  });
+  document.getElementById('j-prompts').innerHTML=html;
+}
+
+// ─── THERAPY PREP ───
+const THQS=[
+  {label:'What has come up most emotionally this week?',hint:'Think Mon–Thu. Anger, sadness, anxiety, flatness, joy — what was most present and why?',tag:'Emotions',c:'#7F77DD',bg:'#EEEDFE'},
+  {label:'What pattern did I notice in myself this week?',hint:'A thought loop, a behavior, a reaction that kept repeating. What triggered it?',tag:'Patterns',c:'#1B5FA6',bg:'#E6F1FB'},
+  {label:'Is there something I keep avoiding thinking about?',hint:'The thing you skip over in your own head. The unfinished sentence.',tag:'Avoidance',c:'#E24B4A',bg:'#FCEBEB'},
+  {label:'What do I want to work on in today\'s session?',hint:'One clear intention. Not "feel better" — something specific to explore or change.',tag:'Intention',c:'#1D9E75',bg:'#E1F5EE'},
+  {label:'What\'s one thing from last session I\'ve been sitting with?',hint:'Any insight, reframe, or homework that stayed with you — or that you pushed away.',tag:'Last session',c:'#BA7517',bg:'#FAEEDA'},
+  {label:'What do I most need my therapist to know today?',hint:'The thing that\'s hardest to say out loud. Write it here first.',tag:'Hard to say',c:'#D4537E',bg:'#F4C0D1'},
+];
+let thState={};
+async function initTherapy(){const v=await sg('therapy-v1');if(v)thState=v;renderTherapy();}
+async function saveTherapy(){
+  const wk=wkKey(now());if(!thState[wk])thState[wk]={};
+  document.querySelectorAll('.thta').forEach((ta,i)=>{thState[wk][i]=ta.value;});
+  await ss('therapy-v1',thState);
+  const b=document.querySelector('#pg-therapy .btn.bp');
+  const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+}
+async function clearTherapy(){delete thState[wkKey(now())];await ss('therapy-v1',thState);renderTherapy();}
+function getNextFri(){
+  const d=now(),day=d.getDay(),days=day<=5?5-day:12-day;
+  const f=addD(d,days);
+  return f.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+}
+function renderTherapy(){
+  const wk=wkKey(now()),saved=thState[wk]||{};
+  document.getElementById('th-badge').innerHTML=
+    `<span style="font-size:12px;font-weight:700;background:#EEEDFE;color:#3C3489;padding:4px 12px;border-radius:20px">Next session: ${getNextFri()} · Week ${wkNum(now())}</span>`;
+  let html='<div class="wrap" style="margin-bottom:12px">';
+  THQS.forEach((q,i)=>{
+    html+=`<div class="trow" style="${i===THQS.length-1?'border-bottom:none':''}">
+      <span class="ttag" style="background:${q.bg};color:${q.c}">${q.tag}</span>
+      <div style="flex:1">
+        <div class="tq">${q.label}</div>
+        <div class="thint">${q.hint}</div>
+        <textarea class="tarea thta" rows="3" placeholder="Write here…">${saved[i]||''}</textarea>
+      </div>
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('th-content').innerHTML=html;
+}
+
+// ─── WEEKLY REVIEW ───
+const RVQS=[
+  {label:'What went well this week?',hint:'Gym sessions, meals, habits, social, sleep — even tiny wins. Your brain needs to hear this.',tag:'Wins',c:'#1D9E75',bg:'#E1F5EE'},
+  {label:'What did I skip or struggle with?',hint:'Not judgment — data. What blocks came up? What kept getting postponed?',tag:'Gaps',c:'#E24B4A',bg:'#FCEBEB'},
+  {label:'How was my energy and mood across the week?',hint:'High days vs low days. Any patterns around certain days, times, or activities?',tag:'Energy',c:'#BA7517',bg:'#FAEEDA'},
+  {label:'Did I move my body enough? What felt good?',hint:'Gym, walks, anything active. What made your body feel good vs heavy?',tag:'Movement',c:'#1B5FA6',bg:'#E6F1FB'},
+  {label:'Did I connect with people I care about?',hint:'Quality interactions. Did you feel isolated? Did you reach out or stay in your shell?',tag:'Connection',c:'#D4537E',bg:'#F4C0D1'},
+  {label:'What\'s one specific thing I\'m adjusting next week?',hint:'Not a full reset. One small concrete thing you\'ll do differently.',tag:'Adjustment',c:'#7F77DD',bg:'#EEEDFE'},
+  {label:'What am I carrying into next week that I want to let go of?',hint:'A resentment, a worry, a story about yourself. Name it here.',tag:'Release',c:'#5C3D1E',bg:'#FAEEDA'},
+];
+let rvState={};
+async function initReview(){const v=await sg('review-v1');if(v)rvState=v;renderReview();}
+async function saveReview(){
+  const wk=wkKey(now());if(!rvState[wk])rvState[wk]={};
+  document.querySelectorAll('.rvta').forEach((ta,i)=>{rvState[wk][i]=ta.value;});
+  await ss('review-v1',rvState);
+  const b=document.querySelector('#pg-review .btn.bp');
+  const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+}
+async function clearReview(){delete rvState[wkKey(now())];await ss('review-v1',rvState);renderReview();}
+function renderReview(){
+  const wk=wkKey(now()),saved=rvState[wk]||{};
+  document.getElementById('rv-badge').innerHTML=
+    `<span style="font-size:12px;font-weight:700;background:#FAEEDA;color:#633806;padding:4px 12px;border-radius:20px">Week ${wkNum(now())} · ${now().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span>`;
+  let html='<div class="wrap" style="margin-bottom:12px">';
+  RVQS.forEach((q,i)=>{
+    html+=`<div class="trow" style="${i===RVQS.length-1?'border-bottom:none':''}">
+      <span class="ttag" style="background:${q.bg};color:${q.c}">${q.tag}</span>
+      <div style="flex:1">
+        <div class="tq">${q.label}</div>
+        <div class="thint">${q.hint}</div>
+        <textarea class="tarea rvta" rows="3" placeholder="Write here…">${saved[i]||''}</textarea>
+      </div>
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('rv-content').innerHTML=html;
+}
+
+// ─── RECIPES ───
+// Each recipe has: id, emoji, title, subtitle, color, bg, baseSrv, macrosPerSrv
+// ingredients: each has name, base qty, unit, scale(bool), alts(array of {name,note} substitutes), note
+// steps: array of strings
+const RECIPES=[
+  {
+    id:'hummus',emoji:'🧆',title:'Homemade Hummus',
+    subtitle:'High protein · High fiber · DASH-friendly · ~10 min active',
+    color:'#BA7517',bg:'#FAEEDA',
+    baseSrv:4,srvUnit:'serving (~¼ cup)',
+    macros:{cal:180,p:7,c:18,f:10,fiber:4},
+    ings:[
+      {n:'Chickpeas, drained & rinsed',base:1,unit:'can (15 oz)',scale:true,note:'Reserve 3 tbsp liquid from the can',
+       alts:[{name:'Dried chickpeas, cooked',note:'Use 1½ cups cooked = 1 can. Soak overnight, boil 1–2 hrs.'},
+             {name:'White beans (cannellini)',note:'Milder flavor, creamier texture. Same quantity.'},
+             {name:'Edamame (shelled, thawed)',note:'Higher protein, greener color. Fun variation.'}]},
+      {n:'Tahini',base:3,unit:'tbsp',scale:true,note:'Stir the jar well before measuring',
+       alts:[{name:'Sunflower seed butter',note:'Nut-free swap, slightly sweeter flavor.'},
+             {name:'Almond butter (natural)',note:'Richer flavor, less authentic but works well.'},
+             {name:'Skip it (plain hummus)',note:'Use an extra tbsp olive oil instead. Less rich.'}]},
+      {n:'Fresh lemon juice',base:2,unit:'tbsp',scale:true,note:'About 1 lemon',
+       alts:[{name:'Bottled lemon juice',note:'Works fine — use same quantity.'},
+             {name:'Lime juice',note:'Brighter, slightly different flavor. Same quantity.'},
+             {name:'White wine vinegar',note:'Use 1 tbsp — sharper, less citrusy.'}]},
+      {n:'Garlic clove, minced',base:1,unit:'clove',scale:false,note:'Use 2 cloves if you love garlic',
+       alts:[{name:'Roasted garlic',note:'Roast 4 cloves at 375°F 20 min — sweeter, mellower.'},
+             {name:'Garlic powder',note:'Use ¼ tsp per clove. Less sharp.'},
+             {name:'Skip garlic',note:'Goes well if you\'re sensitive — still tasty.'}]},
+      {n:'Extra virgin olive oil',base:2,unit:'tbsp',scale:true,note:'Plus extra drizzle for serving',
+       alts:[{name:'Avocado oil',note:'Neutral flavor, higher smoke point.'},
+             {name:'Sesame oil (toasted)',note:'Use 1 tsp only — very strong. Pairs well with the tahini.'},
+             {name:'Skip the oil',note:'Blend in 2 tbsp extra aquafaba instead — lighter, fewer calories.'}]},
+      {n:'Ground cumin',base:0.5,unit:'tsp',scale:false,
+       alts:[{name:'Smoked paprika',note:'Swap or use alongside cumin for smoky flavor.'},
+             {name:'Za\'atar',note:'Use ¾ tsp — earthy, herby, great Middle Eastern variation.'},
+             {name:'Skip it',note:'The base is still good without.'}]},
+      {n:'Salt',base:0.5,unit:'tsp',scale:false,note:'Add to taste',
+       alts:[{name:'Everything bagel seasoning',note:'Use ½ tsp — adds sesame, onion, garlic in one.'},
+             {name:'Low-sodium salt',note:'Use same amount if managing sodium for Losartan.'}]},
+      {n:'Aquafaba (reserved can liquid)',base:2,unit:'tbsp',scale:false,note:'Add 1 tbsp at a time for thickness',
+       alts:[{name:'Cold water',note:'Works just as well for thinning. Use same amount.'},
+             {name:'Broth (low sodium)',note:'Adds a tiny bit of savory depth.'}]},
+      {n:'Paprika (garnish)',base:1,unit:'pinch',scale:false,note:'Optional but classic',
+       alts:[{name:'Smoked paprika',note:'More complex, slightly spicy — very good.'},
+             {name:'Sumac',note:'Tangy, citrusy — authentic Middle Eastern touch.'},
+             {name:'Chili flakes',note:'If you want heat on top.'}]},
+    ],
+    steps:[
+      'Drain and rinse the chickpeas, reserving 3 tablespoons of the liquid from the can.',
+      'Add chickpeas, tahini, lemon juice, garlic, olive oil, cumin, and salt to a food processor.',
+      'Blend for 1 minute. Scrape down the sides with a spatula.',
+      'With the processor running, drizzle in the reserved chickpea liquid 1 tablespoon at a time.',
+      'Blend for another 3–4 minutes until very smooth and creamy. Taste and adjust — more lemon, salt, or tahini as needed.',
+      'Transfer to a bowl. Drizzle with olive oil and dust with paprika. Serve immediately or refrigerate.',
+    ],
+    tips:'<b>Creamier:</b> peel chickpeas before blending (2 min, genuinely worth it) · <b>Storage:</b> airtight, fridge up to 5 days, drizzle oil on top · <b>Freeze:</b> ice cube trays — pop out individual portions as needed',
+  },
+  {
+    id:'tuna',emoji:'🐟',title:'Batch Tuna Salad',
+    subtitle:'No cook · 5 min · 4 days fridge · do not freeze',
+    color:'#1B5FA6',bg:'#E6F1FB',
+    baseSrv:4,srvUnit:'serving (~½ cup)',
+    macros:{cal:220,p:28,c:6,f:9,fiber:1},
+    ings:[
+      {n:'Canned tuna in water, drained',base:4,unit:'cans (5 oz each)',scale:true,note:'Drain well — press with lid before opening fully',
+       alts:[{name:'Canned salmon',note:'Richer flavor, more omega-3s. Same quantity.'},
+             {name:'Tuna in olive oil',note:'Skip the added oil below — richer out of the can.'},
+             {name:'Canned chicken',note:'Milder, kids-friendly swap. Same quantity.'}]},
+      {n:'Plain Greek yogurt',base:3,unit:'tbsp',scale:true,note:'Makes it creamy with extra protein',
+       alts:[{name:'Light mayo only',note:'Use 4 tbsp total mayo, skip the yogurt.'},
+             {name:'Avocado',note:'Mash ½ avocado per batch — creamy, healthy fats, no dairy.'},
+             {name:'Hummus',note:'2 tbsp hummus + 1 tbsp lemon juice — different but surprisingly good.'}]},
+      {n:'Light mayo',base:1,unit:'tbsp',scale:true,
+       alts:[{name:'Regular mayo',note:'Richer — use same amount or slightly less.'},
+             {name:'Olive oil + lemon',note:'Use 1 tbsp each — lighter, no mayo at all.'},
+             {name:'Skip it',note:'Just yogurt works — slightly tangier.'}]},
+      {n:'Dijon mustard',base:1,unit:'tbsp',scale:false,
+       alts:[{name:'Yellow mustard',note:'Milder, sweeter. Use same amount.'},
+             {name:'Whole grain mustard',note:'Adds texture and pop.'},
+             {name:'Hot sauce instead',note:'Skip mustard, add ½ tsp hot sauce for heat.'}]},
+      {n:'Celery, finely diced',base:2,unit:'stalks',scale:false,note:'Adds crunch and volume',
+       alts:[{name:'Cucumber, finely diced',note:'Crunchier, higher water content.'},
+             {name:'Pickles, diced (dill)',note:'Adds brine and crunch — classic tuna melt style.'},
+             {name:'Skip it',note:'Totally fine if you prefer smooth.'}]},
+      {n:'Red onion, finely diced',base:2,unit:'tbsp',scale:false,note:'Soak in cold water 5 min to mellow sharpness',
+       alts:[{name:'Green onion (scallion)',note:'Milder raw, no soaking needed.'},
+             {name:'White onion',note:'Sharper than red — soak it.'},
+             {name:'Onion powder',note:'Use ¼ tsp if you dislike raw onion texture.'}]},
+      {n:'Fresh lemon juice',base:1,unit:'tbsp',scale:false,
+       alts:[{name:'Pickle juice',note:'Adds brine — great if using pickles too.'},
+             {name:'Apple cider vinegar',note:'Use ½ tbsp — tangier, less citrusy.'}]},
+      {n:'Black pepper',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Everything bagel seasoning',note:'Use ½ tsp — replaces salt + pepper + more.'},
+             {name:'Old Bay seasoning',note:'Use ¼ tsp — classic seafood seasoning.'}]},
+    ],
+    steps:[
+      'Drain all tuna cans well — press the lid down firmly to squeeze out excess liquid before opening.',
+      'Flake tuna into a large bowl using a fork until broken up into small pieces.',
+      'Add Greek yogurt, mayo, mustard, and lemon juice. Mix until combined.',
+      'Add celery, red onion, and black pepper. Stir well.',
+      'Taste and adjust — more lemon, mustard, or salt as needed.',
+      'Portion into one airtight container. Lasts 3–4 days in the fridge. Do not freeze.',
+    ],
+    tips:'<b>Serve on:</b> whole wheat bread, crackers, rice cakes, lettuce wraps, or straight from the container · <b>Melt it:</b> spoon on bread, top with cheddar, press on the panini press 3 min · <b>Meal prep:</b> make the full 4-can batch Sunday — covers lunches and snacks all week',
+  },
+  {
+    id:'chicken',emoji:'🍗',title:'Batch Air Fryer Chicken',
+    subtitle:'Batch cook · 20 min hands-off · 4 days fridge · 3 months frozen',
+    color:'#1D9E75',bg:'#E1F5EE',
+    baseSrv:6,srvUnit:'serving (~5–6 oz)',
+    macros:{cal:280,p:38,c:3,f:12,fiber:0},
+    ings:[
+      {n:'Boneless skinless chicken thighs',base:3,unit:'lbs',scale:true,note:'Thighs stay juicy — harder to overcook than breast',
+       alts:[{name:'Chicken breast (boneless)',note:'Leaner but easier to dry out. Pull at exactly 165°F.'},
+             {name:'Bone-in thighs',note:'More flavor — add 5 min to cook time (25–27 min total).'},
+             {name:'Chicken drumsticks',note:'Cheap and flavorful. Air fry 400°F 22–25 min.'}]},
+      {n:'Olive oil',base:2,unit:'tbsp',scale:true,note:'Helps seasoning stick and gets skin crispy',
+       alts:[{name:'Avocado oil',note:'Higher smoke point — slightly better for air fryer.'},
+             {name:'Cooking spray',note:'Spray each piece lightly — less oil, still crispy.'},
+             {name:'Skip oil (teriyaki sauce)',note:'If using a wet marinade, oil is optional.'}]},
+      {n:'Garlic powder',base:1,unit:'tsp',scale:false,
+       alts:[{name:'Fresh garlic, minced',note:'2 cloves per lb — press into the oil before coating.'},
+             {name:'Garlic salt',note:'Use ¾ tsp and skip the separate salt below.'}]},
+      {n:'Smoked paprika',base:1,unit:'tsp',scale:false,
+       alts:[{name:'Cajun seasoning',note:'Use 1½ tsp — replaces paprika, garlic, and pepper in one.'},
+             {name:'Taco seasoning',note:'Use 1 tbsp per lb — direct replacement.'},
+             {name:'Italian seasoning',note:'Use 1 tsp — herby vs smoky.'}]},
+      {n:'Onion powder',base:0.5,unit:'tsp',scale:false,
+       alts:[{name:'Skip it',note:'Not essential if using Cajun or taco seasoning.'}]},
+      {n:'Salt',base:1,unit:'tsp',scale:false,
+       alts:[{name:'Low-sodium salt',note:'Use same amount — DASH-friendly.'},
+             {name:'Soy sauce (low sodium)',note:'Brush on instead of salt — adds umami.'}]},
+      {n:'Black pepper',base:0.5,unit:'tsp',scale:false,
+       alts:[{name:'White pepper',note:'Milder, less visible specks.'},
+             {name:'Cayenne instead',note:'Use ¼ tsp for heat.'}]},
+    ],
+    steps:[
+      'Pat chicken dry with paper towels — moisture is the enemy of crispiness.',
+      'Coat chicken in olive oil. Mix all dry seasonings together and rub evenly over every piece.',
+      'Preheat air fryer to 400°F for 3 minutes.',
+      'Arrange chicken in a single layer in the basket — do not stack. Work in batches if needed.',
+      'Air fry at 400°F for 18–22 minutes, flipping halfway through at the 10-minute mark.',
+      'Check internal temperature — must reach 165°F. Thighs are forgiving; breast pulls at exactly 165°F.',
+      'Rest 5 minutes before slicing or shredding. Portion into clear containers, label with date.',
+    ],
+    tips:'<b>Two-flavor hack:</b> season half the batch with taco seasoning, half with Cajun — two completely different meals from one cook · <b>Reheat:</b> air fryer 375°F 6–8 min to get crispy again, or microwave 90 sec · <b>Freeze:</b> portion into individual bags before freezing — pull one out the night before',
+  },
+  {
+    id:'beef',emoji:'🥩',title:'Taco-Seasoned Ground Beef',
+    subtitle:'Batch cook · 15 min · 4 days fridge · 3 months frozen',
+    color:'#BA7517',bg:'#FAEEDA',
+    baseSrv:5,srvUnit:'serving (~5–6 oz)',
+    macros:{cal:290,p:32,c:4,f:16,fiber:1},
+    ings:[
+      {n:'Lean ground beef (93/7)',base:1.5,unit:'lbs',scale:true,note:'93% lean keeps it from getting greasy',
+       alts:[{name:'Ground turkey (93% lean)',note:'Lower fat, similar macros. Use same seasoning.'},
+             {name:'Ground chicken',note:'Mildest flavor, leanest option. Works well.'},
+             {name:'80/20 ground beef',note:'More fat and flavor — drain extra thoroughly.'}]},
+      {n:'Taco seasoning packet',base:1,unit:'packet (1 oz)',scale:false,note:'Or use the homemade mix below',
+       alts:[{name:'Homemade mix: cumin + chili powder + garlic powder',note:'1 tsp cumin + 1 tsp chili powder + ½ tsp garlic powder + ½ tsp onion powder + ¼ tsp paprika per lb.'},
+             {name:'Cajun seasoning',note:'Use 1½ tsp per lb — different flavor profile but just as good.'},
+             {name:'Italian seasoning + marinara',note:'Skip taco vibe — use for pasta or rice bowls.'}]},
+      {n:'Water',base:0.5,unit:'cup',scale:false,note:'Helps the seasoning coat evenly and simmers into the meat',
+       alts:[{name:'Beef broth (low sodium)',note:'More flavor depth — same amount.'},
+             {name:'Tomato juice or salsa',note:'½ cup — saucy, great for taco bowls.'}]},
+      {n:'Olive oil',base:1,unit:'tsp',scale:false,note:'Only needed if using very lean meat',
+       alts:[{name:'Skip it',note:'80/20 beef has enough fat — no oil needed.'},
+             {name:'Cooking spray',note:'Just to grease the pan.'}]},
+    ],
+    steps:[
+      'Heat a large skillet over medium-high. Add olive oil if using very lean meat.',
+      'Add ground beef. Break it up with a spatula into small pieces as it cooks.',
+      'Cook 7–9 minutes until no pink remains. Drain excess fat by tilting pan and spooning off.',
+      'Add taco seasoning and water. Stir to coat evenly.',
+      'Simmer on medium-low for 5 minutes until liquid absorbs and seasoning is well distributed.',
+      'Taste and adjust seasoning. Cool slightly, then portion into 2–3 airtight containers.',
+    ],
+    tips:'<b>Bowl base:</b> over rice + black beans + salsa + shredded cheese = done in 3 min · <b>Wrap it:</b> in a corn or whole wheat tortilla on the panini press = taco wrap in 5 min · <b>Freeze tip:</b> portion into single-serving freezer bags flat — thaw in microwave 2 min from frozen',
+  },
+  {
+    id:'fish',emoji:'🐠',title:'Air Fryer Fish Fillets',
+    subtitle:'Dinner option · 11 min · fresh only — do not freeze after cooking',
+    color:'#1B5FA6',bg:'#E6F1FB',
+    baseSrv:2,srvUnit:'serving (2 fillets)',
+    macros:{cal:320,p:44,c:14,f:9,fiber:1},
+    ings:[
+      {n:'Tilapia fillets',base:2,unit:'fillets (~5–6 oz each)',scale:true,note:'Pat completely dry before coating',
+       alts:[{name:'Catfish fillets',note:'Stronger flavor, slightly fattier. Same cook time.'},
+             {name:'Cod fillets',note:'Flakier, milder. Watch closely — done faster, ~9 min.'},
+             {name:'Mahi-mahi',note:'Firmer texture, meatier. Add 1–2 min.'}]},
+      {n:'Yellow cornmeal',base:3,unit:'tbsp',scale:true,note:'Creates the crispy crust',
+       alts:[{name:'Panko breadcrumbs',note:'Crispier, lighter coat. Same amount.'},
+             {name:'Crushed crackers (Triscuit)',note:'Nutty flavor — pulse in a bag until fine.'},
+             {name:'Almond flour',note:'Lower carb option. Use same amount.'}]},
+      {n:'Cajun seasoning',base:1,unit:'tsp',scale:false,note:'Mixed into the cornmeal',
+       alts:[{name:'Old Bay seasoning',note:'Classic seafood blend — same amount.'},
+             {name:'Garlic powder + paprika + salt',note:'½ tsp each — basic but solid.'},
+             {name:'Lemon pepper seasoning',note:'Use 1 tsp — bright and clean flavor.'}]},
+      {n:'Salt',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Skip (if Cajun seasoning has salt)',note:'Most Cajun blends already include salt.'}]},
+      {n:'Cooking spray or olive oil',base:1,unit:'light coat',scale:false,note:'Spray both sides of coated fish',
+       alts:[{name:'Avocado oil spray',note:'Higher smoke point — great for air fryer.'},
+             {name:'Brush with ½ tsp olive oil',note:'Use a pastry brush for even coverage.'}]},
+    ],
+    steps:[
+      'Pat fillets completely dry with paper towels on both sides — moisture ruins the crust.',
+      'Mix cornmeal, Cajun seasoning, and salt on a flat plate.',
+      'Press each fillet into the cornmeal mixture, coating both sides firmly. Shake off excess.',
+      'Preheat air fryer to 400°F for 3 minutes.',
+      'Spray the air fryer basket lightly with cooking spray. Place fillets in a single layer — do not overlap.',
+      'Spray the tops of the fillets lightly with cooking spray.',
+      'Air fry at 400°F for 10–12 minutes, flipping carefully at the 6-minute mark.',
+      'Fish is done when it flakes easily with a fork and the coating is golden and crisp.',
+      'Serve immediately with tartar sauce, coleslaw, and rice.',
+    ],
+    tips:'<b>No flip method:</b> thicker fillets (¾"+) can skip the flip if your air fryer heats from the top · <b>Serve with:</b> coleslaw + rice + tartar sauce + lemon wedge + hot sauce · <b>Don\'t fridge overnight:</b> fried fish gets soggy — best eaten fresh the same night · <b>Fish night frequency:</b> aim for 1–2× per week for omega-3s',
+  },
+  {
+    id:'wrap',emoji:'🌯',title:'Panini Beef Wrap',
+    subtitle:'Dinner option · 5 min · panini press required',
+    color:'#993556',bg:'#FBEAF0',
+    baseSrv:1,srvUnit:'wrap',
+    macros:{cal:720,p:48,c:62,f:28,fiber:8},
+    ings:[
+      {n:'Batch taco beef',base:7,unit:'oz',scale:true,note:'From fridge — microwave 45 sec to warm slightly before pressing',
+       alts:[{name:'Batch air fryer chicken (shredded)',note:'Swap protein — different flavor, same method.'},
+             {name:'Canned black beans (drained)',note:'Plant-based swap. Use 6 oz.'},
+             {name:'Scrambled eggs',note:'Breakfast wrap version — 3 eggs.'}]},
+      {n:'Large whole wheat tortilla',base:1,unit:'tortilla (burrito size)',scale:true,note:'Mission Carb Balance or similar — must be burrito size',
+       alts:[{name:'Corn tortilla (2 small)',note:'Lower carb but smaller — use 2. Won\'t press as cleanly.'},
+             {name:'Regular flour tortilla',note:'Softer result, fewer vitamins.'},
+             {name:'Spinach tortilla',note:'Same size, extra micronutrients, green color.'}]},
+      {n:'Shredded cheddar cheese',base:3,unit:'tbsp',scale:false,note:'Inside the wrap — melts during pressing',
+       alts:[{name:'Pepper jack cheese',note:'Adds heat — great with taco beef.'},
+             {name:'Mexican blend shredded',note:'More complex melt, same amount.'},
+             {name:'Skip cheese',note:'Lower fat — add extra avocado instead.'}]},
+      {n:'Salsa',base:2,unit:'tbsp',scale:false,note:'Keep it modest — too much liquid = soggy wrap',
+       alts:[{name:'Pico de gallo',note:'Less liquid than salsa — actually better for a press.'},
+             {name:'Hot sauce only',note:'Use 1 tsp — pure heat, no moisture.'},
+             {name:'Greek yogurt (instead of salsa)',note:'Creamy, higher protein alternative.'}]},
+      {n:'Avocado',base:0.25,unit:'avocado, sliced',scale:false,note:'Added after pressing — heat destroys it',
+       alts:[{name:'Guacamole',note:'2 tbsp — same healthy fat, more flavor.'},
+             {name:'Avocado oil drizzle',note:'1 tsp — subtle richness without bulk.'},
+             {name:'Skip it',note:'Still great — saves ~60 cal.'}]},
+    ],
+    steps:[
+      'Preheat the panini press for 3 minutes on medium-high.',
+      'Warm the beef in the microwave for 45 seconds so it presses hot all the way through.',
+      'Lay the tortilla flat. Add beef to the center-lower third. Top with cheese and salsa — keep a 1" border.',
+      'Fold the sides in first, then roll tightly from the bottom up like a burrito.',
+      'Place seam-side down on the press. Press firmly and hold for 30 seconds, then let it cook.',
+      'Press 3–4 minutes until grill marks appear and the exterior is crisp.',
+      'Remove and rest 1 minute. Slice diagonally. Add avocado slices on the side or on top.',
+    ],
+    tips:'<b>Crispier:</b> brush the outside of the tortilla with a very thin coat of olive oil before pressing · <b>Don\'t overfill:</b> too much filling = messy explosion. Less is more with a press · <b>Chicken version:</b> exact same method with batch chicken — shred it finer for the best result · <b>Quesadilla variation:</b> use 2 corn tortillas flat, fill, press 2–3 min — easier than a burrito fold',
+  },
+  {
+    id:'eggs',emoji:'🥚',title:'Batch Hard Boiled Eggs',
+    subtitle:'Batch cook · 15 min total · 5 days fridge · do not freeze',
+    color:'#BA7517',bg:'#FAEEDA',
+    baseSrv:12,srvUnit:'egg',
+    macros:{cal:78,p:6,c:1,f:5,fiber:0},
+    ings:[
+      {n:'Large eggs',base:12,unit:'eggs',scale:true,note:'Cold from the fridge — straight in',
+       alts:[{name:'Medium eggs',note:'Reduce cook time by 1 minute.'},
+             {name:'Air fryer method instead',note:'250°F for 15–16 min — peels even easier. Ice bath immediately after.'}]},
+      {n:'Water (to cover)',base:1,unit:'pot full',scale:false,note:'Eggs should be fully submerged by 1 inch',
+       alts:[]},
+      {n:'Ice + cold water (ice bath)',base:1,unit:'large bowl',scale:false,note:'Stops cooking instantly — essential for easy peeling',
+       alts:[{name:'Running cold tap water',note:'Works but takes longer. Ice bath is better.'}]},
+    ],
+    steps:[
+      'Place eggs in a single layer in a pot. Cover with cold water by at least 1 inch.',
+      'Bring to a full rolling boil over high heat — do not cover.',
+      'Once boiling, reduce to medium. Cook exactly 10 minutes for firm yolks.',
+      'While eggs cook, fill a large bowl with ice and cold water.',
+      'Transfer eggs immediately to the ice bath using a slotted spoon. Let sit 5 minutes.',
+      'Peel under cold running water — the shell slips off much more easily.',
+      'Store unpeeled in a covered container in the fridge for up to 5 days. Label with the date.',
+    ],
+    tips:'<b>Perfect yolk:</b> 10 min = fully set with no green ring · <b>Easier peel:</b> older eggs peel easier than very fresh ones — buy eggs a few days before boiling · <b>Air fryer hack:</b> 250°F for 15–16 min, ice bath right after — no water, no pot, peels like a dream · <b>Grab-and-go:</b> keep 2–3 peeled and ready in a small container for instant protein',
+  },
+  {
+    id:'broccoli',emoji:'🥦',title:'Batch Air Fryer Broccoli',
+    subtitle:'Batch side · 12 min · 4 days fridge · do not freeze after cooking',
+    color:'#1D9E75',bg:'#E1F5EE',
+    baseSrv:4,srvUnit:'serving (~1 cup)',
+    macros:{cal:80,p:3,c:8,f:4,fiber:3},
+    ings:[
+      {n:'Broccoli crowns',base:2,unit:'large heads (~4 cups florets)',scale:true,note:'Cut into similar-sized florets so they cook evenly',
+       alts:[{name:'Frozen broccoli florets',note:'No cutting needed — air fry 375°F 14–16 min from frozen, no thawing.'},
+             {name:'Broccolini',note:'Thinner stalks — reduce time to 8–10 min.'},
+             {name:'Cauliflower florets',note:'Same method, same time — great swap.'}]},
+      {n:'Olive oil',base:2,unit:'tbsp',scale:true,note:'Toss to coat every floret',
+       alts:[{name:'Avocado oil spray',note:'Lighter coat, higher smoke point.'},
+             {name:'Sesame oil (1 tsp) + olive oil (1 tbsp)',note:'Adds nutty depth — great for Asian bowls.'},
+             {name:'Cooking spray only',note:'Lightest option — fewer calories.'}]},
+      {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,
+       alts:[{name:'Fresh garlic, minced (2 cloves)',note:'Toss with the oil — more pungent.'},
+             {name:'Everything bagel seasoning',note:'Use ¾ tsp — replaces garlic, adds sesame and onion.'}]},
+      {n:'Salt',base:0.5,unit:'tsp',scale:false,
+       alts:[{name:'Low-sodium soy sauce (1 tsp)',note:'Adds umami — less salt but more flavor.'},
+             {name:'Everything bagel seasoning',note:'Already salted — skip separate salt.'}]},
+      {n:'Black pepper',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Red pepper flakes',note:'Use ¼ tsp for heat instead.'},
+             {name:'Skip it',note:'Salt + garlic is enough.'}]},
+    ],
+    steps:[
+      'Cut broccoli into florets of similar size — this is the key to even cooking.',
+      'Toss thoroughly in olive oil, garlic powder, salt, and pepper in a large bowl until every piece is coated.',
+      'Preheat air fryer to 375°F for 2 minutes.',
+      'Add broccoli to the basket in a single layer. It can be slightly overlapping — it shrinks as it cooks.',
+      'Air fry at 375°F for 10–12 minutes, shaking the basket halfway through at 6 minutes.',
+      'Done when tips are lightly charred and stems are fork-tender. A little char = flavor.',
+      'Cool completely before storing. Portion into a container — lasts 4 days in the fridge.',
+    ],
+    tips:'<b>Reheat:</b> air fryer 350°F 4–5 min gets it crispy again — microwave makes it soggy · <b>Flavor upgrade:</b> squeeze lemon juice over it right before serving · <b>Batch size:</b> cook in 2 rounds if needed — overcrowding makes it steam instead of roast · <b>Char is good:</b> the slightly crispy dark tips have the most flavor — don\'t pull it too early',
+  },
+  {
+    id:'coleslaw',emoji:'🥗',title:'Fish Night Coleslaw',
+    subtitle:'No cook · 5 min · pairs with air fryer fish · 3 days fridge',
+    color:'#639922',bg:'#EAF3DE',
+    baseSrv:4,srvUnit:'serving (~½ cup)',
+    macros:{cal:60,p:1,c:9,f:2,fiber:2},
+    ings:[
+      {n:'Coleslaw mix (pre-shredded)',base:1,unit:'bag (14 oz)',scale:true,note:'ALDI Little Salad Bar Coleslaw Mix',
+       alts:[{name:'Green cabbage, shredded',note:'Half a small head — shred thin with a knife or mandoline.'},
+             {name:'Broccoli slaw mix',note:'Crunchier, more nutrients. Same method.'},
+             {name:'Red cabbage + carrot (homemade mix)',note:'½ cup each — more color, more nutrition.'}]},
+      {n:'Apple cider vinegar',base:2,unit:'tbsp',scale:true,note:'The base of the dressing — tangy and DASH-friendly',
+       alts:[{name:'White wine vinegar',note:'Milder tang, same amount.'},
+             {name:'Lemon juice',note:'2 tbsp — citrusy version, very fresh.'},
+             {name:'Rice vinegar',note:'Slightly sweeter — good for Asian-style slaw.'}]},
+      {n:'Light mayo',base:1,unit:'tbsp',scale:true,
+       alts:[{name:'Greek yogurt',note:'Same amount — higher protein, tangier.'},
+             {name:'Avocado oil mayo',note:'Richer, no mayo guilt. Same amount.'},
+             {name:'Skip mayo (vinegar slaw)',note:'Just ACV + honey + pepper — fully oil-free.'}]},
+      {n:'Honey',base:1,unit:'tsp',scale:false,note:'Balances the vinegar',
+       alts:[{name:'Sugar (white or brown)',note:'Same amount — dissolve in vinegar first.'},
+             {name:'Maple syrup',note:'Slightly richer sweetness.'},
+             {name:'Skip sweetener',note:'Pure tang — works great with spicy fish.'}]},
+      {n:'Salt',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Celery salt',note:'Use ¼ tsp — adds classic coleslaw flavor.'}]},
+      {n:'Black pepper',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Celery seeds',note:'Use ¼ tsp — classic Southern coleslaw addition.'}]},
+    ],
+    steps:[
+      'Whisk together apple cider vinegar, mayo, honey, salt, and pepper in a large bowl.',
+      'Add the coleslaw mix and toss thoroughly until every piece is coated.',
+      'Taste and adjust — more vinegar for tang, more honey for sweetness, more salt as needed.',
+      'Let sit 5 minutes before serving so the cabbage softens slightly.',
+      'Serve alongside air fryer fish with tartar sauce and rice.',
+    ],
+    tips:'<b>Make ahead:</b> dress it up to 3 hours before eating — it improves as it sits · <b>Crunchier:</b> dress it right before serving if you prefer crisp slaw · <b>Storage:</b> 3 days max in the fridge — gets watery past that · <b>Asian version:</b> swap ACV for rice vinegar, add ½ tsp sesame oil and 1 tsp soy sauce — great with salmon',
+  },
+  {
+    id:'shake',emoji:'🥤',title:'Protein Shake',
+    subtitle:'Snack 2 option · 2 min · post-workout or afternoon refuel',
+    color:'#7F77DD',bg:'#EEEDFE',
+    baseSrv:1,srvUnit:'shake',
+    macros:{cal:370,p:35,c:36,f:10,fiber:2},
+    ings:[
+      {n:'Whey protein powder (vanilla)',base:1,unit:'scoop (~30g)',scale:true,note:'Transparent Labs Grass-Fed Vanilla — avoid chocolate (cadmium)',
+       alts:[{name:'Chocolate whey',note:'Use only occasionally — chocolate has higher heavy metals in testing.'},
+             {name:'Casein protein',note:'Slower digestion — better as a meal replacement or before bed.'},
+             {name:'Plant-based protein',note:'Pea + rice blend. Use same amount. Slightly grainier texture.'}]},
+      {n:'2% milk',base:1,unit:'cup (8 oz)',scale:false,note:'Adds protein + calcium + fat for absorption',
+       alts:[{name:'Whole milk',note:'Creamier, ~30 more calories. Great post-workout.'},
+             {name:'Unsweetened almond milk',note:'~40 cal less. Lower protein.'},
+             {name:'Water only',note:'Use 10–12 oz. Less creamy but lower calorie.'},
+             {name:'Oat milk',note:'Creamier than almond, slightly more carbs.'}]},
+      {n:'Banana (½, frozen)',base:0.5,unit:'banana',scale:false,note:'Frozen = thicker, colder shake — much better than fresh',
+       alts:[{name:'Frozen mango chunks',note:'¼ cup — tropical, similar sweetness.'},
+             {name:'Frozen berries',note:'¼ cup — lower sugar, more antioxidants.'},
+             {name:'Skip fruit',note:'Lower carb version — add ½ tsp honey instead if needed.'}]},
+      {n:'Natural peanut butter',base:1,unit:'tbsp',scale:false,note:'Adds fat + flavor + satiety',
+       alts:[{name:'Almond butter',note:'Slightly lighter flavor, same fat/protein ratio.'},
+             {name:'PB2 powder',note:'1 tbsp — much lower fat (4g vs 8g). Less rich.'},
+             {name:'Skip nut butter',note:'Saves ~100 cal. Use if you\'re close to daily fat goal.'}]},
+      {n:'Ice',base:4,unit:'cubes',scale:false,note:'Blend last for best texture',
+       alts:[{name:'Frozen banana only (no ice)',note:'The frozen fruit is enough if banana is very frozen.'},
+             {name:'Cold milk only (no ice)',note:'Skip ice — just use extra cold milk.'}]},
+    ],
+    steps:[
+      'Add liquid to the blender first — this protects the blade and prevents powder clumping.',
+      'Add protein powder, then banana, then peanut butter.',
+      'Add ice last.',
+      'Blend 20–30 seconds on high until completely smooth.',
+      'Drink immediately — protein shakes get foamy and separate if you wait.',
+    ],
+    tips:'<b>Post-gym timing:</b> drink within 30–45 min of finishing your workout for optimal muscle protein synthesis · <b>Thicker:</b> add more frozen fruit or use less liquid · <b>Thinner:</b> add 2 oz more milk · <b>Pre-batch:</b> you can blend ahead and refrigerate up to 4 hours — shake well before drinking · <b>Losartan note:</b> take your CoQ10 with this shake since it contains fat from the peanut butter',
+  },
+];
+
+let activeRecipe=null;
+let recipeSrvs={};  // recipe id → current servings
+let recipeSwaps={}; // recipe id + ing index → selected alt index (-1 = default)
+
+function openRecipe(id){
+  activeRecipe=id;
+  if(!recipeSrvs[id]) recipeSrvs[id]=RECIPES.find(r=>r.id===id).baseSrv;
+  document.getElementById('recipe-list').style.display='none';
+  document.getElementById('recipe-detail').style.display='block';
+  window.scrollTo(0,0);
+  renderRecipeDetail();
+}
+function closeRecipe(){
+  activeRecipe=null;
+  document.getElementById('recipe-list').style.display='block';
+  document.getElementById('recipe-detail').style.display='none';
+  window.scrollTo(0,0);
+}
+function changeRecipeSrv(delta){
+  const r=RECIPES.find(x=>x.id===activeRecipe);
+  recipeSrvs[activeRecipe]=Math.max(1,Math.min(20,recipeSrvs[activeRecipe]+delta));
+  renderRecipeDetail();
+}
+function swapIng(ingIdx,altIdx){
+  const key=activeRecipe+'|'+ingIdx;
+  recipeSwaps[key]=altIdx;
+  renderRecipeDetail();
+}
+
+function renderRecipes(){
+  let html='';
+  RECIPES.forEach(r=>{
+    html+=`<div onclick="openRecipe('${r.id}')" style="background:${r.bg};border:1.5px solid ${r.color}30;border-radius:var(--r);padding:18px 20px;margin-bottom:12px;cursor:pointer;-webkit-user-select:none;user-select:none;display:flex;align-items:center;gap:16px;transition:opacity .1s" ontouchstart="this.style.opacity='.75'" ontouchend="this.style.opacity='1'">
+      <div style="font-size:40px;line-height:1;flex-shrink:0">${r.emoji}</div>
+      <div style="flex:1">
+        <div style="font-size:18px;font-weight:700;color:${r.color};margin-bottom:3px">${r.title}</div>
+        <div style="font-size:13px;color:var(--t2);line-height:1.5">${r.subtitle}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+          <span style="font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--card);color:${r.color}">${r.macros.cal} cal/srv</span>
+          <span style="font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--card);color:var(--t2)">${r.macros.p}g protein</span>
+          <span style="font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--card);color:var(--t2)">base ${r.baseSrv} srv</span>
+        </div>
+      </div>
+      <div style="font-size:22px;color:${r.color}30">›</div>
+    </div>`;
+  });
+  document.getElementById('recipe-list').innerHTML=html;
+}
+
+function renderRecipeDetail(){
+  const r=RECIPES.find(x=>x.id===activeRecipe);
+  const srv=recipeSrvs[r.id];
+  const ratio=srv/r.baseSrv;
+
+  let html=`
+    <div style="background:${r.bg};border-radius:var(--r);padding:20px;margin-bottom:12px;border:1px solid ${r.color}30">
+      <div style="font-size:44px;margin-bottom:8px">${r.emoji}</div>
+      <div style="font-size:22px;font-weight:700;margin-bottom:4px;color:${r.color}">${r.title}</div>
+      <div style="font-size:14px;color:var(--t2);line-height:1.5">${r.subtitle}</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px">
+      <div class="ctitle" style="margin-bottom:10px">Macros per serving</div>
+      <div class="macrow">
+        <div class="mac"><div class="macv" style="color:${r.color}">${r.macros.cal}</div><div class="macl">Cal</div></div>
+        <div class="mac"><div class="macv" style="color:#1D9E75">${r.macros.p}g</div><div class="macl">Protein</div></div>
+        <div class="mac"><div class="macv" style="color:#1B5FA6">${r.macros.c}g</div><div class="macl">Carbs</div></div>
+        <div class="mac"><div class="macv" style="color:#7F77DD">${r.macros.fiber}g</div><div class="macl">Fiber</div></div>
+      </div>
+      <div style="font-size:12px;color:var(--t2)">Per 1 ${r.srvUnit}</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px 10px;margin-bottom:4px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="ctitle">Servings</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:2px">${Math.round(srv*r.macros.cal)} cal total · ${Math.round(srv*r.macros.p)}g protein total</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="srvbtn" onclick="changeRecipeSrv(-1)">−</button>
+          <span style="font-size:22px;font-weight:700;min-width:28px;text-align:center">${srv}</span>
+          <span style="font-size:14px;color:var(--t2)">srv</span>
+          <button class="srvbtn" onclick="changeRecipeSrv(1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sectitle">Ingredients <span style="font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--t2)">— tap any ingredient to swap it</span></div>
+    <div class="wrap" style="margin-bottom:12px">`;
+
+  r.ings.forEach((ing,i)=>{
+    const swapKey=r.id+'|'+i;
+    const selAlt=recipeSwaps[swapKey]!==undefined?recipeSwaps[swapKey]:-1;
+    const activeIng=selAlt===-1?{name:ing.n,note:ing.note||''}:ing.alts[selAlt];
+    const amt=ing.scale?+(ing.base*ratio).toFixed(2):ing.base;
+    const amtStr=Number.isInteger(amt)?String(amt):String(parseFloat(amt.toFixed(2)));
+    const isLast=i===r.ings.length-1;
+    const hasAlts=ing.alts&&ing.alts.length>0;
+    const isSwapped=selAlt!==-1;
+
+    html+=`<div style="border-bottom:${isLast?'none':'.5px solid var(--border)'}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:13px 16px;${isSwapped?'background:'+r.bg:''};cursor:${hasAlts?'pointer':'default'}" ${hasAlts?`onclick="toggleIngSwap('${swapKey}',${i})"`:''}>
+        <div style="flex:1">
+          <div style="font-size:15px;font-weight:${isSwapped?'700':'500'};color:${isSwapped?r.color:'var(--tx)'}">${activeIng.name}${isSwapped?' ↺':''}</div>
+          ${activeIng.note?`<div style="font-size:12px;color:var(--t2);margin-top:2px;font-style:italic">${activeIng.note}</div>`:''}
+          ${hasAlts&&!isSwapped?`<div style="font-size:11px;color:${r.color};margin-top:3px;font-weight:600">${ing.alts.length} substitute${ing.alts.length>1?'s':''} available — tap to swap</div>`:''}
+          ${isSwapped?`<div style="font-size:11px;color:${r.color};margin-top:3px;font-weight:600">Swapped — tap to change or restore original</div>`:''}
+        </div>
+        <div style="font-size:14px;font-weight:700;color:${r.color};white-space:nowrap;margin-left:12px;padding-top:2px">${amtStr} ${ing.unit}</div>
+      </div>
+      <div id="swappanel-${r.id}-${i}" style="display:none;background:var(--bg);border-top:.5px solid var(--border);padding:10px 16px 14px">
+        <div style="font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Choose an option:</div>
+        <div onclick="pickSwap('${swapKey}',${i},-1)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--rs);border:2px solid ${selAlt===-1?r.color:'var(--border)'};background:${selAlt===-1?r.bg:'var(--card)'};cursor:pointer;margin-bottom:7px">
+          <div style="width:18px;height:18px;border-radius:50%;border:2px solid ${selAlt===-1?r.color:'var(--border)'};background:${selAlt===-1?r.color:'var(--card)'};flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center">${selAlt===-1?'<svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5L7 1" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>':''}</div>
+          <div><div style="font-size:14px;font-weight:600;color:var(--tx)">${ing.n} <span style="font-size:12px;color:${r.color};font-weight:700">Original</span></div>${ing.note?`<div style="font-size:12px;color:var(--t2);margin-top:2px">${ing.note}</div>`:''}</div>
+        </div>
+        ${ing.alts.map((alt,ai)=>`
+        <div onclick="pickSwap('${swapKey}',${i},${ai})" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--rs);border:2px solid ${selAlt===ai?r.color:'var(--border)'};background:${selAlt===ai?r.bg:'var(--card)'};cursor:pointer;margin-bottom:7px">
+          <div style="width:18px;height:18px;border-radius:50%;border:2px solid ${selAlt===ai?r.color:'var(--border)'};background:${selAlt===ai?r.color:'var(--card)'};flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center">${selAlt===ai?'<svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5L7 1" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>':''}</div>
+          <div><div style="font-size:14px;font-weight:600;color:var(--tx)">${alt.name}</div><div style="font-size:12px;color:var(--t2);margin-top:2px">${alt.note}</div></div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  html+=`</div>
+    <div class="sectitle">Instructions</div>
+    <div class="wrap" style="margin-bottom:12px">`;
+  r.steps.forEach((s,i)=>{
+    html+=`<div class="steprow" style="${i===r.steps.length-1?'border-bottom:none':''}">
+      <div class="stepnum">${i+1}</div>
+      <div style="font-size:15px;line-height:1.5;flex:1">${s}</div>
+    </div>`;
+  });
+  html+=`</div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="ctitle">Tips</div>
+      <div style="font-size:14px;color:var(--t2);line-height:1.9;margin-top:8px">${r.tips}</div>
+    </div>`;
+
+  document.getElementById('recipe-content').innerHTML=html;
+}
+
+function toggleIngSwap(swapKey,ingIdx){
+  const panelId='swappanel-'+activeRecipe+'-'+ingIdx;
+  const panel=document.getElementById(panelId);
+  if(!panel)return;
+  // Close all other panels first
+  document.querySelectorAll('[id^="swappanel-"]').forEach(p=>{if(p.id!==panelId)p.style.display='none';});
+  panel.style.display=panel.style.display==='none'?'block':'none';
+}
+
+function pickSwap(swapKey,ingIdx,altIdx){
+  recipeSwaps[swapKey]=altIdx;
+  // Close panel and re-render
+  const panelId='swappanel-'+activeRecipe+'-'+ingIdx;
+  const panel=document.getElementById(panelId);
+  if(panel)panel.style.display='none';
+  renderRecipeDetail();
+}
+
+// ─── MEALS ───
+const MEAL_GOAL={cal:2620,p:169,c:300,f:80,fiber:38};
+const SLOTS=[
+  {id:'breakfast',name:'Breakfast',time:'7:40 AM',color:'#1D9E75',bg:'#E1F5EE',opts:[
+    {n:'Scrambled eggs + oats',desc:'3 eggs, ½ cup oats, 1 scoop protein powder, 1 tbsp peanut butter',tool:'Stove',toolBg:'#EAF3DE',toolC:'#27500A',time:'5 min',cal:520,p:42,c:48,f:16,fiber:6},
+    {n:'Greek yogurt power bowl',desc:'1 cup Greek yogurt, ½ banana, 2 tbsp granola, 1 tbsp peanut butter, honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:490,p:34,c:54,f:14,fiber:4},
+    {n:'Egg & cheese wrap',desc:'3 eggs, 1 slice cheddar, whole wheat tortilla — panini press 2 min',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'6 min',cal:510,p:38,c:38,f:20,fiber:4},
+  ]},
+  {id:'snack1',name:'Snack 1',time:'1:30 PM',color:'#1B5FA6',bg:'#E6F1FB',opts:[
+    {n:'Greek yogurt + berries',desc:'1 cup Greek yogurt, handful frozen berries, drizzle honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:240,p:20,c:28,f:6,fiber:3},
+    {n:'Tuna + crackers',desc:'1 can tuna with light mayo + mustard on whole wheat crackers',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:230,p:22,c:20,f:6,fiber:2},
+    {n:'String cheese + apple',desc:'2 string cheese sticks, 1 medium apple',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:220,p:14,c:24,f:8,fiber:4},
+  ]},
+  {id:'lunch',name:'Lunch',time:'1:30 PM',color:'#639922',bg:'#EAF3DE',opts:[
+    {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup rice, 1 cup broccoli, sauce of choice — microwave 90 sec',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5},
+    {n:'Tuna salad sandwich',desc:'Batch tuna salad on 2 slices whole wheat bread, lettuce, tomato',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6},
+    {n:'Beef taco bowl',desc:'6 oz batch beef, 1 cup rice, black beans, salsa, shredded cheese — microwave 90 sec',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:660,p:46,c:70,f:18,fiber:9},
+  ]},
+  {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#BA7517',bg:'#FAEEDA',opts:[
+    {n:'Protein shake',desc:'1 scoop whey, 1 cup milk, ½ banana, 1 tbsp peanut butter — blend 20 sec',tool:'Blender',toolBg:'#EAF3DE',toolC:'#27500A',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2},
+    {n:'Hard boiled eggs + banana',desc:'2 batch-cooked eggs, 1 banana — grab from fridge',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:260,p:16,c:28,f:8,fiber:3},
+    {n:'Cottage cheese bowl',desc:'1 cup cottage cheese, pineapple chunks, everything bagel seasoning',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:230,p:24,c:20,f:4,fiber:1},
+  ]},
+  {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#993556',bg:'#FBEAF0',opts:[
+    {n:'Air fryer chicken + broccoli',desc:'7 oz chicken reheated in air fryer (8 min, 375°F), broccoli 10 min, 1 cup rice',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6},
+    {n:'Air fryer fish + rice',desc:'2 tilapia fillets cornmeal-coated, air fryer 400°F 11 min — rice, coleslaw, tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
+    {n:'Panini beef wrap',desc:'7 oz batch beef + cheese + salsa in whole wheat tortilla — panini press 3 min, avocado',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8},
+  ]},
+];
+
+let mealPicks={};   // slot id → option index
+let mealLogToday=[]; // [{name, cal, p, c, f, fiber, ts}]
+
+async function initMeals(){
+  const saved=await sg('meals-v1');
+  if(saved){
+    const dk=dKey(now());
+    if(saved.date===dk){mealPicks=saved.picks||{};mealLogToday=saved.log||[];}
+  }
+  renderMeals();
+}
+async function saveMeals(){
+  await ss('meals-v1',{date:dKey(now()),picks:mealPicks,log:mealLogToday});
+}
+
+function pickMeal(slotId,idx){
+  mealPicks[slotId]=idx;
+  saveMeals();
+  renderMeals();
+}
+
+function logMeal(slotId){
+  const slot=SLOTS.find(s=>s.id===slotId);
+  const idx=mealPicks[slotId]!==undefined?mealPicks[slotId]:0;
+  const opt=slot.opts[idx];
+  mealLogToday.push({name:opt.n,slot:slot.name,cal:opt.cal,p:opt.p,c:opt.c,f:opt.f,fiber:opt.fiber,ts:Date.now()});
+  saveMeals();
+  renderMeals();
+}
+
+function delMealLog(idx){
+  mealLogToday.splice(idx,1);
+  saveMeals();
+  renderMeals();
+}
+
+function clearMealLog(){
+  mealLogToday=[];mealPicks={};
+  saveMeals();renderMeals();
+}
+
+function getMealTotals(){
+  // Sum the picked meals (one per slot) as the planned day
+  let cal=0,p=0,c=0,f=0,fiber=0;
+  SLOTS.forEach(slot=>{
+    const idx=mealPicks[slot.id]!==undefined?mealPicks[slot.id]:0;
+    const opt=slot.opts[idx];
+    cal+=opt.cal;p+=opt.p;c+=opt.c;f+=opt.f;fiber+=opt.fiber;
+  });
+  return{cal,p,c,f,fiber};
+}
+
+function getLogTotals(){
+  return mealLogToday.reduce((a,e)=>({cal:a.cal+e.cal,p:a.p+e.p,c:a.c+e.c,f:a.f+e.f,fiber:a.fiber+e.fiber}),{cal:0,p:0,c:0,f:0,fiber:0});
+}
+
+function renderMeals(){
+  let html='';
+  SLOTS.forEach(slot=>{
+    const pidx=mealPicks[slot.id]!==undefined?mealPicks[slot.id]:-1;
+    html+=`<div class="meal-slot">
+      <div class="slot-hd">
+        <span class="slot-name" style="color:${slot.color}">${slot.name}</span>
+        <span class="slot-time-badge">${slot.time}</span>
+      </div>`;
+    slot.opts.forEach((opt,i)=>{
+      const isp=pidx===i;
+      html+=`<div class="meal-opt${isp?' picked':''}" style="${isp?'border-color:'+slot.color+';background:'+slot.bg+';':''}" onclick="pickMeal('${slot.id}',${i})">
+        <div class="mo-top">
+          <div style="flex:1">
+            <div class="mo-name">${opt.n}</div>
+            <div class="mo-desc">${opt.desc}</div>
+          </div>
+          <button class="mo-btn" style="${isp?'background:'+slot.color+';border-color:'+slot.color+';color:#fff':''}">${isp?'✓ Picked':'Pick'}</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">
+          <span class="mpill">${opt.cal} cal</span>
+          <span class="mpill">${opt.p}g protein</span>
+          <span class="mpill">${opt.c}g carbs</span>
+          <span class="mpill">${opt.f}g fat</span>
+          <span class="mpill">${opt.fiber}g fiber</span>
+          <span class="tpill" style="background:${opt.toolBg};color:${opt.toolC}">${opt.tool} · ${opt.time}</span>
+          ${isp?`<button style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid ${slot.color};color:${slot.color};background:none;cursor:pointer;font-family:inherit" onclick="event.stopPropagation();logMeal('${slot.id}')">Log eaten</button>`:''}
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  document.getElementById('meal-slots').innerHTML=html;
+
+  // Totals
+  const plan=getMealTotals();
+  const log=getLogTotals();
+  const useLog=mealLogToday.length>0;
+  const totals=useLog?log:plan;
+  const calPct=Math.min(100,Math.round(totals.cal/MEAL_GOAL.cal*100));
+  const calColor=calPct<85?'#1D9E75':calPct<=105?'#BA7517':'#E24B4A';
+  const pPct=Math.min(100,Math.round(totals.p/MEAL_GOAL.p*100));
+
+  document.getElementById('day-totals').innerHTML=`
+    <div style="font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t2);margin-bottom:12px">${useLog?'Logged today':'Planned today (tap "Log eaten" to track actual)'}</div>
+    <div class="cal-bar-wrap">
+      <div class="cal-bar-lbl">
+        <span style="font-weight:600">Calories</span>
+        <span style="color:${calColor};font-weight:700">${totals.cal} <span style="color:var(--t2);font-weight:400">/ ${MEAL_GOAL.cal}</span></span>
+      </div>
+      <div class="pbar"><div class="pfill" style="width:${calPct}%;background:${calColor}"></div></div>
+    </div>
+    <div class="cal-bar-wrap">
+      <div class="cal-bar-lbl">
+        <span style="font-weight:600">Protein</span>
+        <span style="color:${pPct>=100?'#1D9E75':'#1B5FA6'};font-weight:700">${totals.p}g <span style="color:var(--t2);font-weight:400">/ ${MEAL_GOAL.p}g</span></span>
+      </div>
+      <div class="pbar"><div class="pfill" style="width:${pPct}%;background:${pPct>=100?'#1D9E75':'#1B5FA6'}"></div></div>
+    </div>
+    <div class="dt-macgrid" style="margin-top:12px">
+      <div class="dtm"><div class="dtm-v" style="color:#1B5FA6">${totals.c}g</div><div class="dtm-l">Carbs / ${MEAL_GOAL.c}g goal</div></div>
+      <div class="dtm"><div class="dtm-v" style="color:#BA7517">${totals.f}g</div><div class="dtm-l">Fat / ${MEAL_GOAL.f}g goal</div></div>
+      <div class="dtm"><div class="dtm-v" style="color:#1D9E75">${totals.fiber}g</div><div class="dtm-l">Fiber / ${MEAL_GOAL.fiber}g goal</div></div>
+      <div class="dtm"><div class="dtm-v" style="color:${calColor}">${calPct}%</div><div class="dtm-l">of calorie goal</div></div>
+    </div>`;
+
+  // Log
+  let logHtml='';
+  if(!mealLogToday.length){
+    logHtml='<div style="text-align:center;padding:20px;color:var(--t3);font-size:14px">Nothing logged yet. Pick a meal above then tap "Log eaten".</div>';
+  } else {
+    [...mealLogToday].reverse().forEach((e,ri)=>{
+      const idx=mealLogToday.length-1-ri;
+      logHtml+=`<div class="log-row">
+        <div style="flex:1">
+          <div class="log-name">${e.name}</div>
+          <div class="log-meta">${e.slot} · ${fmtTime(e.ts)}</div>
+        </div>
+        <span class="log-cal">+${e.cal} cal</span>
+        <span class="log-del" onclick="delMealLog(${idx})">✕</span>
+      </div>`;
+    });
+  }
+  document.getElementById('meal-log').innerHTML=logHtml;
+}
+
+// ─── INIT ───
+initSupps();initWater();initWeight();initMeals();initJournal();initTherapy();initReview();renderRecipes();
+</script>
+</body>
+</html>
