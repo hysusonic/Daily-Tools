@@ -39,11 +39,27 @@ self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--tx);font-family:-apple-system,'SF Pro Text',sans-serif;font-size:16px;min-height:100vh}
 body{padding-bottom:96px}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:6px 0 max(10px,env(safe-area-inset-bottom));z-index:100}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 1px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:8px 0 max(14px,env(safe-area-inset-bottom));z-index:100}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit}
 .nb.on{color:var(--green)}
-.nb-ic{font-size:19px;line-height:1}
-.nb-lb{font-size:9px;font-weight:600}
+.nb-ic{font-size:22px;line-height:1}
+.nb-lb{font-size:10px;font-weight:700}
+
+/* ─── SCHEDULE ─── */
+.sday-tab{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;color:var(--t2);flex-shrink:0}
+.sday-tab.on{color:#fff}
+.sblock{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;background:var(--card);border-bottom:.5px solid var(--border);cursor:pointer;-webkit-user-select:none;user-select:none}
+.sblock:last-child{border-bottom:none}
+.sblock:active{background:#f5f5f3}
+.sblock.done .sb-name{text-decoration:line-through;color:var(--t3)}
+.sblock.done .sb-time{color:var(--t3)}
+.sblock.done .sb-detail{color:var(--t3)}
+.sb-check{width:28px;height:28px;min-width:28px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
+.sb-body{flex:1}
+.sb-time{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:3px}
+.sb-name{font-size:15px;font-weight:600;color:var(--tx);line-height:1.3}
+.sb-detail{font-size:12px;color:var(--t2);margin-top:3px;line-height:1.5}
+.sb-cat{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:5px;display:inline-block}
 .pg{display:none;padding:16px 16px 8px}
 .pg.on{display:block}
 .ptitle{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:3px}
@@ -80,16 +96,6 @@ body{padding-bottom:96px}
 .sinote{font-size:12px;color:var(--t3);margin-top:2px;font-style:italic}
 
 /* WATER */
-.wring{position:relative;width:190px;height:190px;margin:0 auto 16px}
-.wrc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
-.wroz{font-size:40px;font-weight:700;line-height:1}
-.wrlbl{font-size:13px;color:var(--t2);margin-top:3px}
-.wbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.wbtn{padding:16px 8px;border-radius:var(--r);border:2px solid var(--border);background:var(--card);font-size:16px;font-weight:700;cursor:pointer;text-align:center;font-family:inherit;transition:opacity .1s}
-.wbtn:active{opacity:.7}
-.wbtn .wsub{font-size:11px;font-weight:500;color:var(--t2);display:block;margin-top:3px}
-.wbtn.wfill{background:var(--blue);border-color:var(--blue);color:#fff}
-.wbtn.wfill .wsub{color:rgba(255,255,255,.75)}
 .wlogrow{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--card);border-radius:var(--rs);border:.5px solid var(--border);margin-bottom:6px}
 
 /* WEIGHT */
@@ -202,24 +208,8 @@ body{padding-bottom:96px}
   </div>
 </div>
 
-<!-- WATER -->
-<div class="pg" id="pg-water">
-  <div class="dstrip">
-    <div><div class="ptitle">Water</div><div id="wd-lbl" style="font-size:14px;color:var(--t2);margin-top:2px"></div></div>
-    <div class="dnav"><button onclick="wNav(-1)">‹</button><button onclick="wNav(1)">›</button></div>
-  </div>
-  <div id="w-ring"></div>
-  <div class="wbtns">
-    <button class="wbtn wfill" onclick="addWater(8)">+8 oz<span class="wsub">1 cup</span></button>
-    <button class="wbtn wfill" onclick="addWater(16)">+16 oz<span class="wsub">standard cup</span></button>
-    <button class="wbtn" onclick="addWater(20)">+20 oz<span class="wsub">water bottle</span></button>
-    <button class="wbtn" onclick="addWater(32)">+32 oz<span class="wsub">large bottle</span></button>
-  </div>
-  <div class="card"><div class="ctitle" style="margin-bottom:10px">Log</div><div id="w-log"></div></div>
-</div>
-
-<!-- WEIGHT -->
-<div class="pg" id="pg-weight">
+<!-- TRACK (WEIGHT) -->
+<div class="pg" id="pg-track">
   <div class="ptitle">Weight</div>
   <div class="psub">Log weekly — Sunday mornings, after waking, before eating.</div>
   <div class="card">
@@ -242,38 +232,41 @@ body{padding-bottom:96px}
   <div class="card"><div class="ctitle" style="margin-bottom:10px">History</div><div id="wt-log"></div></div>
 </div>
 
-<!-- JOURNAL -->
-<div class="pg" id="pg-journal">
-  <div class="ptitle">Journal</div>
-  <div class="psub">3 prompts, ~10 min. Rotate weekly so they stay fresh.</div>
-  <div class="dstrip" style="margin-bottom:8px">
-    <div id="j-badge"></div>
-    <div class="dnav"><button onclick="jNav(-1)">‹</button><button onclick="jNav(1)">›</button></div>
+<!-- MIND (JOURNAL + THERAPY + REVIEW) -->
+<div class="pg" id="pg-mind">
+  <div style="display:flex;gap:0;background:var(--bg);border-radius:var(--r);padding:3px;margin-bottom:16px;border:.5px solid var(--border)">
+    <button id="mind-tab-journal" class="ftab ftab-on" onclick="switchMindTab('journal')">📓 Journal</button>
+    <button id="mind-tab-therapy" class="ftab" onclick="switchMindTab('therapy')">🧠 Therapy</button>
+    <button id="mind-tab-review" class="ftab" onclick="switchMindTab('review')">📋 Review</button>
   </div>
-  <div id="j-datelbl" style="font-size:14px;color:var(--t2);margin-bottom:14px"></div>
-  <div id="j-prompts"></div>
-  <button class="btn bp bfull" onclick="saveJournal()">Save entries</button>
-  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearJournal()">Clear today</button>
-</div>
-
-<!-- THERAPY PREP -->
-<div class="pg" id="pg-therapy">
-  <div class="ptitle">Therapy Prep</div>
-  <div class="psub">Fill out Thursday night or Friday morning. 10 minutes makes the hour count.</div>
-  <div id="th-badge" style="margin-bottom:14px"></div>
-  <div id="th-content"></div>
-  <button class="btn bp bfull" onclick="saveTherapy()">Save</button>
-  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearTherapy()">Clear this week</button>
-</div>
-
-<!-- WEEKLY REVIEW -->
-<div class="pg" id="pg-review">
-  <div class="ptitle">Weekly Review</div>
-  <div class="psub">Sunday morning — 20 min, no judgment, one adjustment.</div>
-  <div id="rv-badge" style="margin-bottom:14px"></div>
-  <div id="rv-content"></div>
-  <button class="btn bp bfull" onclick="saveReview()">Save review</button>
-  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearReview()">Clear this week</button>
+  <!-- JOURNAL SECTION -->
+  <div id="mind-journal">
+    <div class="psub" style="margin-bottom:12px">3 prompts, ~10 min. Rotate weekly so they stay fresh.</div>
+    <div class="dstrip" style="margin-bottom:8px">
+      <div id="j-badge"></div>
+      <div class="dnav"><button onclick="jNav(-1)">‹</button><button onclick="jNav(1)">›</button></div>
+    </div>
+    <div id="j-datelbl" style="font-size:14px;color:var(--t2);margin-bottom:14px"></div>
+    <div id="j-prompts"></div>
+    <button class="btn bp bfull" onclick="saveJournal()">Save entries</button>
+    <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearJournal()">Clear today</button>
+  </div>
+  <!-- THERAPY SECTION -->
+  <div id="mind-therapy" style="display:none">
+    <div class="psub" style="margin-bottom:12px">Fill out Thursday night or Friday morning. 10 minutes makes the hour count.</div>
+    <div id="th-badge" style="margin-bottom:14px"></div>
+    <div id="th-content"></div>
+    <button class="btn bp bfull" onclick="saveTherapy()">Save</button>
+    <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearTherapy()">Clear this week</button>
+  </div>
+  <!-- REVIEW SECTION -->
+  <div id="mind-review" style="display:none">
+    <div class="psub" style="margin-bottom:12px">Sunday morning — 20 min, no judgment, one adjustment.</div>
+    <div id="rv-badge" style="margin-bottom:14px"></div>
+    <div id="rv-content"></div>
+    <button class="btn bp bfull" onclick="saveReview()">Save review</button>
+    <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearReview()">Clear this week</button>
+  </div>
 </div>
 
 <!-- RECIPES -->
@@ -287,13 +280,20 @@ body{padding-bottom:96px}
   </div>
 </div>
 
+<!-- SCHEDULE -->
+<div class="pg" id="pg-schedule">
+  <div id="sched-header"></div>
+  <div id="sched-day-tabs" style="display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;margin-bottom:14px"></div>
+  <div id="sched-progress" style="margin-bottom:14px"></div>
+  <div id="sched-list"></div>
+  <button class="btn bg2 bfull" style="margin-top:8px" onclick="resetSched()">Reset today</button>
+</div>
+
 <nav class="bnav">
   <button class="nb on" onclick="gp('food',this)"><span class="nb-ic">🍽️</span><span class="nb-lb">Food</span></button>
-  <button class="nb" onclick="gp('water',this)"><span class="nb-ic">💧</span><span class="nb-lb">Water</span></button>
-  <button class="nb" onclick="gp('weight',this)"><span class="nb-ic">⚖️</span><span class="nb-lb">Weight</span></button>
-  <button class="nb" onclick="gp('journal',this)"><span class="nb-ic">📓</span><span class="nb-lb">Journal</span></button>
-  <button class="nb" onclick="gp('therapy',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Therapy</span></button>
-  <button class="nb" onclick="gp('review',this)"><span class="nb-ic">📋</span><span class="nb-lb">Review</span></button>
+  <button class="nb" onclick="gp('schedule',this)"><span class="nb-ic">📅</span><span class="nb-lb">Schedule</span></button>
+  <button class="nb" onclick="gp('track',this)"><span class="nb-ic">⚖️</span><span class="nb-lb">Weight</span></button>
+  <button class="nb" onclick="gp('mind',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Mind</span></button>
   <button class="nb" onclick="gp('recipes',this)"><span class="nb-ic">📖</span><span class="nb-lb">Recipes</span></button>
 </nav>
 
@@ -317,6 +317,9 @@ function gp(id,btn){
   window.scrollTo(0,0);
   // When switching to food tab, re-render both sections
   if(id==='food'){renderMeals();renderSupps();}
+  if(id==='track'){renderWeight();}
+  if(id==='mind'){renderJournal();renderTherapy();renderReview();}
+  if(id==='schedule'){renderSched();}
   if(id==='recipes'){closeRecipe();renderRecipes();}
 }
 function switchFoodTab(tab){
@@ -324,6 +327,14 @@ function switchFoodTab(tab){
   document.getElementById('food-supps').style.display=tab==='supps'?'block':'none';
   document.getElementById('food-tab-meals').classList.toggle('ftab-on',tab==='meals');
   document.getElementById('food-tab-supps').classList.toggle('ftab-on',tab==='supps');
+}
+function switchMindTab(tab){
+  document.getElementById('mind-journal').style.display=tab==='journal'?'block':'none';
+  document.getElementById('mind-therapy').style.display=tab==='therapy'?'block':'none';
+  document.getElementById('mind-review').style.display=tab==='review'?'block':'none';
+  document.getElementById('mind-tab-journal').classList.toggle('ftab-on',tab==='journal');
+  document.getElementById('mind-tab-therapy').classList.toggle('ftab-on',tab==='therapy');
+  document.getElementById('mind-tab-review').classList.toggle('ftab-on',tab==='review');
 }
 function chkSvg(){return'<svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M1.5 6L5.5 10L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
 function saveFeedback(btnSel){
@@ -337,10 +348,10 @@ const SUPPS=[
     {id:'d3',n:'Vitamin D3 2000 IU',dose:'1 capsule',note:'NatureWise plant-based — take with fat'},
     {id:'bc',n:'B-Complex (Jarrow B-Right)',dose:'1 capsule',note:'Methylfolate — NOT folic acid'},
     {id:'zn',n:'Zinc 30mg',dose:'1 tablet',note:'Nature Made — counters Losartan depletion'},
-    {id:'o3',n:'Omega-3 Fish Oil',dose:'2 softgels',note:'Kirkland EPA-dominant — verify gelatin source'},
+    {id:'o3',n:'Omega-3 Fish Oil',dose:'2 softgels',note:'Kirkland 1400mg (230ct) or Nature Made 1000mg (300ct) — both confirmed available'},
   ]},
   {g:'Lunch — with food',t:'1:30 PM',c:'#BA7517',bg:'#FAEEDA',items:[
-    {id:'coq',n:'CoQ10 Ubiquinol 100mg',dose:'1 softgel',note:'Qunol — must take with a fat-containing meal'},
+    {id:'coq',n:'CoQ10 Ubiquinol 100mg',dose:'1 softgel',note:'Qunol Ultra 100mg 180ct — take with a fat-containing meal'},
   ]},
   {g:'Dinner — 2+ hrs from Losartan',t:'7:00 PM',c:'#7F77DD',bg:'#EEEDFE',items:[
     {id:'los',n:'Losartan 50mg',dose:'1 tablet',note:'Same time every day'},
@@ -396,63 +407,6 @@ function renderSupps(){
     html+='</div></div>';
   });
   document.getElementById('s-list').innerHTML=html;
-}
-
-// ─── WATER ───
-const WGOAL=128;
-let wDay=now(),wLog={};
-async function initWater(){const v=await sg('water-v1');if(v)wLog=v;renderWater();}
-async function saveWater(){await ss('water-v1',wLog);}
-function wNav(n){wDay=addD(wDay,n);renderWater();}
-function getDayW(d){return wLog[dKey(d)]||[];}
-function totOz(d){return getDayW(d).reduce((a,e)=>a+e.oz,0);}
-function addWater(oz){
-  const k=dKey(wDay);if(!wLog[k])wLog[k]=[];
-  wLog[k].push({oz,ts:Date.now()});saveWater();renderWater();
-}
-function removeW(idx){
-  const k=dKey(wDay);if(wLog[k])wLog[k].splice(idx,1);
-  saveWater();renderWater();
-}
-function renderWater(){
-  const isT=dKey(wDay)===dKey(now());
-  document.getElementById('wd-lbl').textContent=isT?'Today — '+fmtDate(wDay):fmtDate(wDay);
-  const oz=totOz(wDay);
-  const pct=Math.min(100,Math.round(oz/WGOAL*100));
-  const gal=(oz/128).toFixed(2);
-  const rem=Math.max(0,WGOAL-oz);
-  const c=pct>=100?'#1D9E75':pct>=50?'#1B5FA6':'#BA7517';
-  const R=80,circ=2*Math.PI*R,dash=circ*(pct/100);
-  document.getElementById('w-ring').innerHTML=`
-    <div class="wring">
-      <svg width="190" height="190" viewBox="0 0 190 190" style="display:block">
-        <circle cx="95" cy="95" r="${R}" fill="none" stroke="#E8E8E4" stroke-width="14" transform="rotate(-90 95 95)"/>
-        <circle cx="95" cy="95" r="${R}" fill="none" stroke="${c}" stroke-width="14" stroke-linecap="round"
-          stroke-dasharray="${dash} ${circ}" transform="rotate(-90 95 95)" style="transition:stroke-dasharray .4s"/>
-      </svg>
-      <div class="wrc">
-        <div class="wroz" style="color:${c}">${oz}</div>
-        <div class="wrlbl">oz · ${gal} gal<br>${pct}% of goal</div>
-      </div>
-    </div>
-    <div class="ibox" style="background:${pct>=100?'#E1F5EE':'#E6F1FB'};border-color:${pct>=100?'#9FE1CB':'#B5D4F4'};color:${pct>=100?'#085041':'#0C447C'}">
-      ${pct>=100?'✓ 1 gallon hit! Great work.':'<strong>'+rem+' oz</strong> left to hit 1 gallon. You\'re already great at hydration — keep going.'}
-    </div>`;
-  const entries=getDayW(wDay);
-  let lh='';
-  if(!entries.length){
-    lh='<div style="text-align:center;padding:18px;color:var(--t3);font-size:14px">No water logged yet.</div>';
-  } else {
-    [...entries].reverse().forEach((e,ri)=>{
-      const idx=entries.length-1-ri;
-      lh+=`<div class="wlogrow">
-        <span style="font-size:14px;font-weight:600">${fmtTime(e.ts)}</span>
-        <span style="font-size:15px;font-weight:700;color:#1B5FA6">+${e.oz} oz</span>
-        ${isT?'<span style="font-size:16px;color:var(--t3);cursor:pointer;padding:4px 8px" onclick="removeW('+idx+')">✕</span>':''}
-      </div>`;
-    });
-  }
-  document.getElementById('w-log').innerHTML=lh;
 }
 
 // ─── WEIGHT ───
@@ -582,7 +536,7 @@ async function saveJournal(){
   if(!jState[wk][dk])jState[wk][dk]={};
   document.querySelectorAll('.jta').forEach((ta,i)=>{jState[wk][dk][i]=ta.value;});
   await ss('journal-v1',jState);
-  const b=document.querySelector('#pg-journal .btn.bp');
+  const b=document.querySelector('#pg-mind .btn.bp');
   const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
 }
 async function clearJournal(){
@@ -627,7 +581,7 @@ async function saveTherapy(){
   const wk=wkKey(now());if(!thState[wk])thState[wk]={};
   document.querySelectorAll('.thta').forEach((ta,i)=>{thState[wk][i]=ta.value;});
   await ss('therapy-v1',thState);
-  const b=document.querySelector('#pg-therapy .btn.bp');
+  const b=document.querySelector('#pg-mind .btn.bp');
   const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
 }
 async function clearTherapy(){delete thState[wkKey(now())];await ss('therapy-v1',thState);renderTherapy();}
@@ -671,7 +625,7 @@ async function saveReview(){
   const wk=wkKey(now());if(!rvState[wk])rvState[wk]={};
   document.querySelectorAll('.rvta').forEach((ta,i)=>{rvState[wk][i]=ta.value;});
   await ss('review-v1',rvState);
-  const b=document.querySelector('#pg-review .btn.bp');
+  const b=document.querySelector('#pg-mind .btn.bp');
   const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
 }
 async function clearReview(){delete rvState[wkKey(now())];await ss('review-v1',rvState);renderReview();}
@@ -880,8 +834,9 @@ const RECIPES=[
     baseSrv:2,srvUnit:'serving (2 fillets)',
     macros:{cal:320,p:44,c:14,f:9,fiber:1},
     ings:[
-      {n:'Tilapia fillets',base:2,unit:'fillets (~5–6 oz each)',scale:true,note:'Pat completely dry before coating',
-       alts:[{name:'Catfish fillets',note:'Stronger flavor, slightly fattier. Same cook time.'},
+      {n:'Tilapia fillets (Kirkland Signature fresh farmed)',base:2,unit:'fillets (~5–6 oz each)',scale:true,note:'Pat completely dry before coating — moisture is the enemy of crispiness',
+       alts:[{name:'Kirkland frozen tilapia loins',note:'Thaw fully and pat extra dry. Same cook time.'},
+             {name:'Catfish fillets',note:'Stronger flavor, slightly fattier. Same cook time.'},
              {name:'Cod fillets',note:'Flakier, milder. Watch closely — done faster, ~9 min.'},
              {name:'Mahi-mahi',note:'Firmer texture, meatier. Add 1–2 min.'}]},
       {n:'Yellow cornmeal',base:3,unit:'tbsp',scale:true,note:'Creates the crispy crust',
@@ -1060,11 +1015,12 @@ const RECIPES=[
        alts:[{name:'Chocolate whey',note:'Use only occasionally — chocolate has higher heavy metals in testing.'},
              {name:'Casein protein',note:'Slower digestion — better as a meal replacement or before bed.'},
              {name:'Plant-based protein',note:'Pea + rice blend. Use same amount. Slightly grainier texture.'}]},
-      {n:'2% milk',base:1,unit:'cup (8 oz)',scale:false,note:'Adds protein + calcium + fat for absorption',
-       alts:[{name:'Whole milk',note:'Creamier, ~30 more calories. Great post-workout.'},
-             {name:'Unsweetened almond milk',note:'~40 cal less. Lower protein.'},
-             {name:'Water only',note:'Use 10–12 oz. Less creamy but lower calorie.'},
-             {name:'Oat milk',note:'Creamier than almond, slightly more carbs.'}]},
+      {n:'Milk',base:1,unit:'cup (8 oz)',scale:false,note:'Use whatever you have — all work great',
+       alts:[{name:'Whole milk',note:'Creamiest, ~30 more calories. Best post-workout.'},
+             {name:'2% milk',note:'Good balance of creaminess and calories.'},
+             {name:'Fat free milk',note:'Lightest option, still adds protein and calcium.'},
+             {name:'Oat milk (unsweetened)',note:'Creamy like whole milk, dairy-free. Slightly more carbs.'},
+             {name:'Water only',note:'Use 10–12 oz. Lowest calorie, less creamy.'}]},
       {n:'Banana (½, frozen)',base:0.5,unit:'banana',scale:false,note:'Frozen = thicker, colder shake — much better than fresh',
        alts:[{name:'Frozen mango chunks',note:'¼ cup — tropical, similar sweetness.'},
              {name:'Frozen berries',note:'¼ cup — lower sugar, more antioxidants.'},
@@ -1274,7 +1230,7 @@ const SLOTS=[
   ]},
   {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#993556',bg:'#FBEAF0',opts:[
     {n:'Air fryer chicken + broccoli',desc:'7 oz chicken reheated in air fryer (8 min, 375°F), broccoli 10 min, 1 cup rice',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6},
-    {n:'Air fryer fish + rice',desc:'2 tilapia fillets cornmeal-coated, air fryer 400°F 11 min — rice, coleslaw, tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
+    {n:'Air fryer fish + rice',desc:'2 Kirkland tilapia fillets cornmeal-coated, air fryer 400°F 11 min — rice, coleslaw, tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
     {n:'Panini beef wrap',desc:'7 oz batch beef + cheese + salsa in whole wheat tortilla — panini press 3 min, avocado',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8},
   ]},
 ];
@@ -1421,8 +1377,250 @@ function renderMeals(){
   document.getElementById('meal-log').innerHTML=logHtml;
 }
 
+// ─── SCHEDULE ───
+const SDAYS=[
+  {id:'mon',label:'Mon',full:'Monday',sub:'Work day · Gym after work',color:'#1B5FA6',bg:'#E6F1FB',blocks:[
+    {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
+    {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
+    {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
+    {t:'7:40–8:00',n:'Breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3. Read while eating.',cat:'food'},
+    {t:'8:00–8:25',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand. Rain or shine.',cat:'dog'},
+    {t:'8:25–10:45',n:'Skill block — Coding / tech',d:'Monday = coding or your primary technical skill. 2+ hours. Phone in another room.',cat:'self'},
+    {t:'10:45–11:00',n:'Transition to work',d:'Snack if needed, review your one priority for the day.',cat:'morning'},
+    {t:'11:00–5:00',n:'WORK',d:'Snack 1 at 1:30 PM.',cat:'work'},
+    {t:'1:30 PM',n:'Snack 1',d:'Yogurt + berries, tuna + crackers, or string cheese + apple.',cat:'food'},
+    {t:'5:00 PM',n:'Work ends → GYM NOW',d:'Do not sit down on the couch. Go straight from work.',cat:'fitness'},
+    {t:'5:15–6:45',n:'GYM — Workout A',d:'60–90 min. Your coach\'s program. Full effort.',cat:'fitness'},
+    {t:'6:45–7:00',n:'Post-gym snack 2 + CoQ10',d:'Eat within 45 min of finishing for recovery. CoQ10 needs fat to absorb.',cat:'food'},
+    {t:'7:00 PM',n:'Dinner + magnesium 200mg + Losartan',d:'Planned meal. First magnesium dose. Take Losartan with food.',cat:'food'},
+    {t:'7:30–8:00',n:'Social block',d:'Text or call someone you\'ve been meaning to reach out to.',cat:'social'},
+    {t:'8:00–8:25',n:'Evening dog walk 🐕',d:'20–25 min. Phone in pocket, not in hand.',cat:'dog'},
+    {t:'8:25–9:30',n:'Leisure — TV, gaming, YouTube',d:'Scheduled and bounded. Enjoy without guilt.',cat:'free'},
+    {t:'9:30 PM',n:'PHONE TO CHARGER — across the room',d:'Every single night. Most important habit in this plan.',cat:'sleep'},
+    {t:'9:30–10:00',n:'Wind down',d:'Dim lights. Lay out tomorrow\'s clothes.',cat:'sleep'},
+    {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
+    {t:'10:30 PM',n:'Magnesium 200mg + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
+  ]},
+  {id:'tue',label:'Tue',full:'Tuesday',sub:'Work day · Rest · Career coach 9 AM',color:'#7F77DD',bg:'#EEEDFE',blocks:[
+    {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
+    {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
+    {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
+    {t:'7:40–8:00',n:'Breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3. Read while eating.',cat:'food'},
+    {t:'8:00–8:25',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
+    {t:'8:25–8:55',n:'Pre-coach prep',d:'What do you want from today\'s session? Write 1–2 goals. Makes it 10x more valuable.',cat:'self'},
+    {t:'9:00–10:00',n:'Career coach session',d:'Fixed appointment. Full presence.',cat:'fixed'},
+    {t:'10:00–10:15',n:'Post-session action items',d:'Write 2–3 takeaways while still fresh.',cat:'self'},
+    {t:'10:15–11:00',n:'Skill block — Financial literacy',d:'Review accounts, track spending, study one concept (index funds, budgeting, compound interest).',cat:'self'},
+    {t:'11:00–5:00',n:'WORK — full rest from gym today',d:'Snack 1 at 1:30 PM.',cat:'work'},
+    {t:'1:30 PM',n:'Snack 1',d:'Yogurt + berries, tuna + crackers, or string cheese + apple.',cat:'food'},
+    {t:'5:00 PM',n:'Work ends — 10-min walk',d:'Short transition walk before sitting down. Decompresses from work mode.',cat:'fitness'},
+    {t:'5:15 PM',n:'Snack 2 + CoQ10',d:'Protein shake, hard boiled eggs + banana, or cottage cheese bowl.',cat:'food'},
+    {t:'5:30–6:30',n:'Creative block — art or music',d:'Tuesday creative = visual art, music practice, or creative hobby you\'re building.',cat:'creative'},
+    {t:'6:30–7:00',n:'Free time',d:'Phone allowed. 30 min hard stop.',cat:'free'},
+    {t:'7:00 PM',n:'Dinner + magnesium + Losartan',d:'Planned meal. First magnesium dose. Take Losartan with food.',cat:'food'},
+    {t:'7:30–8:00',n:'Dating apps — 20 min active use',d:'Not passive scrolling. Send messages, respond, make plans. Set a 20-min timer.',cat:'social'},
+    {t:'8:00–8:25',n:'Evening dog walk 🐕',d:'20–25 min. Phone in pocket, not in hand.',cat:'dog'},
+    {t:'8:25–9:30',n:'Leisure',d:'TV, gaming, YouTube — bounded. Ends at 9:30.',cat:'free'},
+    {t:'9:30 PM',n:'PHONE TO CHARGER',d:'Across the room. Every single night.',cat:'sleep'},
+    {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
+    {t:'10:30 PM',n:'Magnesium + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
+  ]},
+  {id:'wed',label:'Wed',full:'Wednesday',sub:'Work day · Gym after work',color:'#1B5FA6',bg:'#E6F1FB',blocks:[
+    {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
+    {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
+    {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
+    {t:'7:40–8:00',n:'Breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3. Read while eating.',cat:'food'},
+    {t:'8:00–8:25',n:'Feed + morning dog walk 🐕',d:'Rest day morning — longer walk if energy allows.',cat:'dog'},
+    {t:'8:25–9:00',n:'Mindfulness / meditation',d:'20–30 min. Headspace, Calm, or sit quietly. Active recovery for the mind.',cat:'self'},
+    {t:'9:00–10:45',n:'Skill block — Language or reading',d:'Alternates weekly: language learning one week, 90 min reading the next.',cat:'self'},
+    {t:'10:45–11:00',n:'Work prep',d:'Review your one priority. Snack if needed.',cat:'morning'},
+    {t:'11:00–5:00',n:'WORK',d:'Snack 1 at 1:30 PM.',cat:'work'},
+    {t:'1:30 PM',n:'Snack 1',d:'Yogurt + berries, tuna + crackers, or string cheese + apple.',cat:'food'},
+    {t:'5:00 PM',n:'Work ends → GYM NOW',d:'Same as Monday. Do not sit down first.',cat:'fitness'},
+    {t:'5:15–6:45',n:'GYM — Workout B',d:'60–90 min. Your coach\'s program. Full effort.',cat:'fitness'},
+    {t:'6:45–7:00',n:'Post-gym snack 2 + CoQ10',d:'Eat within 45 min of finishing for recovery.',cat:'food'},
+    {t:'7:00 PM',n:'Dinner + magnesium + Losartan',d:'Planned meal. First magnesium dose. Take Losartan with food.',cat:'food'},
+    {t:'7:30–8:00',n:'Social — actually call a friend',d:'Voice call, not just text. Genuine connection is different for the brain.',cat:'social'},
+    {t:'8:00–8:25',n:'Evening dog walk 🐕',d:'20–25 min. Pack gym bag for Friday while you\'re at it.',cat:'dog'},
+    {t:'8:25–9:30',n:'Leisure',d:'TV, gaming, YouTube — bounded. Ends at 9:30.',cat:'free'},
+    {t:'9:30 PM',n:'PHONE TO CHARGER',d:'Across the room. Every single night.',cat:'sleep'},
+    {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
+    {t:'10:30 PM',n:'Magnesium + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
+  ]},
+  {id:'thu',label:'Thu',full:'Thursday',sub:'Work day · Full rest day',color:'#1B6B2A',bg:'#EAF3DE',blocks:[
+    {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
+    {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
+    {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
+    {t:'7:40–8:00',n:'Breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3. Read while eating.',cat:'food'},
+    {t:'8:00–8:25',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
+    {t:'8:25–10:45',n:'Skill block — free choice',d:'Pick whatever you\'re most behind on or most energized by. Split skill (60 min) + reading (45 min) or go all-in on one.',cat:'self'},
+    {t:'10:45–11:00',n:'Work prep',d:'Review your one priority. Snack if needed.',cat:'morning'},
+    {t:'11:00–5:00',n:'WORK — full rest from gym',d:'Snack 1 at 1:30 PM.',cat:'work'},
+    {t:'1:30 PM',n:'Snack 1',d:'Yogurt + berries, tuna + crackers, or string cheese + apple.',cat:'food'},
+    {t:'5:00 PM',n:'Work ends — 10-min walk',d:'Short transition walk before sitting down.',cat:'fitness'},
+    {t:'5:15 PM',n:'Snack 2 + CoQ10',d:'Protein shake, hard boiled eggs + banana, or cottage cheese bowl.',cat:'food'},
+    {t:'5:30–6:30',n:'Creative block — writing or content',d:'Thursday creative = writing, long-form journaling, or content creation.',cat:'creative'},
+    {t:'6:30–7:00',n:'Free time',d:'Phone allowed. 30 min hard stop.',cat:'free'},
+    {t:'7:00 PM',n:'Dinner + magnesium + Losartan',d:'Planned meal. First magnesium dose. Take Losartan with food.',cat:'food'},
+    {t:'7:30–8:00',n:'Social — confirm weekend plans',d:'Text or call. Lock in Friday and Saturday so they actually happen.',cat:'social'},
+    {t:'8:00–8:25',n:'Evening dog walk 🐕',d:'20–25 min. Gym bag is already packed from Wednesday.',cat:'dog'},
+    {t:'8:25–9:30',n:'Leisure',d:'TV, gaming, YouTube — bounded. Ends at 9:30.',cat:'free'},
+    {t:'9:30 PM',n:'PHONE TO CHARGER',d:'Across the room. Every single night.',cat:'sleep'},
+    {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
+    {t:'10:30 PM',n:'Magnesium + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
+  ]},
+  {id:'fri',label:'Fri',full:'Friday',sub:'Day off · Therapy 9 AM · Gym · Social night',color:'#D4537E',bg:'#FBEAF0',blocks:[
+    {t:'7:30 AM',n:'Wake up — slightly later',d:'Day off. Extra 30 min. Still no phone until after breakfast.',cat:'morning'},
+    {t:'7:30–8:00',n:'Morning reset + breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3.',cat:'food'},
+    {t:'8:00–8:25',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
+    {t:'8:25–8:55',n:'Pre-therapy journal',d:'What do you want to bring today? What patterns did you notice this week? Makes the session much more productive.',cat:'self'},
+    {t:'9:00–10:00',n:'THERAPY',d:'Fixed weekly appointment. Full presence. No phone before you walk in.',cat:'fixed'},
+    {t:'10:00–10:15',n:'Post-therapy integration',d:'Write 2–3 sentences: the key insight. Don\'t rush to your phone.',cat:'self'},
+    {t:'10:15–11:45',n:'GYM — Workout C',d:'Day off = best session energy. No time pressure. 60–90 min.',cat:'fitness'},
+    {t:'11:45–1:00',n:'Shower + lunch',d:'Eat well post-workout. Post-gym meal matters for recovery.',cat:'food'},
+    {t:'1:00–3:00',n:'Deep skill block — 2 hours',d:'Deepest learning window of the week. One topic: coding project, financial deep dive, language, or books. No phone.',cat:'self'},
+    {t:'3:00–5:00',n:'Free afternoon',d:'Completely unstructured. Your reward for the week.',cat:'free'},
+    {t:'4:30 PM',n:'Snack 2 + CoQ10',d:'Protein shake, hard boiled eggs + banana, or cottage cheese bowl.',cat:'food'},
+    {t:'5:00–6:00',n:'Get ready for social night',d:'Shower, get dressed, confirm plans.',cat:'social'},
+    {t:'6:00 PM+',n:'SOCIAL NIGHT — go out',d:'Friends, date, somewhere new in Miami. Friday is your protected social window every week.',cat:'social'},
+    {t:'7:00 PM',n:'Dinner + magnesium + Losartan',d:'Eat before or during social. Take Losartan with food.',cat:'food'},
+    {t:'8:00 PM',n:'Evening dog walk 🐕',d:'Plan around this or arrange help if you\'re out.',cat:'dog'},
+    {t:'11:30 PM',n:'Wind down — phone to charger',d:'Even on Friday. Midnight is the absolute latest.',cat:'sleep'},
+  ]},
+  {id:'sat',label:'Sat',full:'Saturday',sub:'Day off · Rest · Creative + social',color:'#BA7517',bg:'#FAEEDA',blocks:[
+    {t:'8:00 AM',n:'Wake up',d:'No alarm pressure but keep the morning routine going.',cat:'morning'},
+    {t:'8:00–8:30',n:'Morning reset + breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3.',cat:'food'},
+    {t:'8:30–8:55',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
+    {t:'9:00–10:00',n:'Outdoor activity — walk, hike, swim',d:'No gym. Movement in fresh air. Phone-free if you can.',cat:'fitness'},
+    {t:'10:00–10:20',n:'Quick journal check-in',d:'How\'s the week been feeling? One adjustment for next week.',cat:'self'},
+    {t:'10:20–12:20',n:'Creative deep work — 2 hours',d:'Biggest creative block of the week. Writing, music, art, content, project. Full presence.',cat:'creative'},
+    {t:'12:20–1:00',n:'Lunch',d:'Eat your planned meal from batch-cooked components.',cat:'food'},
+    {t:'1:00–3:00',n:'Finance block (alternating) + errands',d:'Every other Saturday: 1 hr finances (accounts, spending, 1 concept). Other Saturdays: errands + admin.',cat:'admin'},
+    {t:'3:00–6:00',n:'Free time',d:'Games, content, nap, spontaneous plans.',cat:'free'},
+    {t:'6:00 PM+',n:'Social — dinner, hangout, or date',d:'Saturday is your second social window. Confirm plans Thursday.',cat:'social'},
+    {t:'7:00 PM',n:'Dinner + magnesium + Losartan',d:'Planned meal. First magnesium dose. Take Losartan with food.',cat:'food'},
+    {t:'8:00 PM',n:'Evening dog walk 🐕',d:'20–25 min. Phone in pocket.',cat:'dog'},
+    {t:'11:30 PM',n:'Wind down — phone away',d:'Even on Saturday. Charge across the room.',cat:'sleep'},
+  ]},
+  {id:'sun',label:'Sun',full:'Sunday',sub:'Reset day · Instacart order · Early wind-down',color:'#1D9E75',bg:'#E1F5EE',blocks:[
+    {t:'8:00 AM',n:'Wake up',d:'Reset day. Keep the morning routine going.',cat:'morning'},
+    {t:'8:00–8:30',n:'Morning reset + breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3.',cat:'food'},
+    {t:'8:30–8:55',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
+    {t:'9:00–10:00',n:'Weekly review — 1 hour',d:'(1) What went well? (2) What did I skip — no judgment, just data. (3) One adjustment. (4) Finance check if not done Saturday.',cat:'self'},
+    {t:'10:00–12:00',n:'Free morning',d:'Church, errands, rest, spontaneous. Completely unscheduled.',cat:'free'},
+    {t:'12:00–1:00',n:'Lunch',d:'Eat your planned meal.',cat:'food'},
+    {t:'1:00–3:00',n:'Free afternoon',d:'Rest. Your brain needs unscheduled time to consolidate the week.',cat:'free'},
+    {t:'3:00 PM',n:'Place Instacart order',d:'Open pantry tracker, flag what\'s low, place Monday 3–5 PM delivery.',cat:'admin'},
+    {t:'4:00–5:00',n:'Batch cook prep',d:'Clean air fryer, clear counter, confirm Monday delivery window.',cat:'food'},
+    {t:'5:00–7:00',n:'Slow evening',d:'Low stimulation. Easy dinner. Wind down intentionally.',cat:'free'},
+    {t:'7:00 PM',n:'Dinner + magnesium + Losartan',d:'Planned meal. First magnesium dose. Take Losartan with food.',cat:'food'},
+    {t:'7:30–8:00',n:'Reading',d:'Start wind-down early on Sunday.',cat:'self'},
+    {t:'8:00–8:25',n:'Evening dog walk 🐕',d:'20–25 min. Phone in pocket.',cat:'dog'},
+    {t:'9:00 PM',n:'PHONE TO CHARGER — Sunday curfew',d:'9 PM on Sundays. Full sleep before Monday gym + work.',cat:'sleep'},
+    {t:'9:00–10:00',n:'Reading in bed + supplements',d:'Magnesium glycinate second dose. Reading. Sleep by 10:30.',cat:'self'},
+  ]},
+];
+
+const SCAT={
+  morning:{bg:'#FAEEDA',c:'#633806',dot:'#EF9F27'},
+  self:{bg:'#EAF3DE',c:'#27500A',dot:'#1B6B2A'},
+  food:{bg:'#E1F5EE',c:'#085041',dot:'#1D9E75'},
+  dog:{bg:'#FAEEDA',c:'#854F0B',dot:'#BA7517'},
+  work:{bg:'#F1EFE8',c:'#444441',dot:'#888780'},
+  fitness:{bg:'#E6F1FB',c:'#0C447C',dot:'#1B5FA6'},
+  fixed:{bg:'#EEEDFE',c:'#3C3489',dot:'#7F77DD'},
+  creative:{bg:'#F4C0D1',c:'#72243E',dot:'#D4537E'},
+  social:{bg:'#FAEEDA',c:'#633806',dot:'#BA7517'},
+  free:{bg:'#F1EFE8',c:'#444441',dot:'#888780'},
+  sleep:{bg:'#F1EFE8',c:'#5F5E5A',dot:'#5F5E5A'},
+  admin:{bg:'#FCEBEB',c:'#791F1F',dot:'#E24B4A'},
+};
+
+let schedDay=(['sun','mon','tue','wed','thu','fri','sat'])[new Date().getDay()];
+let schedChecked={};
+
+async function initSched(){
+  const saved=await sg('sched-v1');
+  if(saved){
+    // Reset if saved date is not today
+    if(saved.date===dKey(now())) schedChecked=saved.checked||{};
+  }
+  renderSched();
+}
+async function saveSched(){
+  await ss('sched-v1',{date:dKey(now()),checked:schedChecked});
+}
+function switchSchedDay(id){schedDay=id;renderSched();}
+function toggleSchedBlock(key){
+  schedChecked[key]=!schedChecked[key];
+  saveSched();renderSched();
+}
+function resetSched(){
+  const day=SDAYS.find(d=>d.id===schedDay);
+  day.blocks.forEach((_,i)=>{schedChecked[schedDay+'|'+i]=false;});
+  saveSched();renderSched();
+}
+
+function renderSched(){
+  const day=SDAYS.find(d=>d.id===schedDay);
+  const todayId=(['sun','mon','tue','wed','thu','fri','sat'])[new Date().getDay()];
+
+  // Header
+  document.getElementById('sched-header').innerHTML=`
+    <div style="margin-bottom:14px">
+      <div class="ptitle">${day.full}</div>
+      <div style="font-size:14px;color:var(--t2);margin-top:2px">${day.sub}</div>
+    </div>`;
+
+  // Day tabs
+  document.getElementById('sched-day-tabs').innerHTML=SDAYS.map(d=>{
+    const isOn=d.id===schedDay;
+    const isToday=d.id===todayId;
+    return`<button class="sday-tab${isOn?' on':''}" style="${isOn?'background:'+d.color+';border-color:'+d.color:''}" onclick="switchSchedDay('${d.id}')">
+      ${d.label}${isToday&&!isOn?' •':''}
+    </button>`;
+  }).join('');
+
+  // Progress
+  const total=day.blocks.length;
+  const done=day.blocks.filter((_,i)=>schedChecked[schedDay+'|'+i]).length;
+  const pct=Math.round(done/total*100);
+  const pcol=pct===100?'#1D9E75':pct>=50?'#BA7517':'#1B5FA6';
+  document.getElementById('sched-progress').innerHTML=`
+    <div class="card" style="padding:14px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:15px;font-weight:600">${done} of ${total} complete</div>
+        <div style="font-size:16px;font-weight:700;color:${pcol}">${pct}%</div>
+      </div>
+      <div class="pbar"><div class="pfill" style="width:${pct}%;background:${pcol}"></div></div>
+      ${pct===100?'<div style="font-size:13px;color:#1D9E75;margin-top:6px;font-weight:600">✓ Full day complete</div>':''}
+    </div>`;
+
+  // Blocks
+  let html='<div style="border-radius:var(--r);overflow:hidden;border:.5px solid var(--border)">';
+  day.blocks.forEach((b,i)=>{
+    const key=schedDay+'|'+i;
+    const isDone=!!schedChecked[key];
+    const cat=SCAT[b.cat]||SCAT.free;
+    const isLast=i===day.blocks.length-1;
+    html+=`<div class="sblock${isDone?' done':''}" style="${isLast?'border-bottom:none':''}" onclick="toggleSchedBlock('${key}')">
+      <div class="sb-check" style="${isDone?'background:'+day.color+';border-color:'+day.color:''}">
+        ${isDone?'<svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}
+      </div>
+      <div class="sb-body">
+        <div class="sb-time">${b.t}</div>
+        <div class="sb-name">${b.n}</div>
+        ${b.d?`<div class="sb-detail">${b.d}</div>`:''}
+        <span class="sb-cat" style="background:${cat.bg};color:${cat.c}">${b.cat}</span>
+      </div>
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('sched-list').innerHTML=html;
+}
+
 // ─── INIT ───
-initSupps();initWater();initWeight();initMeals();initJournal();initTherapy();initReview();renderRecipes();
+initSupps();initWeight();initMeals();initSched();initJournal();initTherapy();initReview();renderRecipes();
 </script>
 </body>
 </html>
