@@ -188,7 +188,7 @@ body{padding-bottom:96px}
 
   <!-- MEALS SECTION -->
   <div id="food-meals">
-    <div class="psub" style="margin-bottom:12px">Pick a meal for each slot. Calorie and macro totals update live. Tap "Log eaten" to track what you actually ate.</div>
+    <div class="psub" style="margin-bottom:12px">Tap a meal to select it — it logs automatically. Switch your pick any time and the log updates.</div>
     <div id="meal-slots"></div>
     <div class="day-totals" id="day-totals"></div>
     <div class="sectitle" style="margin-top:16px">Today's food log</div>
@@ -430,7 +430,8 @@ function logWeight(){
 function delWt(i){wtLog.splice(i,1);saveWeight();renderWeight();}
 function renderWeight(){
   const cur=wtLog.length?wtLog[wtLog.length-1].weight:WTSTART;
-  const lost=WTSTART-cur;const toGo=Math.max(0,cur-WTGOAL);
+  const baseline=wtLog.length?wtLog[0].weight:WTSTART;
+  const lost=baseline-cur;const toGo=Math.max(0,cur-WTGOAL);
   document.getElementById('wt-stats').innerHTML=`
     <div class="wtstat"><div class="wtstatv" style="color:#1D9E75">${cur.toFixed(1)}</div><div class="wtstath">Current lbs</div></div>
     <div class="wtstat"><div class="wtstatv" style="color:${lost>0?'#1D9E75':'var(--t2)'}">${lost>0?'−':''}${Math.abs(lost).toFixed(1)}</div><div class="wtstath">Lost</div></div>
@@ -473,7 +474,7 @@ function drawChart(){
     ctx.fillText('Log 2+ weigh-ins to see your chart',W/2,H/2);return;
   }
   const vals=wtLog.map(e=>e.weight);
-  const minV=Math.min(...vals,WTGOAL)-3,maxV=Math.max(...vals,WTSTART)+3;
+  const minV=Math.min(...vals,WTGOAL)-3,maxV=Math.max(...vals,wtLog[0].weight)+3;
   const p={t:20,b:28,l:42,r:16},cW=W-p.l-p.r,cH=H-p.t-p.b;
   const xP=i=>p.l+(i/(wtLog.length-1))*cW;
   const yP=v=>p.t+((maxV-v)/(maxV-minV))*cH;
@@ -1258,7 +1259,8 @@ function renderRecipeDetail(){
     const selAlt=recipeSwaps[swapKey]!==undefined?recipeSwaps[swapKey]:-1;
     const activeIng=selAlt===-1?{name:ing.n,note:ing.note||''}:ing.alts[selAlt];
     const amt=ing.scale?+(ing.base*ratio).toFixed(2):ing.base;
-    const amtStr=Number.isInteger(amt)?String(amt):String(parseFloat(amt.toFixed(2)));
+    const fmtAmt=a=>{const fracs={0.25:'¼',0.5:'½',0.75:'¾',0.33:'⅓',0.67:'⅔',1.5:'1½',2.5:'2½'};return fracs[a]!==undefined?fracs[a]:(Number.isInteger(a)?String(a):String(parseFloat(a.toFixed(2))));}
+    const amtStr=fmtAmt(amt);
     const isLast=i===r.ings.length-1;
     const hasAlts=ing.alts&&ing.alts.length>0;
     const isSwapped=selAlt!==-1;
@@ -1271,7 +1273,7 @@ function renderRecipeDetail(){
           ${hasAlts&&!isSwapped?`<div style="font-size:11px;color:${r.color};margin-top:3px;font-weight:600">${ing.alts.length} substitute${ing.alts.length>1?'s':''} available — tap to swap</div>`:''}
           ${isSwapped?`<div style="font-size:11px;color:${r.color};margin-top:3px;font-weight:600">Swapped — tap to change or restore original</div>`:''}
         </div>
-        <div style="font-size:14px;font-weight:700;color:${r.color};white-space:nowrap;margin-left:12px;padding-top:2px">${amtStr} ${ing.unit}</div>
+        <div style="font-size:14px;font-weight:700;color:${r.color};white-space:nowrap;min-width:70px;text-align:right;margin-left:12px;padding-top:2px;flex-shrink:0">${amtStr} ${ing.unit}</div>
       </div>
       <div id="swappanel-${r.id}-${i}" style="display:none;background:var(--bg);border-top:.5px solid var(--border);padding:10px 16px 14px">
         <div style="font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Choose an option:</div>
@@ -1328,29 +1330,29 @@ function pickSwap(swapKey,ingIdx,altIdx){
 const MEAL_GOAL={cal:2620,p:169,c:300,f:80,fiber:38};
 const SLOTS=[
   {id:'breakfast',name:'Breakfast',time:'7:40 AM',color:'#1D9E75',bg:'#E1F5EE',opts:[
-    {n:'Scrambled eggs + oats',desc:'3 eggs, ½ cup oats, 1 scoop protein powder, 1 tbsp peanut butter',tool:'Stove',toolBg:'#EAF3DE',toolC:'#27500A',time:'5 min',cal:520,p:42,c:48,f:16,fiber:6},
-    {n:'Greek yogurt power bowl',desc:'1 cup Greek yogurt, ½ banana, 2 tbsp granola, 1 tbsp peanut butter, honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:490,p:34,c:54,f:14,fiber:4},
-    {n:'Egg & cheese wrap',desc:'3 eggs, 1 slice cheddar, whole wheat tortilla — panini press 2 min',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'6 min',cal:510,p:38,c:38,f:20,fiber:4},
+    {n:'Scrambled eggs + oats',desc:'3 eggs scrambled, ½ cup dry oats cooked, 1 scoop protein powder stirred in, 1 tbsp peanut butter',tool:'Stove',toolBg:'#EAF3DE',toolC:'#27500A',time:'5 min',cal:520,p:42,c:48,f:16,fiber:6},
+    {n:'Greek yogurt power bowl',desc:'1 cup plain Greek yogurt, ½ banana sliced, 2 tbsp granola, 1 tbsp peanut butter, drizzle honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:490,p:34,c:54,f:14,fiber:4},
+    {n:'Egg & cheese wrap',desc:'3 eggs scrambled, 3 tbsp shredded cheddar, 1 Carb Balance tortilla — panini press 3–4 min',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'6 min',cal:510,p:38,c:38,f:20,fiber:4},
   ]},
   {id:'snack1',name:'Snack 1',time:'11:30 AM',color:'#1B5FA6',bg:'#E6F1FB',opts:[
-    {n:'Greek yogurt + berries',desc:'1 cup Greek yogurt, handful frozen berries, drizzle honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:240,p:20,c:28,f:6,fiber:3},
-    {n:'Tuna + crackers',desc:'1 can tuna with light mayo + mustard on whole wheat crackers',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:230,p:22,c:20,f:6,fiber:2},
-    {n:'String cheese + apple',desc:'2 string cheese sticks, 1 medium apple',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:220,p:14,c:24,f:8,fiber:4},
+    {n:'Greek yogurt + berries',desc:'1 cup plain Greek yogurt, ½ cup frozen berries, drizzle honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:240,p:20,c:28,f:6,fiber:3},
+    {n:'Tuna + crackers',desc:'½ cup batch tuna salad (about 3 oz) on 10–12 whole wheat crackers',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:230,p:22,c:20,f:6,fiber:2},
+    {n:'String cheese + apple',desc:'2 mozzarella string cheese sticks, 1 medium apple',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:220,p:14,c:24,f:8,fiber:4},
   ]},
   {id:'lunch',name:'Lunch',time:'1:00 PM',color:'#639922',bg:'#EAF3DE',opts:[
-    {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup rice, 1 cup broccoli — microwave 90 sec. Sauce: soy+sriracha, teriyaki, Frank\'s, or Caesar',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5},
-    {n:'Tuna salad sandwich',desc:'Batch tuna salad on 2 slices whole wheat bread, lettuce, tomato',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6},
-    {n:'Beef taco bowl',desc:'6 oz batch beef, 1 cup rice, black beans, salsa, shredded cheese — microwave 90 sec',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:660,p:46,c:70,f:18,fiber:9},
+    {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup cooked rice, 1 cup batch broccoli — microwave 90 sec. Sauce: soy+sriracha, teriyaki, Frank\'s, or Caesar',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5},
+    {n:'Tuna salad sandwich',desc:'¾ cup batch tuna salad on 2 slices whole wheat bread, lettuce, tomato',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6},
+    {n:'Beef taco bowl',desc:'6 oz batch beef, 1 cup cooked rice, ½ cup black beans, 2 tbsp salsa, 3 tbsp shredded cheese — microwave 90 sec',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:660,p:46,c:70,f:18,fiber:9},
   ]},
   {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#BA7517',bg:'#FAEEDA',opts:[
-    {n:'Protein shake',desc:'1 scoop whey, 1 cup milk, ½ banana, 1 tbsp peanut butter — blend 20 sec',tool:'Blender',toolBg:'#EAF3DE',toolC:'#27500A',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2},
-    {n:'Hard boiled eggs + banana',desc:'2 batch-cooked eggs, 1 banana — grab from fridge',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:260,p:16,c:28,f:8,fiber:3},
-    {n:'Cottage cheese bowl',desc:'1 cup cottage cheese, pineapple chunks, everything bagel seasoning',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:230,p:24,c:20,f:4,fiber:1},
+    {n:'Protein shake',desc:'1 scoop whey protein, 1 cup whole milk, ½ frozen banana, 1 tbsp peanut butter — blend 20 sec',tool:'Blender',toolBg:'#EAF3DE',toolC:'#27500A',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2},
+    {n:'Hard boiled eggs + banana',desc:'2 batch hard boiled eggs, 1 medium banana — grab straight from fridge',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:260,p:16,c:28,f:8,fiber:3},
+    {n:'Cottage cheese bowl',desc:'1 cup Daisy 4% cottage cheese, ½ cup pineapple chunks, ¼ tsp everything bagel seasoning',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:230,p:24,c:20,f:4,fiber:1},
   ]},
   {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#993556',bg:'#FBEAF0',opts:[
-    {n:'Air fryer chicken + broccoli',desc:'7 oz chicken reheated in air fryer (8 min, 375°F), broccoli 10 min, 1 cup rice',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6},
-    {n:'Air fryer fish + rice',desc:'2 Kirkland tilapia fillets cornmeal-coated, air fryer 400°F 11 min — rice, coleslaw, tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
-    {n:'Panini beef wrap',desc:'7 oz batch beef + cheese + salsa in whole wheat tortilla — panini press 3 min, avocado',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8},
+    {n:'Air fryer chicken + broccoli',desc:'7 oz batch chicken in air fryer 8 min at 375°F, 1 cup batch broccoli, 1 cup cooked rice. Sauce: soy+sriracha, teriyaki, or Frank\'s',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6},
+    {n:'Air fryer fish + rice',desc:'2 Kirkland tilapia fillets cornmeal-coated, air fryer 400°F 11 min, 1 cup rice, ½ cup coleslaw, 1 tbsp tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
+    {n:'Panini beef wrap',desc:'7 oz batch beef, 3 tbsp shredded cheddar, 2 tbsp salsa, 1 Carb Balance tortilla — panini press 3–4 min, ¼ avocado on side',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8},
   ]},
 ];
 
@@ -1371,6 +1373,12 @@ async function saveMeals(){
 
 function pickMeal(slotId,idx){
   mealPicks[slotId]=idx;
+  // Auto-log immediately on tap
+  const slot=SLOTS.find(s=>s.id===slotId);
+  const opt=slot.opts[idx];
+  // Remove any previous log entry for this slot today, then add new one
+  mealLogToday=mealLogToday.filter(e=>e.slot!==slot.name);
+  mealLogToday.push({name:opt.n,slot:slot.name,cal:opt.cal,p:opt.p,c:opt.c,f:opt.f,fiber:opt.fiber,ts:Date.now()});
   saveMeals();
   renderMeals();
 }
@@ -1436,7 +1444,7 @@ function renderMeals(){
           <span class="mpill">${opt.f}g fat</span>
           <span class="mpill">${opt.fiber}g fiber</span>
           <span class="tpill" style="background:${opt.toolBg};color:${opt.toolC}">${opt.tool} · ${opt.time}</span>
-          ${isp?`<button style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid ${slot.color};color:${slot.color};background:none;cursor:pointer;font-family:inherit" onclick="event.stopPropagation();logMeal('${slot.id}')">Log eaten</button>`:''}
+          ${isp?`<div style="font-size:11px;font-weight:600;color:${slot.color};margin-top:4px">✓ logged</div>`:''}
         </div>
       </div>`;
     });
@@ -1454,7 +1462,7 @@ function renderMeals(){
   const pPct=Math.min(100,Math.round(totals.p/MEAL_GOAL.p*100));
 
   document.getElementById('day-totals').innerHTML=`
-    <div style="font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t2);margin-bottom:12px">${useLog?'Logged today':'Planned today (tap "Log eaten" to track actual)'}</div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t2);margin-bottom:12px">${useLog?'Logged today':'Nothing logged yet'}</div>
     <div class="cal-bar-wrap">
       <div class="cal-bar-lbl">
         <span style="font-weight:600">Calories</span>
@@ -1479,7 +1487,7 @@ function renderMeals(){
   // Log
   let logHtml='';
   if(!mealLogToday.length){
-    logHtml='<div style="text-align:center;padding:20px;color:var(--t3);font-size:14px">Nothing logged yet. Pick a meal above then tap "Log eaten".</div>';
+    logHtml='<div style="text-align:center;padding:20px;color:var(--t3);font-size:14px">Nothing logged yet — tap a meal above to log it.</div>';
   } else {
     [...mealLogToday].reverse().forEach((e,ri)=>{
       const idx=mealLogToday.length-1-ri;
