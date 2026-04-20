@@ -269,7 +269,24 @@ body{padding-bottom:96px}
   </div>
 </div>
 
-<!-- RECIPES -->
+<!-- EXPORT -->
+<div class="pg" id="pg-export">
+  <div class="ptitle">Export Data</div>
+  <div class="psub" style="margin-bottom:16px">Tap Generate, then copy and paste into Claude to share your progress.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+    <button class="btn bp" onclick="genExport('all')" style="padding:14px 10px;font-size:15px">📋 Full report</button>
+    <button class="btn" style="background:var(--green-light);color:var(--green);border:.5px solid var(--green);padding:14px 10px;font-size:15px" onclick="genExport('weight')">⚖️ Weight only</button>
+    <button class="btn" style="background:#EEEDFE;color:#3C3489;border:.5px solid #7F77DD;padding:14px 10px;font-size:15px" onclick="genExport('food')">🍽️ Food log</button>
+    <button class="btn" style="background:#FAEEDA;color:#633806;border:.5px solid #BA7517;padding:14px 10px;font-size:15px" onclick="genExport('journal')">📓 Journal</button>
+  </div>
+  <div id="export-out" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="font-size:14px;font-weight:600;color:var(--t2)">Tap to copy ↓</div>
+      <button class="btn bp" style="padding:8px 16px;font-size:13px" onclick="copyExport()" id="copy-btn">Copy</button>
+    </div>
+    <textarea id="export-text" readonly style="width:100%;height:320px;font-family:-apple-system,sans-serif;font-size:13px;line-height:1.6;padding:14px;border-radius:var(--r);border:.5px solid var(--border);background:var(--card);color:var(--tx);resize:none;-webkit-user-select:all;user-select:all"></textarea>
+  </div>
+</div>
 <div class="pg" id="pg-recipes">
   <div class="ptitle">Recipes</div>
   <div class="psub">Tap a recipe to open it. Swap ingredients to match how you make it, and scale servings.</div>
@@ -295,6 +312,7 @@ body{padding-bottom:96px}
   <button class="nb" onclick="gp('track',this)"><span class="nb-ic">⚖️</span><span class="nb-lb">Weight</span></button>
   <button class="nb" onclick="gp('mind',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Mind</span></button>
   <button class="nb" onclick="gp('recipes',this)"><span class="nb-ic">📖</span><span class="nb-lb">Recipes</span></button>
+  <button class="nb" onclick="gp('export',this)"><span class="nb-ic">📤</span><span class="nb-lb">Export</span></button>
 </nav>
 
 <script>
@@ -320,6 +338,7 @@ function gp(id,btn){
   if(id==='track'){renderWeight();}
   if(id==='mind'){renderJournal();renderTherapy();renderReview();}
   if(id==='schedule'){renderSched();}
+  if(id==='export'){document.getElementById('export-out').style.display='none';}
   if(id==='recipes'){closeRecipe();renderRecipes();}
 }
 function switchFoodTab(tab){
@@ -829,43 +848,39 @@ const RECIPES=[
     tips:'<b>Bowl base:</b> over rice + black beans + salsa + shredded cheese = done in 3 min · <b>Wrap it:</b> in a corn or whole wheat tortilla on the panini press = taco wrap in 5 min · <b>Freeze tip:</b> portion into single-serving freezer bags flat — thaw in microwave 2 min from frozen',
   },
   {
-    id:'fish',emoji:'🐠',title:'Air Fryer Fish Fillets',
-    subtitle:'Dinner option · 11 min · fresh only — do not freeze after cooking',
+    id:'fish',emoji:'🐠',title:'Air Fryer Fish Fillets (Cornmeal Cajun)',
+    subtitle:'Dinner option · 11 min · cornmeal + Cajun coating',
     color:'#1B5FA6',bg:'#E6F1FB',
     baseSrv:2,srvUnit:'serving (2 fillets)',
     macros:{cal:320,p:44,c:14,f:9,fiber:1},
     ings:[
       {n:'Tilapia fillets (Kirkland Signature fresh farmed)',base:2,unit:'fillets (~5–6 oz each)',scale:true,note:'Pat completely dry before coating — moisture is the enemy of crispiness',
-       alts:[{name:'Kirkland frozen tilapia loins',note:'Thaw fully and pat extra dry. Same cook time.'},
-             {name:'Catfish fillets',note:'Stronger flavor, slightly fattier. Same cook time.'},
+       alts:[{name:'Kirkland frozen tilapia — thawed',note:'Separate by running under cold water 2–3 min, then thaw in fridge overnight or cold water bowl 20 min. Pat extra dry.'},
              {name:'Cod fillets',note:'Flakier, milder. Watch closely — done faster, ~9 min.'},
              {name:'Mahi-mahi',note:'Firmer texture, meatier. Add 1–2 min.'}]},
-      {n:'Yellow cornmeal',base:3,unit:'tbsp',scale:true,note:'Creates the crispy crust',
+      {n:'Yellow cornmeal',base:3,unit:'tbsp',scale:true,note:'Creates the crispy crust — this uses your bag of cornmeal',
        alts:[{name:'Panko breadcrumbs',note:'Crispier, lighter coat. Same amount.'},
-             {name:'Crushed crackers (Triscuit)',note:'Nutty flavor — pulse in a bag until fine.'},
-             {name:'Almond flour',note:'Lower carb option. Use same amount.'}]},
-      {n:'Cajun seasoning',base:1,unit:'tsp',scale:false,note:'Mixed into the cornmeal',
+             {name:'Crushed Crunchmaster crackers',note:'Pulse in a bag until fine — nutty flavor.'}]},
+      {n:'Tony Chachere\'s Creole Seasoning',base:1,unit:'tsp',scale:false,note:'Mix into cornmeal — the Cajun flavor masks the fish taste',
        alts:[{name:'Old Bay seasoning',note:'Classic seafood blend — same amount.'},
-             {name:'Garlic powder + paprika + salt',note:'½ tsp each — basic but solid.'},
-             {name:'Lemon pepper seasoning',note:'Use 1 tsp — bright and clean flavor.'}]},
-      {n:'Salt',base:0.25,unit:'tsp',scale:false,
-       alts:[{name:'Skip (if Cajun seasoning has salt)',note:'Most Cajun blends already include salt.'}]},
-      {n:'Cooking spray or olive oil',base:1,unit:'light coat',scale:false,note:'Spray both sides of coated fish',
-       alts:[{name:'Avocado oil spray',note:'Higher smoke point — great for air fryer.'},
-             {name:'Brush with ½ tsp olive oil',note:'Use a pastry brush for even coverage.'}]},
+             {name:'Garlic powder + smoked paprika + salt',note:'½ tsp each — solid backup.'}]},
+      {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,note:'Mix into cornmeal coating',alts:[]},
+      {n:'Cooking spray or olive oil',base:1,unit:'light coat',scale:false,note:'Spray both sides after coating',
+       alts:[{name:'Avocado oil spray',note:'Higher smoke point — great for air fryer.'}]},
     ],
     steps:[
-      'Pat fillets completely dry with paper towels on both sides — moisture ruins the crust.',
-      'Mix cornmeal, Cajun seasoning, and salt on a flat plate.',
-      'Press each fillet into the cornmeal mixture, coating both sides firmly. Shake off excess.',
+      'If using frozen: run the frozen block under cold water 2–3 min until fillets separate. Do not fully thaw — just separate them, then pat very dry with paper towels.',
+      'If using fresh: pat fillets completely dry on both sides.',
+      'Mix cornmeal, Tony Chachere\'s, and garlic powder on a flat plate.',
+      'Press each fillet firmly into the cornmeal mixture on both sides. Shake off excess.',
       'Preheat air fryer to 400°F for 3 minutes.',
-      'Spray the air fryer basket lightly with cooking spray. Place fillets in a single layer — do not overlap.',
-      'Spray the tops of the fillets lightly with cooking spray.',
-      'Air fry at 400°F for 10–12 minutes, flipping carefully at the 6-minute mark.',
-      'Fish is done when it flakes easily with a fork and the coating is golden and crisp.',
-      'Serve immediately with tartar sauce, coleslaw, and rice.',
+      'Spray basket lightly. Place fillets in single layer — do not overlap.',
+      'Spray tops of fillets lightly.',
+      'Air fry at 400°F for 10–12 minutes (14–16 min from fully frozen), flipping at 6 min (8 min from frozen).',
+      'Done when coating is golden and fish flakes easily with a fork.',
+      'Serve immediately — gets soggy if stored overnight.',
     ],
-    tips:'<b>From frozen:</b> cook straight from frozen at 400°F for 14–16 min, flip at 8 min. Pat off surface ice first and spray generously — coating won\'t stick as cleanly but still crisps up fine · <b>No flip method:</b> thicker fillets (¾"+) can skip the flip if your air fryer heats from the top · <b>Serve with:</b> coleslaw + rice + tartar sauce + lemon wedge + hot sauce · <b>Don\'t fridge overnight:</b> fried fish gets soggy — best eaten fresh the same night · <b>Fish night frequency:</b> aim for 1–2× per week for omega-3s',
+    tips:'<b>Frozen separation fix:</b> run under cold water 2–3 min to separate, OR thaw overnight in fridge, OR submerge bag in cold water bowl 20 min changing water at 10 min · <b>Taste masking:</b> the heavier you coat with Tony\'s the less fish taste you get — be aggressive with the seasoning · <b>Serve with:</b> coleslaw + rice + tartar sauce · <b>See also:</b> Fish Tacos, Cajun Blackened, and Teriyaki Glazed recipes for stronger taste masking',
   },
   {
     id:'wrap',emoji:'🌯',title:'Panini Beef Wrap',
@@ -1177,7 +1192,7 @@ const RECIPES=[
        alts:[{name:'Cajun seasoning (McCormick)',note:'Same amount. Either works.'},
              {name:'Smoked paprika + garlic powder + black pepper',note:'¼ tsp each — milder but still savory.'}]},
       {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,
-       alts:[{name:'Fresh garlic, minced (1 clove)',note:'Sauté in butter for 30 sec before mashing in.'}]},
+       alts:[{name:'Fresh garlic, minced (1 clove)',note:'Saute in butter for 30 sec before mashing in.'}]},
       {n:'Frank\'s RedHot (optional)',base:1,unit:'tsp',scale:false,note:'Adds heat that further kills the sweetness',
        alts:[{name:'Sriracha',note:'Same amount — slightly more garlicky heat.'},
              {name:'Skip it',note:'Cajun seasoning alone is enough.'}]},
@@ -1281,6 +1296,217 @@ const RECIPES=[
       'Top with reheated batch protein or canned tuna. Add hot sauce to taste.',
     ],
     tips:'<b>This is the burnout meal:</b> make it when the fridge is empty and you have no energy. No judgment. · <b>Fastest version:</b> Ben\'s Ready Rice + batch protein + hot sauce + cheese — no boiling, 2 min total · <b>Keep stocked:</b> always have 2 boxes pasta + 4 Ben\'s pouches so burnout nights are covered · <b>Add veg:</b> microwave frozen broccoli 3 min and dump on top',
+  },
+  {
+    id:'zucchini',emoji:'🥒',title:'Air Fryer Roasted Zucchini',
+    subtitle:'Side dish · 12 min · pairs with any protein',
+    color:'#1D9E75',bg:'#E1F5EE',
+    baseSrv:2,srvUnit:'serving',
+    macros:{cal:70,p:2,c:6,f:4,fiber:2},
+    ings:[
+      {n:'Zucchini',base:2,unit:'medium',scale:true,note:'Slice into ½-inch rounds or half-moons — even thickness cooks evenly',
+       alts:[{name:'Yellow squash',note:'Same method, same time.'},
+             {name:'Mixed zucchini + squash',note:'Use 1 of each — more color.'}]},
+      {n:'Olive oil',base:1,unit:'tbsp',scale:true,
+       alts:[{name:'Avocado oil spray',note:'Spray generously — lighter option.'}]},
+      {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,
+       alts:[{name:'Fresh garlic, minced',note:'2 cloves — toss with oil first.'}]},
+      {n:'Salt',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Everything bagel seasoning',note:'Use ½ tsp — replaces salt + adds flavor.'}]},
+      {n:'Black pepper',base:0.25,unit:'tsp',scale:false,
+       alts:[{name:'Red pepper flakes',note:'Use ¼ tsp for heat instead.'}]},
+      {n:'Smoked paprika',base:0.25,unit:'tsp',scale:false,note:'Optional but adds a nice depth',
+       alts:[{name:'Skip it',note:'Garlic + salt + pepper is enough.'}]},
+    ],
+    steps:[
+      'Slice zucchini into ½-inch rounds or half-moons. Pat dry with paper towels — moisture causes steaming instead of roasting.',
+      'Toss in olive oil, garlic powder, salt, pepper, and paprika until every piece is coated.',
+      'Air fry at 400°F for 10–12 minutes, shaking at 6 minutes. Done when edges are golden and slightly caramelized.',
+      'Serve immediately as a side with any batch protein + rice.',
+    ],
+    tips:'<b>Pat dry is key:</b> zucchini is mostly water — skipping this step makes them soggy · <b>Do not overcrowd:</b> single layer only, work in batches if needed · <b>Pairs with:</b> Cajun chicken, steak stir fry, or fish nights · <b>Batch note:</b> zucchini does not batch well — makes 1–2 days max before getting mushy. Cook fresh each time.',
+  },
+  {
+    id:'fish_tacos',emoji:'🌮',title:'Fish Tacos',
+    subtitle:'Dinner · 15 min · cornmeal-coated + shredded · best taste masker',
+    color:'#BA7517',bg:'#FAEEDA',
+    baseSrv:2,srvUnit:'serving (3 tacos)',
+    macros:{cal:520,p:40,c:52,f:14,fiber:6},
+    ings:[
+      {n:'Tilapia fillets',base:2,unit:'fillets',scale:true,note:'Thaw first if frozen — cold water bowl 20 min or fridge overnight. Pat very dry.',
+       alts:[]},
+      {n:'Yellow cornmeal',base:2,unit:'tbsp',scale:true,note:'Lighter coat than the fillet recipe — you\'re shredding it after anyway',
+       alts:[{name:'Taco seasoning only (no cornmeal)',note:'Skip cornmeal entirely — just season and air fry. Shredding hides the texture.'}]},
+      {n:'Taco seasoning',base:1,unit:'tsp',scale:false,note:'Mix into cornmeal AND season again after shredding while still hot',
+       alts:[{name:'Tony Chachere\'s + cumin',note:'½ tsp each — stronger flavor mask.'}]},
+      {n:'Lime juice (or lemon)',base:1,unit:'tbsp',scale:false,note:'Squeeze over shredded fish while still hot — this is key to killing the fish taste',
+       alts:[{name:'Apple cider vinegar',note:'Use ½ tbsp — works the same way, brightens the flavor.'}]},
+      {n:'Mission Carb Balance tortillas',base:3,unit:'small or 2 large',scale:true,note:'Warm in microwave 20 sec wrapped in a damp paper towel',
+       alts:[{name:'Corn tortillas (from grocery)',note:'2 small per serving — more authentic, slightly lower carb.'}]},
+      {n:'Publix Deli Salsa',base:3,unit:'tbsp',scale:false,
+       alts:[{name:'Sriracha + Greek yogurt',note:'1 tsp sriracha + 2 tbsp yogurt mixed — spicy creamy sauce.'}]},
+      {n:'Shredded cheddar cheese',base:3,unit:'tbsp',scale:false,alts:[]},
+      {n:'Sour cream',base:2,unit:'tbsp',scale:false,
+       alts:[{name:'Greek yogurt',note:'Higher protein, same creamy effect.'}]},
+      {n:'Coleslaw mix (a small handful)',base:0.5,unit:'cup',scale:false,note:'Raw, no dressing — adds crunch and freshness',alts:[]},
+    ],
+    steps:[
+      'Thaw fillets if frozen: submerge in cold water bowl 20 min changing water at 10 min, OR fridge overnight. Pat very dry.',
+      'Mix cornmeal + taco seasoning on a plate. Coat fillets on both sides.',
+      'Air fry at 400°F 10–12 min, flipping at 6 min. Done when flaky.',
+      'Immediately shred the cooked fish with two forks into small pieces.',
+      'While still hot, squeeze lime juice over the shredded fish and add another ½ tsp taco seasoning. Toss. The lime + seasoning kills any remaining fish flavor.',
+      'Warm tortillas 20 sec in microwave.',
+      'Build tacos: fish / coleslaw / cheese / salsa / sour cream.',
+    ],
+    tips:'<b>Why this works:</b> shredding removes the fillet texture, lime juice neutralizes the fishy compounds, and taco seasoning dominates the flavor profile · <b>Cornmeal here:</b> adds crunch to the shredded fish even after breaking it up — worth keeping · <b>Double season:</b> seasoning before AND after cooking is the key move · <b>Freeze ahead:</b> cook and shred fish, freeze in portions — reheat in microwave 90 sec, still tastes great',
+  },
+  {
+    id:'fish_blackened',emoji:'🔥',title:'Cajun Blackened Tilapia',
+    subtitle:'Dinner · 12 min · no cornmeal needed · strongest flavor mask',
+    color:'#E24B4A',bg:'#FCEBEB',
+    baseSrv:2,srvUnit:'serving (2 fillets)',
+    macros:{cal:300,p:44,c:4,f:10,fiber:1},
+    ings:[
+      {n:'Tilapia fillets',base:2,unit:'fillets',scale:true,note:'Thaw if frozen — fridge overnight or cold water bowl 20 min. Pat completely dry.',
+       alts:[]},
+      {n:'Tony Chachere\'s Creole Seasoning',base:1.5,unit:'tsp',scale:false,note:'Use more than you think — the heavy coating is what blackens and masks the taste',
+       alts:[{name:'Homemade blackening spice',note:'1 tsp smoked paprika + ½ tsp garlic powder + ¼ tsp cayenne + ¼ tsp onion powder + ¼ tsp black pepper.'}]},
+      {n:'Smoked paprika',base:0.5,unit:'tsp',scale:false,note:'Adds color and smokiness to the crust',alts:[]},
+      {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,alts:[]},
+      {n:'Olive oil',base:1,unit:'tsp',scale:false,note:'Brush lightly on fillets before seasoning — helps coating stick and blacken',
+       alts:[{name:'Cooking spray',note:'Spray both sides — lighter application.'}]},
+      {n:'Yellow cornmeal (optional)',base:1,unit:'tbsp',scale:false,note:'Mix into the spice blend for a slightly crispier crust — uses your cornmeal',
+       alts:[{name:'Skip cornmeal',note:'Pure blackening without the crust — still excellent.'}]},
+    ],
+    steps:[
+      'Thaw fillets if frozen. Pat completely dry — this is critical for blackening.',
+      'Brush or spray fillets lightly with olive oil on both sides.',
+      'Mix Tony\'s, smoked paprika, garlic powder, and cornmeal (if using) on a plate.',
+      'Press fillets firmly into the spice mix coating both sides heavily. Do not shake off — you want a thick crust.',
+      'Preheat air fryer to 400°F for 3 minutes.',
+      'Air fry at 400°F 11–13 min, flipping at 6 min. The coating will darken significantly — that\'s the blackening.',
+      'Serve over rice with coleslaw and a squeeze of lemon or lime.',
+    ],
+    tips:'<b>Why this works:</b> the heavy spice crust chars slightly and completely dominates the flavor — you taste Cajun, not fish · <b>More seasoning = less fish taste:</b> if you can still taste the fish, use more Tony\'s next time · <b>Cornmeal add-in:</b> mixing 1 tbsp cornmeal into the spice blend adds crunch and uses the bag without making it a full coating · <b>Serve with:</b> Cajun mashed sweet potato + coleslaw for a full Cajun plate',
+  },
+  {
+    id:'fish_teriyaki',emoji:'🍯',title:'Teriyaki Glazed Tilapia',
+    subtitle:'Dinner · 12 min · sweet-savory glaze · masks fish taste with umami',
+    color:'#1D9E75',bg:'#E1F5EE',
+    baseSrv:2,srvUnit:'serving (2 fillets)',
+    macros:{cal:340,p:44,c:18,f:8,fiber:0},
+    ings:[
+      {n:'Tilapia fillets',base:2,unit:'fillets',scale:true,note:'Thaw if frozen. Pat dry but not as aggressively — a little moisture helps the glaze stick.',
+       alts:[]},
+      {n:'Kikkoman Teriyaki Sauce',base:3,unit:'tbsp',scale:false,note:'Used twice — before AND after cooking. The double glaze is the key.',
+       alts:[{name:'Soy sauce + honey (1:1)',note:'1½ tbsp each — homemade version, slightly less thick.'},
+             {name:'Soy sauce + sriracha',note:'1 tbsp each — spicy teriyaki variation.'}]},
+      {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,alts:[]},
+      {n:'Sesame oil',base:0.5,unit:'tsp',scale:false,note:'Adds the stir fry-adjacent flavor that masks fish completely',
+       alts:[{name:'Skip it',note:'Teriyaki alone still works well.'}]},
+      {n:'Cornmeal (optional)',base:1,unit:'tbsp',scale:false,note:'Dust the fillet lightly before glazing — adds a subtle crust that holds the glaze better',
+       alts:[{name:'Skip cornmeal',note:'Pure glaze with no crust — softer texture.'}]},
+    ],
+    steps:[
+      'Thaw fillets if frozen. Pat dry.',
+      'Mix teriyaki sauce, garlic powder, and sesame oil in a small bowl.',
+      'If using cornmeal: dust fillets lightly with cornmeal first, shake off excess.',
+      'Brush 1½ tbsp of the teriyaki mixture over both sides of each fillet.',
+      'Preheat air fryer to 375°F (lower than usual — sugar in teriyaki burns at 400°F).',
+      'Air fry at 375°F for 10–12 min, flipping at 6 min.',
+      'In the last 2 minutes, brush remaining teriyaki sauce on top of fillets.',
+      'Done when glaze is caramelized and sticky. Serve over rice with sriracha.',
+    ],
+    tips:'<b>Why this works:</b> the sweet-savory teriyaki glaze completely dominates — you taste teriyaki chicken, not fish · <b>Lower temp:</b> 375°F instead of 400°F because teriyaki sauce has sugar that burns at high heat · <b>Double glaze:</b> brushing before and at the end creates a sticky caramelized crust · <b>Cornmeal use:</b> the light dusting gives the glaze something to grip onto — better adhesion, better crust',
+  },
+  {
+    id:'fish_tuna_style',emoji:'🐟',title:'Flaked Fish Tuna-Style Salad',
+    subtitle:'Lunch option · 10 min · uses cooked tilapia like canned tuna',
+    color:'#7F77DD',bg:'#EEEDFE',
+    baseSrv:2,srvUnit:'serving (~¾ cup)',
+    macros:{cal:240,p:32,c:6,f:10,fiber:1},
+    ings:[
+      {n:'Tilapia fillets, cooked and flaked',base:2,unit:'fillets (cooked)',scale:true,note:'Cook however you want first — plain in air fryer 10 min at 400°F, no seasoning needed since it\'s going in the salad',
+       alts:[]},
+      {n:'Plain Greek yogurt',base:2,unit:'tbsp',scale:true,
+       alts:[{name:'Light mayo only',note:'Use 3 tbsp — skip yogurt.'}]},
+      {n:'Light mayo',base:1,unit:'tbsp',scale:true,alts:[]},
+      {n:'Dijon mustard',base:1,unit:'tbsp',scale:false,alts:[]},
+      {n:'Fresh lemon juice',base:1,unit:'tbsp',scale:false,note:'Neutralizes any remaining fish flavor — do not skip',alts:[]},
+      {n:'Celery, finely diced',base:1,unit:'stalk',scale:false,alts:[]},
+      {n:'Everything bagel seasoning',base:0.5,unit:'tsp',scale:false,note:'Replaces salt + pepper and adds a savory layer that masks the fish',
+       alts:[{name:'Salt + black pepper',note:'¼ tsp salt + ¼ tsp pepper.'}]},
+    ],
+    steps:[
+      'Cook tilapia fillets plain in air fryer at 400°F for 10 min — no seasoning needed.',
+      'Let cool 5 minutes, then flake into small pieces with a fork. Break up any large chunks.',
+      'Mix Greek yogurt, mayo, Dijon mustard, and lemon juice in a bowl.',
+      'Add flaked fish, celery, and everything bagel seasoning. Stir until combined.',
+      'Taste and adjust — more lemon or mustard if you can still detect the fish flavor.',
+      'Serve on crackers, in a sandwich, or straight from the container.',
+    ],
+    tips:'<b>Why this works:</b> flaking removes the fillet texture, lemon juice neutralizes fishy compounds, and the mayo-mustard-seasoning combo is identical to your batch tuna salad — you won\'t taste the difference · <b>When to use it:</b> when you have tilapia that needs to be used up — this is the best way to make it tolerable · <b>Lemon is not optional:</b> it chemically neutralizes trimethylamine, the compound responsible for fish smell and taste · <b>Stores:</b> 3 days fridge, same as tuna salad',
+  },
+  {
+    id:'cornmeal_chicken',emoji:'🍗',title:'Cornmeal-Crusted Cajun Chicken',
+    subtitle:'Batch variation · 20 min · air fryer · crispy exterior different from regular batch',
+    color:'#1D9E75',bg:'#E1F5EE',
+    baseSrv:4,srvUnit:'serving (~6 oz)',
+    macros:{cal:380,p:44,c:12,f:14,fiber:1},
+    ings:[
+      {n:'Boneless skinless chicken thighs',base:1.5,unit:'lbs',scale:true,note:'Pat dry — same as regular batch chicken',
+       alts:[{name:'Chicken breast',note:'Less fat, drier result. Reduce cook time by 3–4 min.'}]},
+      {n:'Yellow cornmeal',base:4,unit:'tbsp',scale:true,note:'The coating — uses your bag',
+       alts:[{name:'Panko breadcrumbs',note:'Same amount — crispier but doesn\'t use the cornmeal.'}]},
+      {n:'Tony Chachere\'s Creole Seasoning',base:1,unit:'tsp',scale:false,
+       alts:[{name:'Smoked paprika + garlic powder + salt',note:'½ tsp each.'}]},
+      {n:'Smoked paprika',base:0.5,unit:'tsp',scale:false,alts:[]},
+      {n:'Garlic powder',base:0.5,unit:'tsp',scale:false,alts:[]},
+      {n:'Onion powder',base:0.25,unit:'tsp',scale:false,alts:[]},
+      {n:'Olive oil or cooking spray',base:1,unit:'tbsp',scale:false,note:'Brush chicken before coating so cornmeal sticks',alts:[]},
+    ],
+    steps:[
+      'Pat chicken thighs completely dry.',
+      'Brush lightly with olive oil on both sides.',
+      'Mix cornmeal, Tony\'s, smoked paprika, garlic powder, and onion powder on a flat plate.',
+      'Press each thigh firmly into the cornmeal mix on both sides.',
+      'Air fry at 400°F for 18–20 min, flipping at 10 min.',
+      'Done when coating is golden-brown and internal temp hits 165°F.',
+      'Store in fridge up to 4 days — reheat in air fryer 5 min at 375°F to re-crisp.',
+    ],
+    tips:'<b>Different from regular batch:</b> the cornmeal crust makes this a completely different eating experience — use it to break up the week · <b>Pairs with:</b> Cajun mashed sweet potato + coleslaw for a full Cajun plate · <b>Uses the cornmeal bag:</b> this plus the fish recipes will work through the bag without waste',
+  },
+  {
+    id:'cornmeal_porridge',emoji:'🥣',title:'Cornmeal Porridge (Sweet Grits)',
+    subtitle:'Breakfast option · 8 min · stove · high carb + filling',
+    color:'#BA7517',bg:'#FAEEDA',
+    baseSrv:1,srvUnit:'bowl',
+    macros:{cal:420,p:18,c:58,f:12,fiber:4},
+    ings:[
+      {n:'Yellow cornmeal',base:0.25,unit:'cup dry',scale:true,note:'Fine or medium grind both work',
+       alts:[]},
+      {n:'Whole milk',base:1,unit:'cup',scale:true,note:'Milk instead of water makes it creamy and adds protein',
+       alts:[{name:'Water',note:'Lower calorie — thinner result.'},
+             {name:'Oat milk',note:'Creamy dairy-free option.'}]},
+      {n:'Honey',base:1,unit:'tbsp',scale:false,
+       alts:[{name:'Maple syrup',note:'Same amount — slightly richer.'},
+             {name:'Skip sweetener',note:'Add peanut butter instead for savory version.'}]},
+      {n:'Natural peanut butter',base:1,unit:'tbsp',scale:false,note:'Stir in after cooking — adds fat and protein',
+       alts:[{name:'Almond butter',note:'Same amount.'},
+             {name:'Skip it',note:'Lower fat — fine on its own.'}]},
+      {n:'Whey protein powder',base:0.5,unit:'scoop',scale:false,note:'Stir in after removing from heat — do not cook it',
+       alts:[{name:'Skip it',note:'Still a solid breakfast without it.'}]},
+      {n:'Salt',base:0.25,unit:'tsp',scale:false,note:'Enhances all flavors — do not skip',alts:[]},
+    ],
+    steps:[
+      'Whisk cornmeal into cold milk in a small saucepan — starting cold prevents lumps.',
+      'Add salt. Cook over medium heat, stirring constantly, 5–7 min until thickened.',
+      'Remove from heat. Stir in honey and peanut butter.',
+      'If using protein powder, stir in now while still hot but off the heat.',
+      'Eat immediately — thickens as it cools.',
+    ],
+    tips:'<b>Lump prevention:</b> always whisk into cold liquid, never add to boiling · <b>Too thick:</b> add a splash of milk and stir · <b>Savory version:</b> skip honey, add garlic powder + shredded cheddar + hot sauce — tastes like Cajun grits · <b>Uses the cornmeal:</b> ¼ cup per serving means a standard bag lasts 16–20 breakfasts',
   },
 ];
 
@@ -1466,6 +1692,7 @@ const SLOTS=[
     {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup cooked rice, 1 cup batch broccoli — microwave 90 sec. Sauce: soy+sriracha, teriyaki, Frank\'s, or Caesar',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5},
     {n:'Tuna salad sandwich',desc:'¾ cup batch tuna salad on 2 slices Dave\'s Killer Bread, lettuce, 2 slices roma tomato',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6},
     {n:'Beef taco bowl',desc:'6 oz batch beef, 1 cup cooked rice, ½ cup black beans, 2 tbsp salsa, 3 tbsp shredded cheese, 1 tbsp sour cream, cherry tomatoes — microwave 90 sec',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:680,p:46,c:70,f:20,fiber:9},
+    {n:'Amy\'s Lentil Soup',desc:'1 can Amy\'s Organic Lentil Soup Light in Sodium — microwave 2 min in a bowl. Add sriracha or Frank\'s if you want heat.',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'2 min',cal:320,p:14,c:52,f:6,fiber:10},
   ]},
   {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#BA7517',bg:'#FAEEDA',opts:[
     {n:'Protein shake',desc:'1 scoop whey protein, 1 cup whole milk, ½ frozen banana, 1 tbsp peanut butter — blend 20 sec',tool:'Blender',toolBg:'#EAF3DE',toolC:'#27500A',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2},
@@ -1475,10 +1702,14 @@ const SLOTS=[
     {n:'Beef jerky + trail mix',desc:'1 oz Kirkland beef jerky, 2 tbsp Kirkland trail mix — portable snack',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:220,p:14,c:18,f:8,fiber:2},
     {n:'Edamame',desc:'1 cup frozen edamame in shell — microwave 3 min in bag, sprinkle sea salt',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:190,p:17,c:14,f:8,fiber:8},
     {n:'Dark chocolate + seaweed',desc:'2 squares 365 70% dark chocolate, 1 pack Kirkland sea salt seaweed snacks — evening dopamine combo',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:130,p:2,c:14,f:8,fiber:2},
+    {n:'SmartPop popcorn',desc:'1 bag Orville Redenbacher SmartPop 94% fat free — microwave 2.5 min. Low calorie dopamine snack.',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:110,p:3,c:20,f:2,fiber:4},
   ]},
   {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#993556',bg:'#FBEAF0',opts:[
     {n:'Air fryer chicken + broccoli',desc:'7 oz batch chicken in air fryer 8 min at 375°F, 1 cup batch broccoli, 1 cup cooked rice. Sauce: soy+sriracha, teriyaki, or Frank\'s',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6},
-    {n:'Air fryer fish + rice',desc:'2 Kirkland tilapia fillets cornmeal-coated, air fryer 400°F 11 min, 1 cup rice, ½ cup coleslaw, 1 tbsp tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
+    {n:'Air fryer fish + rice',desc:'2 tilapia fillets cornmeal-Cajun coated, air fryer 400°F 11 min, 1 cup rice, ½ cup coleslaw, 1 tbsp tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
+    {n:'Fish tacos',desc:'2 tilapia fillets cornmeal-coated, air fryer 11 min, shredded + lime juice + taco seasoning, 3 Carb Balance tortillas, salsa, cheese, sour cream, coleslaw',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'15 min',cal:520,p:40,c:52,f:14,fiber:6},
+    {n:'Cajun blackened fish + rice',desc:'2 tilapia fillets coated in Tony\'s + smoked paprika + garlic, air fryer 400°F 12 min, 1 cup rice, coleslaw',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'12 min',cal:560,p:46,c:52,f:12,fiber:3},
+    {n:'Teriyaki glazed fish + rice',desc:'2 tilapia fillets brushed with teriyaki + sesame oil, air fryer 375°F 12 min, glaze again last 2 min, 1 cup rice, sriracha',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'12 min',cal:580,p:44,c:54,f:10,fiber:1},
     {n:'Panini beef wrap',desc:'7 oz batch beef, 3 tbsp shredded cheddar, 2 tbsp salsa, 1 Carb Balance tortilla — panini press 3–4 min, ¼ avocado on side',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8},
   ]},
 ];
@@ -1876,6 +2107,173 @@ function renderSched(){
   });
   html+='</div>';
   document.getElementById('sched-list').innerHTML=html;
+}
+
+// ─── EXPORT ───
+function fmtExportDate(ds){
+  return new Date(ds+'T12:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+}
+
+async function genExport(mode){
+  const lines=[];
+  const ts=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  lines.push('══════════════════════════════════');
+  lines.push('DAILY TOOLS EXPORT — '+ts);
+  lines.push('══════════════════════════════════');
+
+  if(mode==='all'||mode==='weight'){
+    lines.push('');
+    lines.push('── WEIGHT LOG ──────────────────');
+    const wt=await sg('weight-v1')||[];
+    if(!wt.length){
+      lines.push('No weigh-ins logged yet.');
+    } else {
+      lines.push('Start: '+wt[0].weight+' lbs  ('+fmtExportDate(wt[0].date)+')');
+      lines.push('Latest: '+wt[wt.length-1].weight+' lbs  ('+fmtExportDate(wt[wt.length-1].date)+')');
+      const lost=(wt[0].weight-wt[wt.length-1].weight).toFixed(1);
+      lines.push('Change: '+(lost>0?'-':'')+Math.abs(lost)+' lbs total');
+      lines.push('Goal: 180 lbs | Remaining: '+(wt[wt.length-1].weight-180).toFixed(1)+' lbs');
+      lines.push('');
+      lines.push('Full history:');
+      wt.forEach((e,i)=>{
+        const prev=i>0?wt[i-1].weight:null;
+        const d=prev!==null?(' ('+(e.weight<prev?'':'+')+((e.weight-prev).toFixed(1))+' lbs)'):'  (start)';
+        lines.push('  '+fmtExportDate(e.date)+'  →  '+e.weight+' lbs'+d);
+      });
+    }
+  }
+
+  if(mode==='all'||mode==='food'){
+    lines.push('');
+    lines.push('── FOOD LOG (TODAY) ────────────');
+    const meals=await sg('meals-v1');
+    const today=dKey(now());
+    if(!meals||meals.date!==today||!meals.log||!meals.log.length){
+      lines.push('Nothing logged today.');
+    } else {
+      let totCal=0,totP=0,totC=0,totF=0,totFib=0;
+      meals.log.forEach(e=>{
+        lines.push('  ['+e.slot+']  '+e.n);
+        lines.push('    '+e.cal+' cal  |  '+e.p+'g protein  |  '+e.c+'g carbs  |  '+e.f+'g fat  |  '+e.fiber+'g fiber');
+        totCal+=e.cal;totP+=e.p;totC+=e.c;totF+=e.f;totFib+=e.fiber;
+      });
+      lines.push('');
+      lines.push('  TOTALS: '+totCal+' cal  |  '+totP+'g protein  |  '+totC+'g carbs  |  '+totF+'g fat  |  '+totFib+'g fiber');
+      lines.push('  TARGETS: 2620 cal  |  169g protein  |  300g carbs  |  80g fat  |  38g fiber');
+      const pct=Math.round(totCal/2620*100);
+      lines.push('  Progress: '+pct+'% of daily calories');
+    }
+
+    lines.push('');
+    lines.push('── SUPPLEMENTS (TODAY) ─────────');
+    const supps=await sg('supps-v1');
+    if(!supps||supps.date!==today){
+      lines.push('No supplement data for today.');
+    } else {
+      let taken=0,total=0;
+      SUPPS.forEach(g=>{
+        g.items.forEach(item=>{
+          total++;
+          const done=supps.state&&supps.state[today+'|'+item.id];
+          if(done) taken++;
+          lines.push('  ['+(done?'✓':'○')+'] '+item.n+' — '+item.dose);
+        });
+      });
+      lines.push('  '+taken+'/'+total+' taken today');
+    }
+  }
+
+  if(mode==='all'||mode==='journal'){
+    lines.push('');
+    lines.push('── JOURNAL ENTRIES ─────────────');
+    const jdata=await sg('journal-v1')||{};
+    const jDates=Object.keys(jdata).sort().reverse().slice(0,7);
+    if(!jDates.length){
+      lines.push('No journal entries yet.');
+    } else {
+      jDates.forEach(dk=>{
+        lines.push('');
+        lines.push('  '+fmtExportDate(dk)+':');
+        const entry=jdata[dk];
+        if(Array.isArray(entry)){
+          entry.forEach((a,i)=>{if(a&&a.trim()) lines.push('    '+(i+1)+'. '+a.trim());});
+        }
+      });
+    }
+
+    lines.push('');
+    lines.push('── THERAPY PREP (LATEST) ───────');
+    const thdata=await sg('therapy-v1')||{};
+    const thKeys=Object.keys(thdata).sort().reverse();
+    if(!thKeys.length){
+      lines.push('No therapy prep entries yet.');
+    } else {
+      const latest=thdata[thKeys[0]];
+      lines.push('Week of: '+thKeys[0]);
+      if(Array.isArray(latest)){
+        latest.forEach((a,i)=>{if(a&&a.trim()) lines.push('  '+(i+1)+'. '+a.trim());});
+      }
+    }
+
+    lines.push('');
+    lines.push('── WEEKLY REVIEW (LATEST) ──────');
+    const rvdata=await sg('review-v1')||{};
+    const rvKeys=Object.keys(rvdata).sort().reverse();
+    if(!rvKeys.length){
+      lines.push('No weekly reviews yet.');
+    } else {
+      const latest=rvdata[rvKeys[0]];
+      lines.push('Week: '+rvKeys[0]);
+      if(Array.isArray(latest)){
+        latest.forEach((a,i)=>{if(a&&a.trim()) lines.push('  '+(i+1)+'. '+a.trim());});
+      }
+    }
+  }
+
+  if(mode==='all'){
+    lines.push('');
+    lines.push('── SCHEDULE COMPLIANCE ─────────');
+    const sdata=await sg('sched-v1');
+    if(!sdata||sdata.date!==dKey(now())){
+      lines.push('No schedule data for today.');
+    } else {
+      const todayId=(['sun','mon','tue','wed','thu','fri','sat'])[new Date().getDay()];
+      const day=SDAYS.find(d=>d.id===todayId);
+      let done=0;
+      day.blocks.forEach((_,i)=>{if(sdata.checked[todayId+'|'+i])done++;});
+      lines.push('Today ('+day.full+'): '+done+'/'+day.blocks.length+' blocks completed ('+Math.round(done/day.blocks.length*100)+'%)');
+    }
+  }
+
+  lines.push('');
+  lines.push('══════════════════════════════════');
+  lines.push('End of export');
+
+  const txt=lines.join('\n');
+  document.getElementById('export-text').value=txt;
+  document.getElementById('export-out').style.display='block';
+  document.getElementById('copy-btn').textContent='Copy';
+  document.getElementById('export-text').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copyExport(){
+  const ta=document.getElementById('export-text');
+  ta.select();
+  ta.setSelectionRange(0,99999);
+  try{
+    navigator.clipboard.writeText(ta.value).then(()=>{
+      document.getElementById('copy-btn').textContent='Copied ✓';
+      setTimeout(()=>{document.getElementById('copy-btn').textContent='Copy';},2000);
+    }).catch(()=>{
+      document.execCommand('copy');
+      document.getElementById('copy-btn').textContent='Copied ✓';
+      setTimeout(()=>{document.getElementById('copy-btn').textContent='Copy';},2000);
+    });
+  }catch(e){
+    document.execCommand('copy');
+    document.getElementById('copy-btn').textContent='Copied ✓';
+    setTimeout(()=>{document.getElementById('copy-btn').textContent='Copy';},2000);
+  }
 }
 
 // ─── INIT ───
