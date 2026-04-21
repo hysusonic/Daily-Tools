@@ -2153,7 +2153,7 @@ async function genExport(mode){
     } else {
       let totCal=0,totP=0,totC=0,totF=0,totFib=0;
       meals.log.forEach(e=>{
-        lines.push('  ['+e.slot+']  '+e.n);
+        lines.push('  ['+e.slot+']  '+e.name);
         lines.push('    '+e.cal+' cal  |  '+e.p+'g protein  |  '+e.c+'g carbs  |  '+e.f+'g fat  |  '+e.fiber+'g fiber');
         totCal+=e.cal;totP+=e.p;totC+=e.c;totF+=e.f;totFib+=e.fiber;
       });
@@ -2166,19 +2166,19 @@ async function genExport(mode){
 
     lines.push('');
     lines.push('── SUPPLEMENTS (TODAY) ─────────');
-    const supps=await sg('supps-v1');
-    if(!supps||supps.date!==today){
+    const supps=await sg('supps-v1')||{};
+    let taken=0,total=0;
+    SUPPS.forEach(g=>{
+      g.items.forEach(item=>{
+        total++;
+        const done=!!supps[today+'|'+item.id];
+        if(done) taken++;
+        lines.push('  ['+(done?'✓':'○')+'] '+item.n+' — '+item.dose);
+      });
+    });
+    if(total===0){
       lines.push('No supplement data for today.');
     } else {
-      let taken=0,total=0;
-      SUPPS.forEach(g=>{
-        g.items.forEach(item=>{
-          total++;
-          const done=supps.state&&supps.state[today+'|'+item.id];
-          if(done) taken++;
-          lines.push('  ['+(done?'✓':'○')+'] '+item.n+' — '+item.dose);
-        });
-      });
       lines.push('  '+taken+'/'+total+' taken today');
     }
   }
