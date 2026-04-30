@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Daily Tools">
-<meta name="theme-color" content="#1D9E75">
+<meta name="theme-color" content="#0d1117">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231D9E75'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🌿</text></svg>">
 <title>Daily Tools</title>
 <script>
@@ -26,35 +26,35 @@ self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r
 </script>
 <style>
 :root{
-  --green:#1D9E75;--gl:#E1F5EE;--gd:#085041;
-  --blue:#1B5FA6;--bl:#E6F1FB;--bd:#0C447C;
-  --amber:#BA7517;--al:#FAEEDA;--ad:#633806;
-  --purple:#7F77DD;--pl:#EEEDFE;--pd:#3C3489;
-  --pink:#D4537E;--pkl:#F4C0D1;--pkd:#72243E;
-  --red:#E24B4A;--rl:#FCEBEB;--rd:#791F1F;
-  --bg:#F7F7F5;--card:#FFF;--border:#E8E8E4;
-  --tx:#1A1A1A;--t2:#666;--t3:#AAA;
+  --green:#1D9E75;--gl:#0d2f22;--gd:#3ecfa0;
+  --blue:#1B5FA6;--bl:#0d1f33;--bd:#5a9fd6;
+  --amber:#BA7517;--al:#2a1e0a;--ad:#e0a948;
+  --purple:#7F77DD;--pl:#1a1830;--pd:#a9a3f0;
+  --pink:#D4537E;--pkl:#2a1420;--pkd:#e88aac;
+  --red:#E24B4A;--rl:#2a1111;--rd:#f08080;
+  --bg:#0d1117;--card:#161b22;--border:#30363d;
+  --tx:#e6edf3;--t2:#8b949e;--t3:#6e7681;
   --r:16px;--rs:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--tx);font-family:-apple-system,'SF Pro Text',sans-serif;font-size:16px;min-height:100vh}
-body{padding-bottom:96px}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:8px 0 max(14px,env(safe-area-inset-bottom));z-index:100}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 2px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit}
+body{padding-bottom:96px;padding-top:44px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(22,27,34,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:8px 0 max(14px,env(safe-area-inset-bottom));z-index:100}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 2px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit;position:relative}
 .nb.on{color:var(--green)}
 .nb-ic{font-size:22px;line-height:1}
 .nb-lb{font-size:10px;font-weight:700}
 
 /* ─── SCHEDULE ─── */
-.sday-tab{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;color:var(--t2);flex-shrink:0}
+.sday-tab{padding:12px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;color:var(--t2);flex-shrink:0}
 .sday-tab.on{color:#fff}
 .sblock{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;background:var(--card);border-bottom:.5px solid var(--border);cursor:pointer;-webkit-user-select:none;user-select:none}
 .sblock:last-child{border-bottom:none}
-.sblock:active{background:#f5f5f3}
+.sblock:active{background:#1c2128}
 .sblock.done .sb-name{text-decoration:line-through;color:var(--t3)}
 .sblock.done .sb-time{color:var(--t3)}
 .sblock.done .sb-detail{color:var(--t3)}
-.sb-check{width:28px;height:28px;min-width:28px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
+.sb-check{width:44px;height:44px;min-width:44px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}
 .sb-body{flex:1}
 .sb-time{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:3px}
 .sb-name{font-size:15px;font-weight:600;color:var(--tx);line-height:1.3}
@@ -70,12 +70,12 @@ body{padding-bottom:96px}
 .btn{padding:13px 18px;border-radius:var(--rs);border:1px solid var(--border);background:var(--card);font-size:15px;font-weight:600;cursor:pointer;color:var(--tx);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;transition:opacity .1s}
 .btn:active{opacity:.7}
 .bp{background:var(--green);color:#fff;border-color:var(--green)}
-.bg2{background:none;color:var(--t2);border-color:var(--border)}
+.bg2{background:#1c2128;color:var(--t2);border-color:var(--border)}
 .bfull{width:100%;display:flex}
 .dstrip{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .dnav{display:flex;gap:8px}
-.dnav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--card);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);font-family:inherit}
-.pbar{height:8px;background:var(--border);border-radius:8px;overflow:hidden;margin:8px 0}
+.dnav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--card);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);font-family:inherit}
+.pbar{height:8px;background:#21262d;border-radius:8px;overflow:hidden;margin:8px 0}
 .pfill{height:100%;border-radius:8px;transition:width .4s}
 .ibox{border-radius:var(--rs);padding:12px 14px;font-size:14px;line-height:1.6;margin-bottom:12px;border:1px solid}
 .sectitle{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin:20px 0 8px;padding-bottom:6px;border-bottom:.5px solid var(--border)}
@@ -87,10 +87,10 @@ body{padding-bottom:96px}
 .sgbadge{font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px}
 .si{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border-bottom:.5px solid var(--border);cursor:pointer;-webkit-user-select:none;user-select:none}
 .si:last-child{border-bottom:none}
-.si:active{background:#f5f5f3}
+.si:active{background:#1c2128}
 .si.tk .sin{text-decoration:line-through;color:var(--t3)}
 .si.tk .sidose{color:var(--t3)}
-.sicb{width:30px;height:30px;min-width:30px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.sicb{width:44px;height:44px;min-width:44px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
 .sin{font-size:16px;font-weight:500;line-height:1.3}
 .sidose{font-size:13px;color:var(--t2);margin-top:3px}
 .sinote{font-size:12px;color:var(--t3);margin-top:2px;font-style:italic}
@@ -101,7 +101,7 @@ body{padding-bottom:96px}
 /* WEIGHT */
 .wtin-row{display:flex;gap:12px;align-items:flex-end;margin-bottom:12px}
 .wtlbl{font-size:13px;font-weight:600;color:var(--t2);margin-bottom:6px;display:block}
-.wtin{font-size:36px;font-weight:700;border:none;border-bottom:2.5px solid var(--border);background:none;width:100%;padding:4px 0;font-family:inherit;outline:none;transition:border-color .2s;color:var(--tx)}
+.wtin{font-size:36px;font-weight:700;border:none;border-bottom:2.5px solid var(--border);background:var(--bg);width:100%;padding:4px 0;font-family:inherit;outline:none;transition:border-color .2s;color:var(--tx)}
 .wtin:focus{border-color:var(--green)}
 .wtstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
 .wtstat{background:var(--card);border:.5px solid var(--border);border-radius:var(--rs);padding:12px;text-align:center}
@@ -114,7 +114,7 @@ body{padding-bottom:96px}
 .pnum{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
 .pq{font-size:18px;font-weight:600;line-height:1.4;color:var(--tx);margin-bottom:8px}
 .ph{font-size:12px;color:var(--t2);margin-bottom:10px;line-height:1.5;font-style:italic}
-.pta{width:100%;min-height:88px;border:.5px solid var(--border);border-radius:var(--rs);padding:12px;font-size:15px;line-height:1.6;font-family:inherit;resize:none;background:var(--bg);color:var(--tx);outline:none;transition:border-color .2s}
+.pta{width:100%;min-height:88px;border:.5px solid var(--border);border-radius:var(--rs);padding:12px;font-size:15px;line-height:1.6;font-family:inherit;resize:none;background:#0d1117;color:#e6edf3;outline:none;transition:border-color .2s}
 .pta:focus{border-color:var(--green)}
 
 /* THERAPY + REVIEW */
@@ -123,10 +123,10 @@ body{padding-bottom:96px}
 .ttag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;margin-top:2px;flex-shrink:0}
 .tq{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.4}
 .thint{font-size:12px;color:var(--t2);margin-bottom:7px;line-height:1.4;font-style:italic}
-.tarea{width:100%;border:.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:15px;line-height:1.5;font-family:inherit;resize:none;background:var(--bg);color:var(--tx);outline:none;min-height:72px}
+.tarea{width:100%;border:.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:15px;line-height:1.5;font-family:inherit;resize:none;background:#0d1117;color:#e6edf3;outline:none;min-height:72px}
 
 /* HUMMUS */
-.rhdr{background:linear-gradient(135deg,#FAEEDA,#FFF8EE);border-radius:var(--r);padding:20px;margin-bottom:12px;border:.5px solid #FAC775}
+.rhdr{background:linear-gradient(135deg,rgba(186,117,23,.15),rgba(186,117,23,.08));border-radius:var(--r);padding:20px;margin-bottom:12px;border:.5px solid rgba(186,117,23,.3)}
 .ingrow{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 16px;background:var(--card);border-bottom:.5px solid var(--border)}
 .ingrow:last-child{border-bottom:none}
 .ingname{font-size:15px;font-weight:500;flex:1}
@@ -139,7 +139,7 @@ body{padding-bottom:96px}
 .macv{font-size:18px;font-weight:700}
 .macl{font-size:11px;color:var(--t2);margin-top:2px}
 .srvrow{display:flex;align-items:center;gap:10px;margin-bottom:4px}
-.srvbtn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--card);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.srvbtn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--border);background:var(--card);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
 
 .empty{text-align:center;padding:36px 16px;color:var(--t2)}
 
@@ -173,10 +173,28 @@ body{padding-bottom:96px}
 
 /* ─── FOOD SUB-TAB ─── */
 .ftab{flex:1;padding:9px 8px;border-radius:12px;border:none;background:none;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--t2);transition:all .15s}
-.ftab.ftab-on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.ftab.ftab-on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.status-bar{position:fixed;top:0;left:0;right:0;height:36px;background:rgba(22,27,34,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:center;gap:16px;z-index:99;padding:0 16px;font-size:12px;font-weight:600}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--t3);transition:background .3s}
+.status-dot.on{background:#1D9E75}
+.sblock.now{border-left:3px solid #58a6ff;background:rgba(88,166,255,.06)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nb .pulse-dot{width:8px;height:8px;border-radius:50%;background:#E24B4A;position:absolute;top:6px;right:calc(50% - 16px);animation:pulse 1.5s infinite}
 </style>
 </head>
 <body>
+<div id="save-warn" style="display:none;position:fixed;top:0;left:0;right:0;padding:12px 16px;background:#E24B4A;color:#fff;font-size:13px;font-weight:600;text-align:center;z-index:200">Storage full — data may not be saved. Export your data now.</div>
+<div class="status-bar" id="status-bar">
+  <div style="display:flex;align-items:center;gap:4px">
+    <span style="color:var(--t3);margin-right:4px;font-size:11px">MEALS</span>
+    <div class="status-dot" id="sd-breakfast"></div>
+    <div class="status-dot" id="sd-snack1"></div>
+    <div class="status-dot" id="sd-lunch"></div>
+    <div class="status-dot" id="sd-snack2"></div>
+    <div class="status-dot" id="sd-dinner"></div>
+  </div>
+  <div id="status-supps" style="color:var(--t3)">SUPPS 0/8</div>
+</div>
 
 <!-- FOOD (MEALS + SUPPLEMENTS COMBINED) -->
 <div class="pg on" id="pg-food">
@@ -189,6 +207,7 @@ body{padding-bottom:96px}
   <!-- MEALS SECTION -->
   <div id="food-meals">
     <div class="psub" style="margin-bottom:12px">Tap a meal to select it — it logs automatically. Switch your pick any time and the log updates.</div>
+    <button class="btn bg2" style="margin-bottom:12px;width:100%" onclick="copyYesterdayMeals()">📋 Same as yesterday</button>
     <div id="meal-slots"></div>
     <div class="day-totals" id="day-totals"></div>
     <div class="sectitle" style="margin-top:16px">Today's food log</div>
@@ -225,7 +244,7 @@ body{padding-bottom:96px}
       </div>
       <button class="btn bp" onclick="logWeight()" style="margin-bottom:4px">Log it</button>
     </div>
-    <div style="font-size:13px;color:var(--t2)">Start: 227 · Goal: 180 · Pace: ~1 lb/week</div>
+    <div style="font-size:13px;color:var(--t2)">Start: 233 · Goal: 180 · Pace: ~1 lb/week</div>
   </div>
   <div class="wtstats" id="wt-stats"></div>
   <div class="card" style="padding:16px"><div style="font-size:14px;font-weight:600;color:var(--t2);margin-bottom:12px">Progress chart</div><canvas id="wt-chart" height="180"></canvas></div>
@@ -248,7 +267,7 @@ body{padding-bottom:96px}
     </div>
     <div id="j-datelbl" style="font-size:14px;color:var(--t2);margin-bottom:14px"></div>
     <div id="j-prompts"></div>
-    <button class="btn bp bfull" onclick="saveJournal()">Save entries</button>
+    <button class="btn bg2 bfull" onclick="saveJournal()">Save entries</button>
     <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearJournal()">Clear today</button>
   </div>
   <!-- THERAPY SECTION -->
@@ -256,7 +275,7 @@ body{padding-bottom:96px}
     <div class="psub" style="margin-bottom:12px">Fill out Thursday night or Friday morning. 10 minutes makes the hour count.</div>
     <div id="th-badge" style="margin-bottom:14px"></div>
     <div id="th-content"></div>
-    <button class="btn bp bfull" onclick="saveTherapy()">Save</button>
+    <button class="btn bg2 bfull" onclick="saveTherapy()">Save</button>
     <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearTherapy()">Clear this week</button>
   </div>
   <!-- REVIEW SECTION -->
@@ -264,7 +283,7 @@ body{padding-bottom:96px}
     <div class="psub" style="margin-bottom:12px">Sunday morning — 20 min, no judgment, one adjustment.</div>
     <div id="rv-badge" style="margin-bottom:14px"></div>
     <div id="rv-content"></div>
-    <button class="btn bp bfull" onclick="saveReview()">Save review</button>
+    <button class="btn bg2 bfull" onclick="saveReview()">Save review</button>
     <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearReview()">Clear this week</button>
   </div>
 </div>
@@ -275,16 +294,16 @@ body{padding-bottom:96px}
   <div class="psub" style="margin-bottom:16px">Tap Generate, then copy and paste into Claude to share your progress.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
     <button class="btn bp" onclick="genExport('all')" style="padding:14px 10px;font-size:15px">📋 Full report</button>
-    <button class="btn" style="background:var(--green-light);color:var(--green);border:.5px solid var(--green);padding:14px 10px;font-size:15px" onclick="genExport('weight')">⚖️ Weight only</button>
-    <button class="btn" style="background:#EEEDFE;color:#3C3489;border:.5px solid #7F77DD;padding:14px 10px;font-size:15px" onclick="genExport('food')">🍽️ Food log</button>
-    <button class="btn" style="background:#FAEEDA;color:#633806;border:.5px solid #BA7517;padding:14px 10px;font-size:15px" onclick="genExport('journal')">📓 Journal</button>
+    <button class="btn" style="background:var(--gl);color:var(--green);border:.5px solid var(--green);padding:14px 10px;font-size:15px" onclick="genExport('weight')">⚖️ Weight only</button>
+    <button class="btn" style="background:rgba(127,119,221,.15);color:#a9a3f0;border:.5px solid #7F77DD;padding:14px 10px;font-size:15px" onclick="genExport('food')">🍽️ Food log</button>
+    <button class="btn" style="background:rgba(186,117,23,.15);color:#e0a948;border:.5px solid #BA7517;padding:14px 10px;font-size:15px" onclick="genExport('journal')">📓 Journal</button>
   </div>
   <div id="export-out" style="display:none">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
       <div style="font-size:14px;font-weight:600;color:var(--t2)">Tap to copy ↓</div>
       <button class="btn bp" style="padding:8px 16px;font-size:13px" onclick="copyExport()" id="copy-btn">Copy</button>
     </div>
-    <textarea id="export-text" readonly style="width:100%;height:320px;font-family:-apple-system,sans-serif;font-size:13px;line-height:1.6;padding:14px;border-radius:var(--r);border:.5px solid var(--border);background:var(--card);color:var(--tx);resize:none;-webkit-user-select:all;user-select:all"></textarea>
+    <textarea id="export-text" readonly style="width:100%;height:320px;font-family:-apple-system,sans-serif;font-size:13px;line-height:1.6;padding:14px;border-radius:var(--r);border:.5px solid var(--border);background:#0d1117;color:#e6edf3;resize:none;-webkit-user-select:all;user-select:all"></textarea>
   </div>
 </div>
 <div class="pg" id="pg-recipes">
@@ -310,7 +329,7 @@ body{padding-bottom:96px}
   <button class="nb on" onclick="gp('food',this)"><span class="nb-ic">🍽️</span><span class="nb-lb">Food</span></button>
   <button class="nb" onclick="gp('schedule',this)"><span class="nb-ic">📅</span><span class="nb-lb">Schedule</span></button>
   <button class="nb" onclick="gp('track',this)"><span class="nb-ic">⚖️</span><span class="nb-lb">Weight</span></button>
-  <button class="nb" onclick="gp('mind',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Mind</span></button>
+  <button class="nb" onclick="gp('mind',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Mind</span><span class="pulse-dot" id="therapy-dot" style="display:none"></span></button>
   <button class="nb" onclick="gp('recipes',this)"><span class="nb-ic">📖</span><span class="nb-lb">Recipes</span></button>
   <button class="nb" onclick="gp('export',this)"><span class="nb-ic">📤</span><span class="nb-lb">Export</span></button>
 </nav>
@@ -323,10 +342,21 @@ function now(){return new Date();}
 function addD(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fmtDate(d){return d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});}
 function fmtTime(ts){return new Date(ts).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
-function wkNum(d){const j=new Date(d.getFullYear(),0,1);return Math.ceil(((d-j)/86400000+j.getDay()+1)/7);}
+function wkNum(d){
+  const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  t.setUTCDate(t.getUTCDate()+4-(t.getUTCDay()||7));
+  const y=new Date(Date.UTC(t.getUTCFullYear(),0,1));
+  return Math.ceil(((t-y)/86400000+1)/7);
+}
 function wkKey(d){return d.getFullYear()+'W'+pad(wkNum(d));}
 async function sg(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
-async function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+async function ss(k,v){
+  try{localStorage.setItem(k,JSON.stringify(v));}
+  catch(e){
+    const w=document.getElementById('save-warn');
+    if(w){w.style.display='block';setTimeout(()=>{w.style.display='none';},5000);}
+  }
+}
 function gp(id,btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
@@ -336,10 +366,24 @@ function gp(id,btn){
   // When switching to food tab, re-render both sections
   if(id==='food'){renderMeals();renderSupps();}
   if(id==='track'){renderWeight();}
-  if(id==='mind'){renderJournal();renderTherapy();renderReview();}
+  if(id==='mind'){
+    renderJournal();renderTherapy();renderReview();
+    const dow=now().getDay();
+    if(dow===4||dow===5) switchMindTab('therapy');
+  }
   if(id==='schedule'){renderSched();}
   if(id==='export'){document.getElementById('export-out').style.display='none';}
   if(id==='recipes'){closeRecipe();renderRecipes();}
+}
+function goToRecipe(recipeId){
+  // Switch to Recipes tab and open the recipe
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pg-recipes').classList.add('on');
+  document.querySelectorAll('.nb').forEach(b=>{if(b.querySelector('.nb-lb').textContent==='Recipes')b.classList.add('on');});
+  window.scrollTo(0,0);
+  renderRecipes();
+  openRecipe(recipeId);
 }
 function switchFoodTab(tab){
   document.getElementById('food-meals').style.display=tab==='meals'?'block':'none';
@@ -363,25 +407,35 @@ function saveFeedback(btnSel){
 
 // ─── SUPPLEMENTS ───
 const SUPPS=[
-  {g:'Morning — with breakfast',t:'7:40 AM',c:'#1D9E75',bg:'#E1F5EE',items:[
+  {g:'Morning — with breakfast',t:'7:40 AM',c:'#1D9E75',bg:'rgba(29,158,117,.15)',items:[
     {id:'d3',n:'Vitamin D3 2000 IU',dose:'1 capsule',note:'NatureWise plant-based — take with fat for absorption'},
     {id:'bc',n:'B-Complex (Jarrow B-Right)',dose:'1 capsule',note:'Contains Quatrefolic methylfolate — NOT folic acid'},
     {id:'zn',n:'Zinc 30mg',dose:'1 tablet',note:'Nature Made — counters Losartan zinc depletion. Take with food.'},
     {id:'o3',n:'Omega-3 Fish Oil',dose:'1–2 softgels',note:'Kirkland 1400mg: 1 softgel = 1400mg. 2 softgels if using Nature Made 1000mg. Take with fat.'},
   ]},
-  {g:'Lunch — with food',t:'1:00 PM',c:'#BA7517',bg:'#FAEEDA',items:[
+  {g:'Lunch — with food',t:'1:00 PM',c:'#BA7517',bg:'rgba(186,117,23,.15)',items:[
     {id:'coq',n:'CoQ10 Ubiquinol 100mg',dose:'1 softgel',note:'Qunol Ultra 100mg 180ct — must take with a fat-containing meal for absorption'},
   ]},
-  {g:'Dinner — take Losartan with food',t:'7:00 PM',c:'#7F77DD',bg:'#EEEDFE',items:[
+  {g:'Dinner — take Losartan with food',t:'7:00 PM',c:'#7F77DD',bg:'rgba(127,119,221,.15)',items:[
     {id:'los',n:'Losartan 50mg',dose:'1 tablet',note:'Take with dinner. Same time every day.'},
   ]},
-  {g:'Bedtime — 2+ hrs after Losartan',t:'10:30 PM',c:'#1B5FA6',bg:'#E6F1FB',items:[
-    {id:'mg1',n:'Magnesium Glycinate 240mg',dose:'2 capsules',note:"Nature's Bounty 240mg (2-cap serving) — first dose. 2+ hrs after Losartan."},
-    {id:'mg2',n:'Magnesium Glycinate 240mg',dose:'2 capsules',note:'Second dose — total 480mg/day split. Supports sleep quality and anxiety.'},
+  {g:'Bedtime — 2+ hrs after Losartan',t:'10:30 PM',c:'#1B5FA6',bg:'rgba(27,95,166,.15)',items:[
+    {id:'mg1',n:'Magnesium Glycinate 240mg',dose:'1 capsule (240mg)',note:"Nature's Bounty — first capsule. 2+ hrs after Losartan."},
+    {id:'mg2',n:'Magnesium Glycinate 240mg',dose:'1 capsule (240mg)',note:'Second capsule — 480mg total tonight. Supports sleep + anxiety.'},
   ]},
 ];
 let sDay=now(),sState={};
-async function initSupps(){const v=await sg('supps-v1');if(v)sState=v;renderSupps();}
+function pruneOldSupps(){
+  const cutoff=dKey(addD(now(),-90));
+  const pruned={};
+  for(const k in sState){
+    const datepart=k.split('|')[0];
+    if(datepart>=cutoff) pruned[k]=sState[k];
+  }
+  sState=pruned;
+  saveSupps();
+}
+async function initSupps(){const v=await sg('supps-v1');if(v)sState=v;pruneOldSupps();renderSupps();}
 async function saveSupps(){await ss('supps-v1',sState);}
 function sNav(n){sDay=addD(sDay,n);renderSupps();}
 function skKey(d,id){return dKey(d)+'|'+id;}
@@ -426,10 +480,11 @@ function renderSupps(){
     html+='</div></div>';
   });
   document.getElementById('s-list').innerHTML=html;
+  if(typeof updateStatusBar==='function') updateStatusBar();
 }
 
 // ─── WEIGHT ───
-const WTGOAL=180,WTSTART=227;
+const WTGOAL=180,WTSTART=233;
 let wtLog=[];
 async function initWeight(){const v=await sg('weight-v1');if(v)wtLog=v;renderWeight();}
 async function saveWeight(){await ss('weight-v1',wtLog);}
@@ -455,6 +510,25 @@ function renderWeight(){
     <div class="wtstat"><div class="wtstatv" style="color:#1D9E75">${cur.toFixed(1)}</div><div class="wtstath">Current lbs</div></div>
     <div class="wtstat"><div class="wtstatv" style="color:${lost>0?'#1D9E75':'var(--t2)'}">${lost>0?'−':''}${Math.abs(lost).toFixed(1)}</div><div class="wtstath">Lost</div></div>
     <div class="wtstat"><div class="wtstatv" style="color:#BA7517">${toGo.toFixed(1)}</div><div class="wtstath">To goal</div></div>`;
+  // Weight projection
+  if(wtLog.length>=2){
+    const recent=wtLog.slice(-4);
+    if(recent.length>=2){
+      const first=recent[0],last=recent[recent.length-1];
+      const daysDiff=(new Date(last.date+'T12:00')-new Date(first.date+'T12:00'))/86400000;
+      const weeklyRate=daysDiff>0?((first.weight-last.weight)/daysDiff*7):0;
+      if(weeklyRate>0){
+        const lbsToGo=last.weight-WTGOAL;
+        const weeksToGo=lbsToGo/weeklyRate;
+        const targetDate=new Date();targetDate.setDate(targetDate.getDate()+Math.round(weeksToGo*7));
+        const targetStr=targetDate.toLocaleDateString('en-US',{month:'short',year:'numeric'});
+        document.getElementById('wt-stats').innerHTML+=`
+          <div style="grid-column:1/-1;background:var(--card);border:.5px solid var(--border);border-radius:var(--rs);padding:12px;text-align:center">
+            <div style="font-size:13px;color:var(--t2)">Losing <span style="font-weight:700;color:#1D9E75">${weeklyRate.toFixed(1)} lbs/week</span> · Goal by <span style="font-weight:700;color:#BA7517">${targetStr}</span></div>
+          </div>`;
+      }
+    }
+  }
   drawChart();
   let lh='';
   if(!wtLog.length){
@@ -504,7 +578,7 @@ function drawChart(){
   ctx.fillText('Goal 180',p.l+3,gy-5);
   // Y labels
   ctx.fillStyle='#AAA';ctx.font='10px -apple-system,sans-serif';ctx.textAlign='right';
-  [180,190,200,210,220,227].forEach(v=>{if(v>=minV&&v<=maxV)ctx.fillText(v,p.l-4,yP(v)+4);});
+  [180,190,200,210,220,233].forEach(v=>{if(v>=minV&&v<=maxV)ctx.fillText(v,p.l-4,yP(v)+4);});
   // Line
   ctx.beginPath();
   wtLog.forEach((e,i)=>i===0?ctx.moveTo(xP(i),yP(e.weight)):ctx.lineTo(xP(i),yP(e.weight)));
@@ -549,15 +623,22 @@ const JSETS=[
   ],
 ];
 let jDay=now(),jState={};
-async function initJournal(){const v=await sg('journal-v1');if(v)jState=v;renderJournal();}
+function pruneOldJournal(){
+  const cutoff=wkKey(addD(now(),-182));
+  const pruned={};
+  for(const k in jState){ if(k>=cutoff) pruned[k]=jState[k]; }
+  jState=pruned;
+  ss('journal-v1',jState);
+}
+async function initJournal(){const v=await sg('journal-v1');if(v)jState=v;pruneOldJournal();renderJournal();}
 async function saveJournal(){
   const wk=wkKey(jDay),dk=dKey(jDay);
   if(!jState[wk])jState[wk]={};
   if(!jState[wk][dk])jState[wk][dk]={};
   document.querySelectorAll('.jta').forEach((ta,i)=>{jState[wk][dk][i]=ta.value;});
   await ss('journal-v1',jState);
-  const b=document.querySelector('#pg-mind .btn.bp');
-  const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+  const b=document.querySelector('#mind-journal .btn.bg2');
+  if(b){const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);}
 }
 async function clearJournal(){
   const wk=wkKey(jDay),dk=dKey(jDay);
@@ -572,9 +653,28 @@ function renderJournal(){
   const prompts=JSETS[si];
   const names=['A','B','C','D'];
   document.getElementById('j-badge').innerHTML=
-    `<span style="font-size:12px;font-weight:700;background:#EEEDFE;color:#3C3489;padding:4px 12px;border-radius:20px">Week ${wkNum(jDay)} · Set ${names[si]}</span>`;
-  const saved=(jState[wkKey(jDay)]&&jState[wkKey(jDay)][dKey(jDay)])||{};
+    `<span style="font-size:12px;font-weight:700;background:rgba(127,119,221,.15);color:#a9a3f0;padding:4px 12px;border-radius:20px">Week ${wkNum(jDay)} · Set ${names[si]}</span>`;
+  // Journal gap nudge
+  let lastEntryDate=null;
+  for(const wk of Object.keys(jState).sort().reverse()){
+    if(jState[wk]&&typeof jState[wk]==='object'){
+      for(const dk of Object.keys(jState[wk]).sort().reverse()){
+        const answers=jState[wk][dk];
+        if(answers&&typeof answers==='object'&&Object.values(answers).some(v=>v&&String(v).trim())){
+          lastEntryDate=dk;break;
+        }
+      }
+    }
+    if(lastEntryDate) break;
+  }
   let html='';
+  if(lastEntryDate){
+    const daysAgo=Math.floor((now()-new Date(lastEntryDate+'T12:00'))/86400000);
+    if(daysAgo>1){
+      html+=`<div style="background:rgba(186,117,23,.15);color:#e0a948;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:12px;border:.5px solid rgba(186,117,23,.3)">Last entry: ${daysAgo} days ago</div>`;
+    }
+  }
+  const saved=(jState[wkKey(jDay)]&&jState[wkKey(jDay)][dKey(jDay)])||{};
   prompts.forEach((p,i)=>{
     html+=`<div class="pc">
       <div class="pnum">Prompt ${i+1} of 3</div>
@@ -588,21 +688,28 @@ function renderJournal(){
 
 // ─── THERAPY PREP ───
 const THQS=[
-  {label:'What has come up most emotionally this week?',hint:'Think Mon–Thu. Anger, sadness, anxiety, flatness, joy — what was most present and why?',tag:'Emotions',c:'#7F77DD',bg:'#EEEDFE'},
-  {label:'What pattern did I notice in myself this week?',hint:'A thought loop, a behavior, a reaction that kept repeating. What triggered it?',tag:'Patterns',c:'#1B5FA6',bg:'#E6F1FB'},
-  {label:'Is there something I keep avoiding thinking about?',hint:'The thing you skip over in your own head. The unfinished sentence.',tag:'Avoidance',c:'#E24B4A',bg:'#FCEBEB'},
-  {label:'What do I want to work on in today\'s session?',hint:'One clear intention. Not "feel better" — something specific to explore or change.',tag:'Intention',c:'#1D9E75',bg:'#E1F5EE'},
-  {label:'What\'s one thing from last session I\'ve been sitting with?',hint:'Any insight, reframe, or homework that stayed with you — or that you pushed away.',tag:'Last session',c:'#BA7517',bg:'#FAEEDA'},
-  {label:'What do I most need my therapist to know today?',hint:'The thing that\'s hardest to say out loud. Write it here first.',tag:'Hard to say',c:'#D4537E',bg:'#F4C0D1'},
+  {label:'What has come up most emotionally this week?',hint:'Think Mon–Thu. Anger, sadness, anxiety, flatness, joy — what was most present and why?',tag:'Emotions',c:'#a9a3f0',bg:'rgba(127,119,221,.15)'},
+  {label:'What pattern did I notice in myself this week?',hint:'A thought loop, a behavior, a reaction that kept repeating. What triggered it?',tag:'Patterns',c:'#5a9fd6',bg:'rgba(27,95,166,.15)'},
+  {label:'Is there something I keep avoiding thinking about?',hint:'The thing you skip over in your own head. The unfinished sentence.',tag:'Avoidance',c:'#f08080',bg:'rgba(226,75,74,.15)'},
+  {label:'What do I want to work on in today\'s session?',hint:'One clear intention. Not "feel better" — something specific to explore or change.',tag:'Intention',c:'#3ecfa0',bg:'rgba(29,158,117,.15)'},
+  {label:'What\'s one thing from last session I\'ve been sitting with?',hint:'Any insight, reframe, or homework that stayed with you — or that you pushed away.',tag:'Last session',c:'#e0a948',bg:'rgba(186,117,23,.15)'},
+  {label:'What do I most need my therapist to know today?',hint:'The thing that\'s hardest to say out loud. Write it here first.',tag:'Hard to say',c:'#e88aac',bg:'rgba(212,83,126,.15)'},
 ];
 let thState={};
-async function initTherapy(){const v=await sg('therapy-v1');if(v)thState=v;renderTherapy();}
+function pruneOldTherapy(){
+  const cutoff=wkKey(addD(now(),-182));
+  const pruned={};
+  for(const k in thState){ if(k>=cutoff) pruned[k]=thState[k]; }
+  thState=pruned;
+  ss('therapy-v1',thState);
+}
+async function initTherapy(){const v=await sg('therapy-v1');if(v)thState=v;pruneOldTherapy();renderTherapy();}
 async function saveTherapy(){
   const wk=wkKey(now());if(!thState[wk])thState[wk]={};
   document.querySelectorAll('.thta').forEach((ta,i)=>{thState[wk][i]=ta.value;});
   await ss('therapy-v1',thState);
-  const b=document.querySelector('#pg-mind .btn.bp');
-  const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+  const b=document.querySelector('#mind-therapy .btn.bg2');
+  if(b){const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);}
 }
 async function clearTherapy(){delete thState[wkKey(now())];await ss('therapy-v1',thState);renderTherapy();}
 function getNextFri(){
@@ -613,7 +720,7 @@ function getNextFri(){
 function renderTherapy(){
   const wk=wkKey(now()),saved=thState[wk]||{};
   document.getElementById('th-badge').innerHTML=
-    `<span style="font-size:12px;font-weight:700;background:#EEEDFE;color:#3C3489;padding:4px 12px;border-radius:20px">Next session: ${getNextFri()} · Week ${wkNum(now())}</span>`;
+    `<span style="font-size:12px;font-weight:700;background:rgba(127,119,221,.15);color:#a9a3f0;padding:4px 12px;border-radius:20px">Next session: ${getNextFri()} · Week ${wkNum(now())}</span>`;
   let html='<div class="wrap" style="margin-bottom:12px">';
   THQS.forEach((q,i)=>{
     html+=`<div class="trow" style="${i===THQS.length-1?'border-bottom:none':''}">
@@ -631,28 +738,35 @@ function renderTherapy(){
 
 // ─── WEEKLY REVIEW ───
 const RVQS=[
-  {label:'What went well this week?',hint:'Gym sessions, meals, habits, social, sleep — even tiny wins. Your brain needs to hear this.',tag:'Wins',c:'#1D9E75',bg:'#E1F5EE'},
-  {label:'What did I skip or struggle with?',hint:'Not judgment — data. What blocks came up? What kept getting postponed?',tag:'Gaps',c:'#E24B4A',bg:'#FCEBEB'},
-  {label:'How was my energy and mood across the week?',hint:'High days vs low days. Any patterns around certain days, times, or activities?',tag:'Energy',c:'#BA7517',bg:'#FAEEDA'},
-  {label:'Did I move my body enough? What felt good?',hint:'Gym, walks, anything active. What made your body feel good vs heavy?',tag:'Movement',c:'#1B5FA6',bg:'#E6F1FB'},
-  {label:'Did I connect with people I care about?',hint:'Quality interactions. Did you feel isolated? Did you reach out or stay in your shell?',tag:'Connection',c:'#D4537E',bg:'#F4C0D1'},
-  {label:'What\'s one specific thing I\'m adjusting next week?',hint:'Not a full reset. One small concrete thing you\'ll do differently.',tag:'Adjustment',c:'#7F77DD',bg:'#EEEDFE'},
-  {label:'What am I carrying into next week that I want to let go of?',hint:'A resentment, a worry, a story about yourself. Name it here.',tag:'Release',c:'#5C3D1E',bg:'#FAEEDA'},
+  {label:'What went well this week?',hint:'Gym sessions, meals, habits, social, sleep — even tiny wins. Your brain needs to hear this.',tag:'Wins',c:'#3ecfa0',bg:'rgba(29,158,117,.15)'},
+  {label:'What did I skip or struggle with?',hint:'Not judgment — data. What blocks came up? What kept getting postponed?',tag:'Gaps',c:'#f08080',bg:'rgba(226,75,74,.15)'},
+  {label:'How was my energy and mood across the week?',hint:'High days vs low days. Any patterns around certain days, times, or activities?',tag:'Energy',c:'#e0a948',bg:'rgba(186,117,23,.15)'},
+  {label:'Did I move my body enough? What felt good?',hint:'Gym, walks, anything active. What made your body feel good vs heavy?',tag:'Movement',c:'#5a9fd6',bg:'rgba(27,95,166,.15)'},
+  {label:'Did I connect with people I care about?',hint:'Quality interactions. Did you feel isolated? Did you reach out or stay in your shell?',tag:'Connection',c:'#e88aac',bg:'rgba(212,83,126,.15)'},
+  {label:'What\'s one specific thing I\'m adjusting next week?',hint:'Not a full reset. One small concrete thing you\'ll do differently.',tag:'Adjustment',c:'#a9a3f0',bg:'rgba(127,119,221,.15)'},
+  {label:'What am I carrying into next week that I want to let go of?',hint:'A resentment, a worry, a story about yourself. Name it here.',tag:'Release',c:'#e0a948',bg:'rgba(186,117,23,.15)'},
 ];
 let rvState={};
-async function initReview(){const v=await sg('review-v1');if(v)rvState=v;renderReview();}
+function pruneOldReview(){
+  const cutoff=wkKey(addD(now(),-182));
+  const pruned={};
+  for(const k in rvState){ if(k>=cutoff) pruned[k]=rvState[k]; }
+  rvState=pruned;
+  ss('review-v1',rvState);
+}
+async function initReview(){const v=await sg('review-v1');if(v)rvState=v;pruneOldReview();renderReview();}
 async function saveReview(){
   const wk=wkKey(now());if(!rvState[wk])rvState[wk]={};
   document.querySelectorAll('.rvta').forEach((ta,i)=>{rvState[wk][i]=ta.value;});
   await ss('review-v1',rvState);
-  const b=document.querySelector('#pg-mind .btn.bp');
-  const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);
+  const b=document.querySelector('#mind-review .btn.bg2');
+  if(b){const o=b.textContent;b.textContent='Saved ✓';setTimeout(()=>{b.textContent=o;},1400);}
 }
 async function clearReview(){delete rvState[wkKey(now())];await ss('review-v1',rvState);renderReview();}
 function renderReview(){
   const wk=wkKey(now()),saved=rvState[wk]||{};
   document.getElementById('rv-badge').innerHTML=
-    `<span style="font-size:12px;font-weight:700;background:#FAEEDA;color:#633806;padding:4px 12px;border-radius:20px">Week ${wkNum(now())} · ${now().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span>`;
+    `<span style="font-size:12px;font-weight:700;background:rgba(186,117,23,.15);color:#e0a948;padding:4px 12px;border-radius:20px">Week ${wkNum(now())} · ${now().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span>`;
   let html='<div class="wrap" style="margin-bottom:12px">';
   RVQS.forEach((q,i)=>{
     html+=`<div class="trow" style="${i===RVQS.length-1?'border-bottom:none':''}">
@@ -676,7 +790,7 @@ const RECIPES=[
   {
     id:'hummus',emoji:'🧆',title:'Homemade Hummus',
     subtitle:'High protein · High fiber · DASH-friendly · ~10 min active',
-    color:'#BA7517',bg:'#FAEEDA',
+    color:'#BA7517',bg:'rgba(186,117,23,.12)',
     baseSrv:4,srvUnit:'serving (~¼ cup)',
     macros:{cal:180,p:7,c:18,f:10,fiber:4},
     ings:[
@@ -728,7 +842,7 @@ const RECIPES=[
   {
     id:'tuna',emoji:'🐟',title:'Batch Tuna Salad',
     subtitle:'No cook · 5 min · 4 days fridge · do not freeze',
-    color:'#1B5FA6',bg:'#E6F1FB',
+    color:'#1B5FA6',bg:'rgba(27,95,166,.12)',
     baseSrv:4,srvUnit:'serving (~½ cup)',
     macros:{cal:220,p:28,c:6,f:9,fiber:1},
     ings:[
@@ -776,7 +890,7 @@ const RECIPES=[
   {
     id:'chicken',emoji:'🍗',title:'Batch Air Fryer Chicken',
     subtitle:'Batch cook · 20 min hands-off · 4 days fridge · 3 months frozen',
-    color:'#1D9E75',bg:'#E1F5EE',
+    color:'#1D9E75',bg:'rgba(29,158,117,.12)',
     baseSrv:6,srvUnit:'serving (~5–6 oz)',
     macros:{cal:280,p:38,c:3,f:12,fiber:0},
     ings:[
@@ -818,7 +932,7 @@ const RECIPES=[
   {
     id:'beef',emoji:'🥩',title:'Taco-Seasoned Ground Beef',
     subtitle:'Batch cook · 15 min · 4 days fridge · 3 months frozen',
-    color:'#BA7517',bg:'#FAEEDA',
+    color:'#BA7517',bg:'rgba(186,117,23,.12)',
     baseSrv:5,srvUnit:'serving (~5–6 oz)',
     macros:{cal:290,p:32,c:4,f:16,fiber:1},
     ings:[
@@ -850,7 +964,7 @@ const RECIPES=[
   {
     id:'fish',emoji:'🐠',title:'Air Fryer Fish Fillets (Cornmeal Cajun)',
     subtitle:'Dinner option · 11 min · cornmeal + Cajun coating',
-    color:'#1B5FA6',bg:'#E6F1FB',
+    color:'#1B5FA6',bg:'rgba(27,95,166,.12)',
     baseSrv:2,srvUnit:'serving (2 fillets)',
     macros:{cal:320,p:44,c:14,f:9,fiber:1},
     ings:[
@@ -885,7 +999,7 @@ const RECIPES=[
   {
     id:'wrap',emoji:'🌯',title:'Panini Beef Wrap',
     subtitle:'Dinner option · 5 min · panini press required',
-    color:'#993556',bg:'#FBEAF0',
+    color:'#993556',bg:'rgba(212,83,126,.12)',
     baseSrv:1,srvUnit:'wrap',
     macros:{cal:720,p:48,c:62,f:28,fiber:8},
     ings:[
@@ -924,7 +1038,7 @@ const RECIPES=[
   {
     id:'eggs',emoji:'🥚',title:'Batch Hard Boiled Eggs',
     subtitle:'Batch cook · 15 min total · 5 days fridge · do not freeze',
-    color:'#BA7517',bg:'#FAEEDA',
+    color:'#BA7517',bg:'rgba(186,117,23,.12)',
     baseSrv:12,srvUnit:'egg',
     macros:{cal:78,p:6,c:1,f:5,fiber:0},
     ings:[
@@ -950,7 +1064,7 @@ const RECIPES=[
   {
     id:'broccoli',emoji:'🥦',title:'Batch Air Fryer Broccoli',
     subtitle:'Batch side · 12 min · 4 days fridge · do not freeze after cooking',
-    color:'#1D9E75',bg:'#E1F5EE',
+    color:'#1D9E75',bg:'rgba(29,158,117,.12)',
     baseSrv:4,srvUnit:'serving (~1 cup)',
     macros:{cal:80,p:3,c:8,f:4,fiber:3},
     ings:[
@@ -986,7 +1100,7 @@ const RECIPES=[
   {
     id:'coleslaw',emoji:'🥗',title:'Fish Night Coleslaw',
     subtitle:'No cook · 5 min · pairs with air fryer fish · 3 days fridge',
-    color:'#639922',bg:'#EAF3DE',
+    color:'#639922',bg:'rgba(99,153,34,.12)',
     baseSrv:4,srvUnit:'serving (~½ cup)',
     macros:{cal:60,p:1,c:9,f:2,fiber:2},
     ings:[
@@ -1023,7 +1137,7 @@ const RECIPES=[
   {
     id:'shake',emoji:'🥤',title:'Protein Shake',
     subtitle:'Snack 2 option · 2 min · post-workout or afternoon refuel',
-    color:'#7F77DD',bg:'#EEEDFE',
+    color:'#7F77DD',bg:'rgba(127,119,221,.12)',
     baseSrv:1,srvUnit:'shake',
     macros:{cal:370,p:35,c:36,f:10,fiber:2},
     ings:[
@@ -1061,7 +1175,7 @@ const RECIPES=[
   {
     id:'stirfry',emoji:'🥢',title:'Thursday Steak Stir Fry',
     subtitle:'Dinner variation · 15 min · flank steak + veg over rice',
-    color:'#E24B4A',bg:'#FCEBEB',
+    color:'#E24B4A',bg:'rgba(226,75,74,.12)',
     baseSrv:2,srvUnit:'serving',
     macros:{cal:620,p:44,c:58,f:20,fiber:5},
     ings:[
@@ -1109,7 +1223,7 @@ const RECIPES=[
   {
     id:'eggs_oats',emoji:'🍳',title:'Scrambled Eggs + Oats',
     subtitle:'Breakfast · 5 min · stove · highest protein breakfast option',
-    color:'#1D9E75',bg:'#E1F5EE',
+    color:'#1D9E75',bg:'rgba(29,158,117,.12)',
     baseSrv:1,srvUnit:'serving',
     macros:{cal:520,p:42,c:48,f:16,fiber:6},
     ings:[
@@ -1146,7 +1260,7 @@ const RECIPES=[
   {
     id:'egg_wrap',emoji:'🌯',title:'Egg & Cheese Wrap',
     subtitle:'Breakfast · 6 min · stove + panini press · crispy and filling',
-    color:'#D4537E',bg:'#FBEAF0',
+    color:'#D4537E',bg:'rgba(212,83,126,.12)',
     baseSrv:1,srvUnit:'wrap',
     macros:{cal:510,p:38,c:38,f:20,fiber:4},
     ings:[
@@ -1180,7 +1294,7 @@ const RECIPES=[
   {
     id:'sweet_cajun',emoji:'🍠',title:'Cajun Mashed Sweet Potato',
     subtitle:'Side dish · 10 min · Cajun spices mask the sweetness completely',
-    color:'#BA7517',bg:'#FAEEDA',
+    color:'#BA7517',bg:'rgba(186,117,23,.12)',
     baseSrv:2,srvUnit:'serving (~½ cup)',
     macros:{cal:160,p:2,c:28,f:5,fiber:4},
     ings:[
@@ -1210,7 +1324,7 @@ const RECIPES=[
   {
     id:'sweet_taco',emoji:'🌮',title:'Taco-Spiced Sweet Potato Bowl',
     subtitle:'Lunch or dinner add-in · 25 min · air fryer · swaps into any rice bowl',
-    color:'#E24B4A',bg:'#FCEBEB',
+    color:'#E24B4A',bg:'rgba(226,75,74,.12)',
     baseSrv:2,srvUnit:'serving (~½ cup)',
     macros:{cal:180,p:3,c:34,f:4,fiber:5},
     ings:[
@@ -1238,7 +1352,7 @@ const RECIPES=[
   {
     id:'sweet_sriracha',emoji:'🔥',title:'Sriracha-Soy Roasted Sweet Potato',
     subtitle:'Side dish · 25 min · air fryer · pairs with stir fry night',
-    color:'#E24B4A',bg:'#FCEBEB',
+    color:'#E24B4A',bg:'rgba(226,75,74,.12)',
     baseSrv:2,srvUnit:'serving (~½ cup)',
     macros:{cal:175,p:3,c:32,f:4,fiber:4},
     ings:[
@@ -1268,7 +1382,7 @@ const RECIPES=[
   {
     id:'pasta',emoji:'🍝',title:'Burnout Box Pasta',
     subtitle:'Emergency meal · 12 min · for days when batch food is gone',
-    color:'#639922',bg:'#EAF3DE',
+    color:'#639922',bg:'rgba(99,153,34,.12)',
     baseSrv:1,srvUnit:'serving',
     macros:{cal:580,p:38,c:72,f:12,fiber:8},
     ings:[
@@ -1300,7 +1414,7 @@ const RECIPES=[
   {
     id:'zucchini',emoji:'🥒',title:'Air Fryer Roasted Zucchini',
     subtitle:'Side dish · 12 min · pairs with any protein',
-    color:'#1D9E75',bg:'#E1F5EE',
+    color:'#1D9E75',bg:'rgba(29,158,117,.12)',
     baseSrv:2,srvUnit:'serving',
     macros:{cal:70,p:2,c:6,f:4,fiber:2},
     ings:[
@@ -1329,7 +1443,7 @@ const RECIPES=[
   {
     id:'fish_tacos',emoji:'🌮',title:'Fish Tacos',
     subtitle:'Dinner · 15 min · cornmeal-coated + shredded · best taste masker',
-    color:'#BA7517',bg:'#FAEEDA',
+    color:'#BA7517',bg:'rgba(186,117,23,.12)',
     baseSrv:2,srvUnit:'serving (3 tacos)',
     macros:{cal:520,p:40,c:52,f:14,fiber:6},
     ings:[
@@ -1364,7 +1478,7 @@ const RECIPES=[
   {
     id:'fish_blackened',emoji:'🔥',title:'Cajun Blackened Tilapia',
     subtitle:'Dinner · 12 min · no cornmeal needed · strongest flavor mask',
-    color:'#E24B4A',bg:'#FCEBEB',
+    color:'#E24B4A',bg:'rgba(226,75,74,.12)',
     baseSrv:2,srvUnit:'serving (2 fillets)',
     macros:{cal:300,p:44,c:4,f:10,fiber:1},
     ings:[
@@ -1393,7 +1507,7 @@ const RECIPES=[
   {
     id:'fish_teriyaki',emoji:'🍯',title:'Teriyaki Glazed Tilapia',
     subtitle:'Dinner · 12 min · sweet-savory glaze · masks fish taste with umami',
-    color:'#1D9E75',bg:'#E1F5EE',
+    color:'#1D9E75',bg:'rgba(29,158,117,.12)',
     baseSrv:2,srvUnit:'serving (2 fillets)',
     macros:{cal:340,p:44,c:18,f:8,fiber:0},
     ings:[
@@ -1423,7 +1537,7 @@ const RECIPES=[
   {
     id:'fish_tuna_style',emoji:'🐟',title:'Flaked Fish Tuna-Style Salad',
     subtitle:'Lunch option · 10 min · uses cooked tilapia like canned tuna',
-    color:'#7F77DD',bg:'#EEEDFE',
+    color:'#7F77DD',bg:'rgba(127,119,221,.12)',
     baseSrv:2,srvUnit:'serving (~¾ cup)',
     macros:{cal:240,p:32,c:6,f:10,fiber:1},
     ings:[
@@ -1451,7 +1565,7 @@ const RECIPES=[
   {
     id:'cornmeal_chicken',emoji:'🍗',title:'Cornmeal-Crusted Cajun Chicken',
     subtitle:'Batch variation · 20 min · air fryer · crispy exterior different from regular batch',
-    color:'#1D9E75',bg:'#E1F5EE',
+    color:'#1D9E75',bg:'rgba(29,158,117,.12)',
     baseSrv:4,srvUnit:'serving (~6 oz)',
     macros:{cal:380,p:44,c:12,f:14,fiber:1},
     ings:[
@@ -1480,7 +1594,7 @@ const RECIPES=[
   {
     id:'cornmeal_porridge',emoji:'🥣',title:'Cornmeal Porridge (Sweet Grits)',
     subtitle:'Breakfast option · 8 min · stove · high carb + filling',
-    color:'#BA7517',bg:'#FAEEDA',
+    color:'#BA7517',bg:'rgba(186,117,23,.12)',
     baseSrv:1,srvUnit:'bowl',
     macros:{cal:420,p:18,c:58,f:12,fiber:4},
     ings:[
@@ -1675,54 +1789,87 @@ function pickSwap(swapKey,ingIdx,altIdx){
 // ─── MEALS ───
 const MEAL_GOAL={cal:2620,p:169,c:300,f:80,fiber:38};
 const SLOTS=[
-  {id:'breakfast',name:'Breakfast',time:'7:40 AM',color:'#1D9E75',bg:'#E1F5EE',opts:[
-    {n:'Scrambled eggs + oats',desc:'3 eggs scrambled, ½ cup dry oats cooked, 1 scoop protein powder stirred in, 1 tbsp peanut butter',tool:'Stove',toolBg:'#EAF3DE',toolC:'#27500A',time:'5 min',cal:520,p:42,c:48,f:16,fiber:6},
-    {n:'Greek yogurt power bowl',desc:'1 cup plain Greek yogurt, ½ banana sliced, 2 tbsp granola, 1 tbsp peanut butter, drizzle honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:490,p:34,c:54,f:14,fiber:4},
-    {n:'Egg & cheese wrap',desc:'3 eggs scrambled, 3 tbsp shredded cheddar, 1 Carb Balance tortilla — panini press 3–4 min',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'6 min',cal:510,p:38,c:38,f:20,fiber:4},
-    {n:'Egg & cheese English muffin',desc:'2 eggs scrambled, 2 tbsp shredded cheddar, 1 Thomas\' whole wheat English muffin toasted — assemble and eat',tool:'Stove',toolBg:'#EAF3DE',toolC:'#27500A',time:'5 min',cal:420,p:28,c:42,f:14,fiber:4},
-    {n:'Protein pancakes',desc:'½ cup pancake mix, 1 scoop protein powder, 1 egg, ¼ cup milk — make 3–4 small pancakes. Top with honey.',tool:'Stove',toolBg:'#EAF3DE',toolC:'#27500A',time:'10 min',cal:480,p:36,c:52,f:10,fiber:3},
+  {id:'breakfast',name:'Breakfast',time:'7:40 AM',color:'#1D9E75',bg:'rgba(29,158,117,.12)',opts:[
+    {n:'Scrambled eggs + oats',desc:'3 eggs scrambled, ½ cup dry oats cooked, 1 scoop protein powder stirred in, 1 tbsp peanut butter',tool:'Stove',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'5 min',cal:520,p:42,c:48,f:16,fiber:6,recipe:'eggs_oats'},
+    {n:'Greek yogurt power bowl',desc:'1 cup plain Greek yogurt, ½ banana sliced, 2 tbsp granola, 1 tbsp peanut butter, drizzle honey',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'2 min',cal:490,p:34,c:54,f:14,fiber:4},
+    {n:'Egg & cheese wrap',desc:'3 eggs scrambled, 3 tbsp shredded cheddar, 1 Carb Balance tortilla — panini press 3–4 min',tool:'Press',toolBg:'rgba(212,83,126,.15)',toolC:'#e88aac',time:'6 min',cal:510,p:38,c:38,f:20,fiber:4,recipe:'egg_wrap'},
+    {n:'Egg & cheese English muffin',desc:'2 eggs scrambled, 2 tbsp shredded cheddar, 1 Thomas\' whole wheat English muffin toasted — assemble and eat',tool:'Stove',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'5 min',cal:420,p:28,c:42,f:14,fiber:4},
+    {n:'Protein pancakes',desc:'½ cup pancake mix, 1 scoop protein powder, 1 egg, ¼ cup milk — make 3–4 small pancakes. Top with honey.',tool:'Stove',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'10 min',cal:480,p:36,c:52,f:10,fiber:3},
+    {n:'Cornmeal porridge',desc:'¼ cup cornmeal, 1 cup milk, 1 scoop protein powder, 1 tbsp peanut butter, drizzle honey — stove 8 min',tool:'Stove',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'8 min',cal:420,p:18,c:58,f:12,fiber:4,recipe:'cornmeal_porridge'},
   ]},
-  {id:'snack1',name:'Snack 1',time:'11:30 AM',color:'#1B5FA6',bg:'#E6F1FB',opts:[
-    {n:'Greek yogurt + berries',desc:'1 cup plain Greek yogurt, ½ cup frozen berries, drizzle honey',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:240,p:20,c:28,f:6,fiber:3},
-    {n:'Tuna + crackers',desc:'½ cup batch tuna salad (about 3 oz) on 10–12 whole wheat crackers',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:230,p:22,c:20,f:6,fiber:2},
-    {n:'String cheese + apple',desc:'2 mozzarella string cheese sticks, 1 medium apple',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:220,p:14,c:24,f:8,fiber:4},
-    {n:'Carrots + hummus',desc:'1 cup baby carrots, 3 tbsp batch hummus — grab both from fridge',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:180,p:6,c:24,f:6,fiber:6},
+  {id:'snack1',name:'Snack 1',time:'11:30 AM',color:'#1B5FA6',bg:'rgba(27,95,166,.12)',opts:[
+    {n:'Greek yogurt + berries',desc:'1 cup plain Greek yogurt, ½ cup frozen berries, drizzle honey',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'1 min',cal:240,p:20,c:28,f:6,fiber:3},
+    {n:'Tuna + crackers',desc:'½ cup batch tuna salad (about 3 oz) on 10–12 whole wheat crackers',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'1 min',cal:230,p:22,c:20,f:6,fiber:2,recipe:'tuna'},
+    {n:'String cheese + apple',desc:'2 mozzarella string cheese sticks, 1 medium apple',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'0 min',cal:220,p:14,c:24,f:8,fiber:4},
+    {n:'Carrots + hummus',desc:'1 cup baby carrots, 3 tbsp batch hummus — grab both from fridge',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'0 min',cal:180,p:6,c:24,f:6,fiber:6,recipe:'hummus'},
   ]},
-  {id:'lunch',name:'Lunch',time:'1:00 PM',color:'#639922',bg:'#EAF3DE',opts:[
-    {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup cooked rice, 1 cup batch broccoli — microwave 90 sec. Sauce: soy+sriracha, teriyaki, Frank\'s, or Caesar',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5},
-    {n:'Tuna salad sandwich',desc:'¾ cup batch tuna salad on 2 slices Dave\'s Killer Bread, lettuce, 2 slices roma tomato',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6},
-    {n:'Beef taco bowl',desc:'6 oz batch beef, 1 cup cooked rice, ½ cup black beans, 2 tbsp salsa, 3 tbsp shredded cheese, 1 tbsp sour cream, cherry tomatoes — microwave 90 sec',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:680,p:46,c:70,f:20,fiber:9},
-    {n:'Amy\'s Lentil Soup',desc:'1 can Amy\'s Organic Lentil Soup Light in Sodium — microwave 2 min in a bowl. Add sriracha or Frank\'s if you want heat.',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'2 min',cal:320,p:14,c:52,f:6,fiber:10},
+  {id:'lunch',name:'Lunch',time:'1:00 PM',color:'#639922',bg:'rgba(99,153,34,.12)',opts:[
+    {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup cooked rice, 1 cup batch broccoli — microwave 90 sec. Sauce: soy+sriracha, teriyaki, Frank\'s, or Caesar',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5,recipe:'chicken'},
+    {n:'Tuna salad sandwich',desc:'¾ cup batch tuna salad on 2 slices Dave\'s Killer Bread, lettuce, 2 slices roma tomato',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6,recipe:'tuna'},
+    {n:'Beef taco bowl',desc:'6 oz batch beef, 1 cup cooked rice, ½ cup black beans, 2 tbsp salsa, 3 tbsp shredded cheese, 1 tbsp sour cream, cherry tomatoes — microwave 90 sec',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'3 min',cal:680,p:46,c:70,f:20,fiber:9,recipe:'beef'},
+    {n:'Amy\'s Lentil Soup',desc:'1 can Amy\'s Organic Lentil Soup Light in Sodium — microwave 2 min in a bowl. Add sriracha or Frank\'s if you want heat.',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'2 min',cal:320,p:14,c:52,f:6,fiber:10},
+    {n:'Flaked fish tuna-style salad',desc:'¾ cup flaked cooked tilapia mixed with Greek yogurt, mustard, celery, lemon — on bread or crackers',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'2 min',cal:240,p:32,c:6,f:10,fiber:1,recipe:'fish_tuna_style'},
+    {n:'Burnout box pasta',desc:'Penne + canned chicken + marinara + shredded cheese — microwave or stove 12 min. For days when batch food is gone.',tool:'Stove',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'12 min',cal:580,p:38,c:72,f:12,fiber:8,recipe:'pasta'},
+    {n:'Taco sweet potato bowl',desc:'Air fryer sweet potato cubes + batch beef + salsa + cheese + sour cream — microwave 90 sec',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'3 min',cal:680,p:46,c:70,f:20,fiber:9,recipe:'sweet_taco'},
   ]},
-  {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#BA7517',bg:'#FAEEDA',opts:[
-    {n:'Protein shake',desc:'1 scoop whey protein, 1 cup whole milk, ½ frozen banana, 1 tbsp peanut butter — blend 20 sec',tool:'Blender',toolBg:'#EAF3DE',toolC:'#27500A',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2},
-    {n:'Hard boiled eggs + banana',desc:'2 batch hard boiled eggs, 1 medium banana — grab straight from fridge',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:260,p:16,c:28,f:8,fiber:3},
-    {n:'Cottage cheese bowl',desc:'1 cup Daisy 4% cottage cheese, ½ cup frozen pineapple chunks, ¼ tsp everything bagel seasoning',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'1 min',cal:230,p:24,c:20,f:4,fiber:1},
-    {n:'Protein+ Bar',desc:'1 Transparent Labs Protein+ Bar — grab and go',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:200,p:20,c:22,f:6,fiber:4},
-    {n:'Beef jerky + trail mix',desc:'1 oz Kirkland beef jerky, 2 tbsp Kirkland trail mix — portable snack',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:220,p:14,c:18,f:8,fiber:2},
-    {n:'Edamame',desc:'1 cup frozen edamame in shell — microwave 3 min in bag, sprinkle sea salt',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:190,p:17,c:14,f:8,fiber:8},
-    {n:'Dark chocolate + seaweed',desc:'2 squares 365 70% dark chocolate, 1 pack Kirkland sea salt seaweed snacks — evening dopamine combo',tool:'No cook',toolBg:'#FAEEDA',toolC:'#633806',time:'0 min',cal:130,p:2,c:14,f:8,fiber:2},
-    {n:'SmartPop popcorn',desc:'1 bag Orville Redenbacher SmartPop 94% fat free — microwave 2.5 min. Low calorie dopamine snack.',tool:'Microwave',toolBg:'#E6F1FB',toolC:'#0C447C',time:'3 min',cal:110,p:3,c:20,f:2,fiber:4},
+  {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#BA7517',bg:'rgba(186,117,23,.12)',opts:[
+    {n:'Protein shake',desc:'1 scoop whey protein, 1 cup whole milk, ½ frozen banana, 1 tbsp peanut butter — blend 20 sec',tool:'Blender',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2,recipe:'shake'},
+    {n:'Hard boiled eggs + banana',desc:'2 batch hard boiled eggs, 1 medium banana — grab straight from fridge',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'0 min',cal:260,p:16,c:28,f:8,fiber:3,recipe:'eggs'},
+    {n:'Cottage cheese bowl',desc:'1 cup Daisy 4% cottage cheese, ½ cup frozen pineapple chunks, ¼ tsp everything bagel seasoning',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'1 min',cal:230,p:24,c:20,f:4,fiber:1},
+    {n:'Protein+ Bar',desc:'1 Transparent Labs Protein+ Bar — grab and go',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'0 min',cal:200,p:20,c:22,f:6,fiber:4},
+    {n:'Beef jerky + trail mix',desc:'1 oz Kirkland beef jerky, 2 tbsp Kirkland trail mix — portable snack',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'0 min',cal:220,p:14,c:18,f:8,fiber:2},
+    {n:'Edamame',desc:'1 cup frozen edamame in shell — microwave 3 min in bag, sprinkle sea salt',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'3 min',cal:190,p:17,c:14,f:8,fiber:8},
+    {n:'Dark chocolate + seaweed',desc:'2 squares 365 70% dark chocolate, 1 pack Kirkland sea salt seaweed snacks — evening dopamine combo',tool:'No cook',toolBg:'rgba(186,117,23,.15)',toolC:'#e0a948',time:'0 min',cal:130,p:2,c:14,f:8,fiber:2},
+    {n:'SmartPop popcorn',desc:'1 bag Orville Redenbacher SmartPop 94% fat free — microwave 2.5 min. Low calorie dopamine snack.',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'3 min',cal:110,p:3,c:20,f:2,fiber:4},
+    {n:'Cajun mashed sweet potato',desc:'½ sweet potato microwaved 5 min, mash with butter + Tony Chachere\'s + garlic powder — savory not sweet',tool:'Microwave',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'6 min',cal:160,p:2,c:28,f:5,fiber:4,recipe:'sweet_cajun'},
+    {n:'Sriracha-soy sweet potato',desc:'Sweet potato cubes air fryer 25 min, toss with soy sauce + sriracha + sesame oil',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'25 min',cal:175,p:3,c:32,f:4,fiber:4,recipe:'sweet_sriracha'},
   ]},
-  {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#993556',bg:'#FBEAF0',opts:[
-    {n:'Air fryer chicken + broccoli',desc:'7 oz batch chicken in air fryer 8 min at 375°F, 1 cup batch broccoli, 1 cup cooked rice. Sauce: soy+sriracha, teriyaki, or Frank\'s',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6},
-    {n:'Air fryer fish + rice',desc:'2 tilapia fillets cornmeal-Cajun coated, air fryer 400°F 11 min, 1 cup rice, ½ cup coleslaw, 1 tbsp tartar sauce',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5},
-    {n:'Fish tacos',desc:'2 tilapia fillets cornmeal-coated, air fryer 11 min, shredded + lime juice + taco seasoning, 3 Carb Balance tortillas, salsa, cheese, sour cream, coleslaw',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'15 min',cal:520,p:40,c:52,f:14,fiber:6},
-    {n:'Cajun blackened fish + rice',desc:'2 tilapia fillets coated in Tony\'s + smoked paprika + garlic, air fryer 400°F 12 min, 1 cup rice, coleslaw',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'12 min',cal:560,p:46,c:52,f:12,fiber:3},
-    {n:'Teriyaki glazed fish + rice',desc:'2 tilapia fillets brushed with teriyaki + sesame oil, air fryer 375°F 12 min, glaze again last 2 min, 1 cup rice, sriracha',tool:'Air fryer',toolBg:'#E6F1FB',toolC:'#0C447C',time:'12 min',cal:580,p:44,c:54,f:10,fiber:1},
-    {n:'Panini beef wrap',desc:'7 oz batch beef, 3 tbsp shredded cheddar, 2 tbsp salsa, 1 Carb Balance tortilla — panini press 3–4 min, ¼ avocado on side',tool:'Press',toolBg:'#F4C0D1',toolC:'#72243E',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8},
+  {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#993556',bg:'rgba(153,53,86,.12)',opts:[
+    {n:'Air fryer chicken + broccoli',desc:'7 oz batch chicken in air fryer 8 min at 375°F, 1 cup batch broccoli, 1 cup cooked rice. Sauce: soy+sriracha, teriyaki, or Frank\'s',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6,recipe:'chicken'},
+    {n:'Air fryer fish + rice',desc:'2 tilapia fillets cornmeal-Cajun coated, air fryer 400°F 11 min, 1 cup rice, ½ cup coleslaw, 1 tbsp tartar sauce',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5,recipe:'fish'},
+    {n:'Fish tacos',desc:'2 tilapia fillets cornmeal-coated, air fryer 11 min, shredded + lime juice + taco seasoning, 3 Carb Balance tortillas, salsa, cheese, sour cream, coleslaw',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'15 min',cal:520,p:40,c:52,f:14,fiber:6,recipe:'fish_tacos'},
+    {n:'Cajun blackened fish + rice',desc:'2 tilapia fillets coated in Tony\'s + smoked paprika + garlic, air fryer 400°F 12 min, 1 cup rice, coleslaw',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'12 min',cal:560,p:46,c:52,f:12,fiber:3,recipe:'fish_blackened'},
+    {n:'Teriyaki glazed fish + rice',desc:'2 tilapia fillets brushed with teriyaki + sesame oil, air fryer 375°F 12 min, glaze again last 2 min, 1 cup rice, sriracha',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'12 min',cal:580,p:44,c:54,f:10,fiber:1,recipe:'fish_teriyaki'},
+    {n:'Panini beef wrap',desc:'7 oz batch beef, 3 tbsp shredded cheddar, 2 tbsp salsa, 1 Carb Balance tortilla — panini press 3–4 min, ¼ avocado on side',tool:'Press',toolBg:'rgba(212,83,126,.15)',toolC:'#e88aac',time:'5 min',cal:720,p:48,c:62,f:28,fiber:8,recipe:'wrap'},
+    {n:'Steak stir fry + rice',desc:'Flank steak thin-sliced, soy sauce + garlic + ginger, broccoli + bell pepper, 1 cup rice — stove 15 min',tool:'Stove',toolBg:'rgba(99,153,34,.15)',toolC:'#7ab840',time:'15 min',cal:620,p:44,c:58,f:20,fiber:5,recipe:'stirfry'},
+    {n:'Cornmeal-crusted chicken + broccoli',desc:'6 oz cornmeal-Cajun coated chicken, air fryer 20 min, 1 cup batch broccoli, 1 cup rice',tool:'Air fryer',toolBg:'rgba(27,95,166,.15)',toolC:'#5a9fd6',time:'20 min',cal:680,p:50,c:68,f:18,fiber:5,recipe:'cornmeal_chicken'},
   ]},
 ];
 
 let mealPicks={};   // slot id → option index
 let mealLogToday=[]; // [{name, cal, p, c, f, fiber, ts}]
+let mealExpanded={}; // slot id → true/false
 
 async function initMeals(){
   const saved=await sg('meals-v1');
   if(saved){
     const dk=dKey(now());
-    if(saved.date===dk){mealPicks=saved.picks||{};mealLogToday=saved.log||[];}
+    if(saved.date===dk){
+      mealPicks=saved.picks||{};
+      mealLogToday=saved.log||[];
+    } else {
+      // Save yesterday's picks before resetting
+      await ss('meals-prev-v1',{picks:saved.picks||{},date:saved.date});
+    }
   }
+  renderMeals();
+}
+async function copyYesterdayMeals(){
+  const prev=await sg('meals-prev-v1');
+  if(!prev||!prev.picks||!Object.keys(prev.picks).length){
+    alert('No meals saved from yesterday.');
+    return;
+  }
+  mealPicks={...prev.picks};
+  mealLogToday=[];
+  SLOTS.forEach(slot=>{
+    const idx=mealPicks[slot.id];
+    if(idx!==undefined){
+      const opt=slot.opts[idx];
+      mealLogToday.push({name:opt.n,slot:slot.name,cal:opt.cal,p:opt.p,c:opt.c,f:opt.f,fiber:opt.fiber,ts:Date.now()});
+    }
+  });
+  saveMeals();
   renderMeals();
 }
 async function saveMeals(){
@@ -1731,6 +1878,7 @@ async function saveMeals(){
 
 function pickMeal(slotId,idx){
   mealPicks[slotId]=idx;
+  mealExpanded[slotId]=false; // collapse after picking
   // Auto-log immediately on tap
   const slot=SLOTS.find(s=>s.id===slotId);
   const opt=slot.opts[idx];
@@ -1762,11 +1910,11 @@ function clearMealLog(){
 }
 
 function getMealTotals(){
-  // Sum the picked meals (one per slot) as the planned day
+  // Sum only slots with an explicit pick — skip unselected
   let cal=0,p=0,c=0,f=0,fiber=0;
   SLOTS.forEach(slot=>{
-    const idx=mealPicks[slot.id]!==undefined?mealPicks[slot.id]:0;
-    const opt=slot.opts[idx];
+    if(mealPicks[slot.id]===undefined) return;
+    const opt=slot.opts[mealPicks[slot.id]];
     cal+=opt.cal;p+=opt.p;c+=opt.c;f+=opt.f;fiber+=opt.fiber;
   });
   return{cal,p,c,f,fiber};
@@ -1776,36 +1924,60 @@ function getLogTotals(){
   return mealLogToday.reduce((a,e)=>({cal:a.cal+e.cal,p:a.p+e.p,c:a.c+e.c,f:a.f+e.f,fiber:a.fiber+e.fiber}),{cal:0,p:0,c:0,f:0,fiber:0});
 }
 
+function toggleSlot(slotId){
+  mealExpanded[slotId]=!mealExpanded[slotId];
+  renderMeals();
+}
+
 function renderMeals(){
   let html='';
   SLOTS.forEach(slot=>{
     const pidx=mealPicks[slot.id]!==undefined?mealPicks[slot.id]:-1;
-    html+=`<div class="meal-slot">
-      <div class="slot-hd">
-        <span class="slot-name" style="color:${slot.color}">${slot.name}</span>
-        <span class="slot-time-badge">${slot.time}</span>
-      </div>`;
-    slot.opts.forEach((opt,i)=>{
-      const isp=pidx===i;
-      html+=`<div class="meal-opt${isp?' picked':''}" style="${isp?'border-color:'+slot.color+';background:'+slot.bg+';':''}" onclick="pickMeal('${slot.id}',${i})">
-        <div class="mo-top">
-          <div style="flex:1">
-            <div class="mo-name">${opt.n}</div>
-            <div class="mo-desc">${opt.desc}</div>
+    const isOpen=!!mealExpanded[slot.id];
+    const pickedOpt=pidx>=0?slot.opts[pidx]:null;
+
+    // Collapsed header — shows slot name, time, and current pick
+    html+=`<div class="meal-slot" style="margin-bottom:8px">
+      <div onclick="toggleSlot('${slot.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border-radius:var(--r);border:.5px solid var(--border);cursor:pointer;-webkit-user-select:none;user-select:none">
+        <div style="font-size:18px;color:${slot.color};transition:transform .2s;transform:rotate(${isOpen?'90':'0'}deg)">›</div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:15px;font-weight:700;color:${slot.color}">${slot.name}</span>
+            <span class="slot-time-badge">${slot.time}</span>
           </div>
-          <button class="mo-btn" style="${isp?'background:'+slot.color+';border-color:'+slot.color+';color:#fff':''}">${isp?'✓ Picked':'Pick'}</button>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">
-          <span class="mpill">${opt.cal} cal</span>
-          <span class="mpill">${opt.p}g protein</span>
-          <span class="mpill">${opt.c}g carbs</span>
-          <span class="mpill">${opt.f}g fat</span>
-          <span class="mpill">${opt.fiber}g fiber</span>
-          <span class="tpill" style="background:${opt.toolBg};color:${opt.toolC}">${opt.tool} · ${opt.time}</span>
-          ${isp?`<div style="font-size:11px;font-weight:600;color:${slot.color};margin-top:4px">✓ logged</div>`:''}
+          ${pickedOpt?`<div style="font-size:13px;color:var(--t2);margin-top:4px;display:flex;align-items:center;gap:6px">
+            <span style="color:${slot.color}">✓</span> ${pickedOpt.n} <span class="mpill" style="font-size:11px;padding:2px 7px">${pickedOpt.cal} cal</span>
+          </div>`:`<div style="font-size:13px;color:var(--t3);margin-top:4px">No meal selected</div>`}
         </div>
       </div>`;
-    });
+
+    // Expanded options
+    if(isOpen){
+      html+=`<div style="margin-top:6px">`;
+      slot.opts.forEach((opt,i)=>{
+        const isp=pidx===i;
+        html+=`<div class="meal-opt${isp?' picked':''}" style="${isp?'border-color:'+slot.color+';background:'+slot.bg+';':''}" onclick="pickMeal('${slot.id}',${i})">
+          <div class="mo-top">
+            <div style="flex:1">
+              <div class="mo-name">${opt.n}</div>
+              <div class="mo-desc">${opt.desc}</div>
+            </div>
+            <button class="mo-btn" style="${isp?'background:'+slot.color+';border-color:'+slot.color+';color:#fff':''}">${isp?'✓ Picked':'Pick'}</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">
+            <span class="mpill">${opt.cal} cal</span>
+            <span class="mpill">${opt.p}g protein</span>
+            <span class="mpill">${opt.c}g carbs</span>
+            <span class="mpill">${opt.f}g fat</span>
+            <span class="mpill">${opt.fiber}g fiber</span>
+            <span class="tpill" style="background:${opt.toolBg};color:${opt.toolC}">${opt.tool} · ${opt.time}</span>
+            ${opt.recipe?`<span class="tpill" style="background:rgba(127,119,221,.15);color:#a89eec;cursor:pointer" onclick="event.stopPropagation();goToRecipe('${opt.recipe}')">📖 Recipe</span>`:''}
+            ${isp?`<div style="font-size:11px;font-weight:600;color:${slot.color};margin-top:4px">✓ logged</div>`:''}
+          </div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
     html+='</div>';
   });
   document.getElementById('meal-slots').innerHTML=html;
@@ -1860,11 +2032,12 @@ function renderMeals(){
     });
   }
   document.getElementById('meal-log').innerHTML=logHtml;
+  if(typeof updateStatusBar==='function') updateStatusBar();
 }
 
 // ─── SCHEDULE ───
 const SDAYS=[
-  {id:'mon',label:'Mon',full:'Monday',sub:'Work day · Gym after work',color:'#1B5FA6',bg:'#E6F1FB',blocks:[
+  {id:'mon',label:'Mon',full:'Monday',sub:'Work day · Gym after work',color:'#1B5FA6',bg:'rgba(27,95,166,.12)',blocks:[
     {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
     {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
     {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
@@ -1887,7 +2060,7 @@ const SDAYS=[
     {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
     {t:'10:30 PM',n:'Magnesium 200mg + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
   ]},
-  {id:'tue',label:'Tue',full:'Tuesday',sub:'Work day · Rest · Career coach 9 AM',color:'#7F77DD',bg:'#EEEDFE',blocks:[
+  {id:'tue',label:'Tue',full:'Tuesday',sub:'Work day · Rest · Career coach 9 AM',color:'#7F77DD',bg:'rgba(127,119,221,.12)',blocks:[
     {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
     {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
     {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
@@ -1912,7 +2085,7 @@ const SDAYS=[
     {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
     {t:'10:30 PM',n:'Magnesium + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
   ]},
-  {id:'wed',label:'Wed',full:'Wednesday',sub:'Work day · Gym after work',color:'#1B5FA6',bg:'#E6F1FB',blocks:[
+  {id:'wed',label:'Wed',full:'Wednesday',sub:'Work day · Gym after work',color:'#1B5FA6',bg:'rgba(27,95,166,.12)',blocks:[
     {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
     {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
     {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
@@ -1935,7 +2108,7 @@ const SDAYS=[
     {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
     {t:'10:30 PM',n:'Magnesium + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
   ]},
-  {id:'thu',label:'Thu',full:'Thursday',sub:'Work day · Full rest day',color:'#1B6B2A',bg:'#EAF3DE',blocks:[
+  {id:'thu',label:'Thu',full:'Thursday',sub:'Work day · Full rest day',color:'#1B6B2A',bg:'rgba(27,107,42,.12)',blocks:[
     {t:'7:00 AM',n:'Wake up — phone stays face down',d:'Feet on floor in 5 min. Phone does not get picked up.',cat:'morning'},
     {t:'7:05–7:20',n:'Morning reset',d:'Drink 16 oz water, brush teeth, get dressed.',cat:'morning'},
     {t:'7:20–7:40',n:'Journal — 3 prompts',d:'(1) How am I feeling? (2) One thing grateful for. (3) My one priority today.',cat:'self'},
@@ -1958,7 +2131,7 @@ const SDAYS=[
     {t:'10:00–10:30',n:'Reading in bed',d:'Physical book or e-reader only. No screens.',cat:'self'},
     {t:'10:30 PM',n:'Magnesium + lights out',d:'Second dose. Sleep target 11 PM.',cat:'sleep'},
   ]},
-  {id:'fri',label:'Fri',full:'Friday',sub:'Day off · Therapy 9 AM · Gym · Social night',color:'#D4537E',bg:'#FBEAF0',blocks:[
+  {id:'fri',label:'Fri',full:'Friday',sub:'Day off · Therapy 9 AM · Gym · Social night',color:'#D4537E',bg:'rgba(212,83,126,.12)',blocks:[
     {t:'7:30 AM',n:'Wake up — slightly later',d:'Day off. Extra 30 min. Still no phone until after breakfast.',cat:'morning'},
     {t:'7:30–8:00',n:'Morning reset + breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3.',cat:'food'},
     {t:'8:00–8:25',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
@@ -1977,7 +2150,7 @@ const SDAYS=[
     {t:'8:00 PM',n:'Evening dog walk 🐕',d:'Plan around this or arrange help if you\'re out.',cat:'dog'},
     {t:'11:30 PM',n:'Wind down — phone to charger',d:'Even on Friday. Midnight is the absolute latest.',cat:'sleep'},
   ]},
-  {id:'sat',label:'Sat',full:'Saturday',sub:'Day off · Rest · Creative + social',color:'#BA7517',bg:'#FAEEDA',blocks:[
+  {id:'sat',label:'Sat',full:'Saturday',sub:'Day off · Rest · Creative + social',color:'#BA7517',bg:'rgba(186,117,23,.12)',blocks:[
     {t:'8:00 AM',n:'Wake up',d:'No alarm pressure but keep the morning routine going.',cat:'morning'},
     {t:'8:00–8:30',n:'Morning reset + breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3.',cat:'food'},
     {t:'8:30–8:55',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
@@ -1992,7 +2165,7 @@ const SDAYS=[
     {t:'8:00 PM',n:'Evening dog walk 🐕',d:'20–25 min. Phone in pocket.',cat:'dog'},
     {t:'11:30 PM',n:'Wind down — phone away',d:'Even on Saturday. Charge across the room.',cat:'sleep'},
   ]},
-  {id:'sun',label:'Sun',full:'Sunday',sub:'Reset day · Instacart order · Early wind-down',color:'#1D9E75',bg:'#E1F5EE',blocks:[
+  {id:'sun',label:'Sun',full:'Sunday',sub:'Reset day · Instacart order · Early wind-down',color:'#1D9E75',bg:'rgba(29,158,117,.12)',blocks:[
     {t:'8:00 AM',n:'Wake up',d:'Reset day. Keep the morning routine going.',cat:'morning'},
     {t:'8:00–8:30',n:'Morning reset + breakfast + supplements',d:'Eat planned meal. D3, B-complex, zinc, omega-3.',cat:'food'},
     {t:'8:30–8:55',n:'Feed + morning dog walk 🐕',d:'Phone in pocket, not in hand.',cat:'dog'},
@@ -2012,18 +2185,18 @@ const SDAYS=[
 ];
 
 const SCAT={
-  morning:{bg:'#FAEEDA',c:'#633806',dot:'#EF9F27'},
-  self:{bg:'#EAF3DE',c:'#27500A',dot:'#1B6B2A'},
-  food:{bg:'#E1F5EE',c:'#085041',dot:'#1D9E75'},
-  dog:{bg:'#FAEEDA',c:'#854F0B',dot:'#BA7517'},
-  work:{bg:'#F1EFE8',c:'#444441',dot:'#888780'},
-  fitness:{bg:'#E6F1FB',c:'#0C447C',dot:'#1B5FA6'},
-  fixed:{bg:'#EEEDFE',c:'#3C3489',dot:'#7F77DD'},
-  creative:{bg:'#F4C0D1',c:'#72243E',dot:'#D4537E'},
-  social:{bg:'#FAEEDA',c:'#633806',dot:'#BA7517'},
-  free:{bg:'#F1EFE8',c:'#444441',dot:'#888780'},
-  sleep:{bg:'#F1EFE8',c:'#5F5E5A',dot:'#5F5E5A'},
-  admin:{bg:'#FCEBEB',c:'#791F1F',dot:'#E24B4A'},
+  morning:{bg:'rgba(186,117,23,.15)',c:'#e0a948',dot:'#EF9F27'},
+  self:{bg:'rgba(27,107,42,.15)',c:'#5cb870',dot:'#1B6B2A'},
+  food:{bg:'rgba(29,158,117,.15)',c:'#3ecfa0',dot:'#1D9E75'},
+  dog:{bg:'rgba(186,117,23,.15)',c:'#e0a948',dot:'#BA7517'},
+  work:{bg:'rgba(136,135,128,.12)',c:'#8b949e',dot:'#888780'},
+  fitness:{bg:'rgba(27,95,166,.15)',c:'#5a9fd6',dot:'#1B5FA6'},
+  fixed:{bg:'rgba(127,119,221,.15)',c:'#a9a3f0',dot:'#7F77DD'},
+  creative:{bg:'rgba(212,83,126,.15)',c:'#e88aac',dot:'#D4537E'},
+  social:{bg:'rgba(186,117,23,.15)',c:'#e0a948',dot:'#BA7517'},
+  free:{bg:'rgba(136,135,128,.12)',c:'#8b949e',dot:'#888780'},
+  sleep:{bg:'rgba(95,94,90,.15)',c:'#8b949e',dot:'#5F5E5A'},
+  admin:{bg:'rgba(226,75,74,.15)',c:'#f08080',dot:'#E24B4A'},
 };
 
 let schedDay=(['sun','mon','tue','wed','thu','fri','sat'])[new Date().getDay()];
@@ -2086,6 +2259,49 @@ function renderSched(){
       ${pct===100?'<div style="font-size:13px;color:#1D9E75;margin-top:6px;font-weight:600">✓ Full day complete</div>':''}
     </div>`;
 
+  // Find current/next block for highlight
+  let nowBlockIdx=-1;
+  const isViewingToday=schedDay===todayId;
+  if(isViewingToday){
+    const nowTime=new Date();
+    const nowMins=nowTime.getHours()*60+nowTime.getMinutes();
+    let lastPastIdx=-1;
+    let lastKnownHour=7;
+
+    function parseHM(str,inferAfter){
+      const match=str.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+      if(!match) return -1;
+      let h=parseInt(match[1]),m=parseInt(match[2]);
+      const ampm=(match[3]||'').toUpperCase();
+      if(ampm==='PM'&&h<12)h+=12;
+      else if(ampm==='AM'&&h===12)h=0;
+      else if(!ampm){
+        if(h<inferAfter&&h<=10) h+=12;
+      }
+      return h*60+m;
+    }
+
+    for(let i=0;i<day.blocks.length;i++){
+      const tm=day.blocks[i].t;
+      // Check if this is a range block (e.g. "11:00–5:00")
+      const rangeParts=tm.split(/[–\-]/);
+      const startMins=parseHM(rangeParts[0],lastKnownHour);
+      if(startMins>=0){
+        lastKnownHour=Math.floor(startMins/60);
+        // If range block, check if current time is INSIDE the range
+        if(rangeParts.length>=2){
+          const endMins=parseHM(rangeParts[1],lastKnownHour);
+          if(endMins>0&&nowMins>=startMins&&nowMins<endMins){
+            lastPastIdx=i; // we're inside this range — this is the active block
+            break; // range block is definitive, stop looking
+          }
+        }
+        if(startMins<=nowMins) lastPastIdx=i;
+      }
+    }
+    nowBlockIdx=lastPastIdx>=0?lastPastIdx:0;
+  }
+
   // Blocks
   let html='<div style="border-radius:var(--r);overflow:hidden;border:.5px solid var(--border)">';
   day.blocks.forEach((b,i)=>{
@@ -2093,7 +2309,8 @@ function renderSched(){
     const isDone=!!schedChecked[key];
     const cat=SCAT[b.cat]||SCAT.free;
     const isLast=i===day.blocks.length-1;
-    html+=`<div class="sblock${isDone?' done':''}" style="${isLast?'border-bottom:none':''}" onclick="toggleSchedBlock('${key}')">
+    const isNow=i===nowBlockIdx;
+    html+=`<div class="sblock${isDone?' done':''}${isNow?' now':''}" id="sblock-${i}" style="${isLast?'border-bottom:none':''}" onclick="toggleSchedBlock('${key}')">
       <div class="sb-check" style="${isDone?'background:'+day.color+';border-color:'+day.color:''}">
         ${isDone?'<svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}
       </div>
@@ -2107,6 +2324,10 @@ function renderSched(){
   });
   html+='</div>';
   document.getElementById('sched-list').innerHTML=html;
+  if(isViewingToday){
+    const nowEl=document.querySelector('.sblock.now');
+    if(nowEl) setTimeout(()=>{nowEl.scrollIntoView({behavior:'smooth',block:'center'});},100);
+  }
 }
 
 // ─── EXPORT ───
@@ -2159,8 +2380,8 @@ async function genExport(mode){
       });
       lines.push('');
       lines.push('  TOTALS: '+totCal+' cal  |  '+totP+'g protein  |  '+totC+'g carbs  |  '+totF+'g fat  |  '+totFib+'g fiber');
-      lines.push('  TARGETS: 2620 cal  |  169g protein  |  300g carbs  |  80g fat  |  38g fiber');
-      const pct=Math.round(totCal/2620*100);
+      lines.push('  TARGETS: 2595 cal  |  168g protein  |  297g carbs  |  79g fat  |  38g fiber');
+      const pct=Math.round(totCal/2595*100);
       lines.push('  Progress: '+pct+'% of daily calories');
     }
 
@@ -2187,17 +2408,28 @@ async function genExport(mode){
     lines.push('');
     lines.push('── JOURNAL ENTRIES ─────────────');
     const jdata=await sg('journal-v1')||{};
-    const jDates=Object.keys(jdata).sort().reverse().slice(0,7);
-    if(!jDates.length){
+    const weekKeys=Object.keys(jdata).sort().reverse();
+    let jEntryCount=0;
+    if(!weekKeys.length){
       lines.push('No journal entries yet.');
     } else {
-      jDates.forEach(dk=>{
-        lines.push('');
-        lines.push('  '+fmtExportDate(dk)+':');
-        const entry=jdata[dk];
-        if(Array.isArray(entry)){
-          entry.forEach((a,i)=>{if(a&&a.trim()) lines.push('    '+(i+1)+'. '+a.trim());});
-        }
+      weekKeys.forEach(wk=>{
+        const weekData=jdata[wk];
+        if(!weekData||typeof weekData!=='object') return;
+        const dateKeys=Object.keys(weekData).sort().reverse();
+        dateKeys.forEach(dk=>{
+          if(jEntryCount>=7) return;
+          const answers=weekData[dk];
+          if(!answers||typeof answers!=='object') return;
+          lines.push('');
+          lines.push('  '+fmtExportDate(dk)+':');
+          const answerKeys=Object.keys(answers).sort();
+          answerKeys.forEach((k,i)=>{
+            const a=answers[k];
+            if(a&&String(a).trim()) lines.push('    '+(i+1)+'. '+String(a).trim());
+          });
+          jEntryCount++;
+        });
       });
     }
 
@@ -2210,8 +2442,8 @@ async function genExport(mode){
     } else {
       const latest=thdata[thKeys[0]];
       lines.push('Week of: '+thKeys[0]);
-      if(Array.isArray(latest)){
-        latest.forEach((a,i)=>{if(a&&a.trim()) lines.push('  '+(i+1)+'. '+a.trim());});
+      if(latest&&typeof latest==='object'){
+        Object.keys(latest).sort().forEach((k,i)=>{const a=latest[k];if(a&&String(a).trim()) lines.push('  '+(i+1)+'. '+String(a).trim());});
       }
     }
 
@@ -2224,8 +2456,8 @@ async function genExport(mode){
     } else {
       const latest=rvdata[rvKeys[0]];
       lines.push('Week: '+rvKeys[0]);
-      if(Array.isArray(latest)){
-        latest.forEach((a,i)=>{if(a&&a.trim()) lines.push('  '+(i+1)+'. '+a.trim());});
+      if(latest&&typeof latest==='object'){
+        Object.keys(latest).sort().forEach((k,i)=>{const a=latest[k];if(a&&String(a).trim()) lines.push('  '+(i+1)+'. '+String(a).trim());});
       }
     }
   }
@@ -2276,8 +2508,75 @@ function copyExport(){
   }
 }
 
+// ─── AUTO-SAVE DEBOUNCE ───
+let _jAutoSaveTimer=null,_thAutoSaveTimer=null,_rvAutoSaveTimer=null;
+function setupAutoSave(){
+  document.addEventListener('input',function(e){
+    const ta=e.target;
+    if(ta.classList.contains('jta')){
+      // Immediately capture value in memory
+      const wk=wkKey(jDay),dk=dKey(jDay);
+      if(!jState[wk])jState[wk]={};
+      if(!jState[wk][dk])jState[wk][dk]={};
+      const idx=[...document.querySelectorAll('.jta')].indexOf(ta);
+      if(idx>=0) jState[wk][dk][idx]=ta.value;
+      clearTimeout(_jAutoSaveTimer);
+      _jAutoSaveTimer=setTimeout(()=>{ss('journal-v1',jState);},1500);
+    }
+    if(ta.classList.contains('thta')){
+      const wk=wkKey(now());
+      if(!thState[wk])thState[wk]={};
+      const idx=[...document.querySelectorAll('.thta')].indexOf(ta);
+      if(idx>=0) thState[wk][idx]=ta.value;
+      clearTimeout(_thAutoSaveTimer);
+      _thAutoSaveTimer=setTimeout(()=>{ss('therapy-v1',thState);},1500);
+    }
+    if(ta.classList.contains('rvta')){
+      const wk=wkKey(now());
+      if(!rvState[wk])rvState[wk]={};
+      const idx=[...document.querySelectorAll('.rvta')].indexOf(ta);
+      if(idx>=0) rvState[wk][idx]=ta.value;
+      clearTimeout(_rvAutoSaveTimer);
+      _rvAutoSaveTimer=setTimeout(()=>{ss('review-v1',rvState);},1500);
+    }
+  });
+}
+
+// ─── STATUS BAR ───
+function updateStatusBar(){
+  // Meal dots
+  ['breakfast','snack1','lunch','snack2','dinner'].forEach(id=>{
+    const dot=document.getElementById('sd-'+id);
+    if(dot) dot.classList.toggle('on',mealPicks[id]!==undefined);
+  });
+  // Supplement count
+  const today=dKey(now());
+  let tot=0,tk=0;
+  SUPPS.forEach(g=>g.items.forEach(s=>{tot++;if(sState[today+'|'+s.id])tk++;}));
+  const pct=tot?tk/tot:0;
+  const suppEl=document.getElementById('status-supps');
+  if(suppEl){
+    const sc=pct>=1?'#1D9E75':pct>=0.5?'#BA7517':'#E24B4A';
+    suppEl.textContent='SUPPS '+tk+'/'+tot;
+    suppEl.style.color=sc;
+  }
+  // Therapy urgency dot
+  const dow=now().getDay();
+  const therapyDot=document.getElementById('therapy-dot');
+  if(therapyDot){
+    if(dow===4||dow===5){
+      const wk=wkKey(now()),saved=thState[wk]||{};
+      const hasContent=Object.values(saved).some(v=>v&&String(v).trim());
+      therapyDot.style.display=hasContent?'none':'block';
+    } else {
+      therapyDot.style.display='none';
+    }
+  }
+}
+
 // ─── INIT ───
-initSupps();initWeight();initMeals();initSched();initJournal();initTherapy();initReview();renderRecipes();
+initSupps();initWeight();initMeals();initSched();initJournal();initTherapy();initReview();renderRecipes();setupAutoSave();
+setTimeout(updateStatusBar,100);
 </script>
 </body>
 </html>
