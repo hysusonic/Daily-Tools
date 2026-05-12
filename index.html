@@ -1555,27 +1555,79 @@ let groceryList=[],pantryItems=[];
 async function initGrocery(){const g=await sg('grocery-v1');if(g)groceryList=g;const p=await sg('pantry-v1');if(p)pantryItems=p;}
 async function saveGrocery(){await ss('grocery-v1',groceryList);}
 async function savePantry(){await ss('pantry-v1',pantryItems);}
+// Practical grocery quantities — what you actually BUY, not recipe prep amounts
+const GROCERY_QTY={
+  // Produce
+  'boneless skinless chicken thighs':'3 lbs','boneless skinless chicken breast':'2 lbs','chicken thighs':'3 lbs','chicken breast':'2 lbs',
+  'ground beef':'1.5 lbs','ground beef (90/10)':'1.5 lbs','lean ground beef':'1.5 lbs',
+  'flank steak':'1 lb','large eggs':'18 ct','eggs':'18 ct','canned tuna in water':'4 cans','canned tuna':'4 cans',
+  'tilapia fillets':'4 fillets','tilapia':'4 fillets',
+  'broccoli crowns':'2 heads','broccoli florets':'2 heads','broccoli':'2 heads',
+  'bell pepper':'3','bell peppers':'3',
+  'cucumber':'2','cherry tomatoes':'1 pint','tomato':'3','red onion':'1','yellow onion':'2',
+  'scallions':'1 bunch','bananas':'1 bunch','banana':'1 bunch','lemons':'3','lemon':'3','lemon juice':'3 lemons','fresh lemon juice':'3 lemons',
+  'baby carrots':'1 bag','sweet potatoes':'2','sweet potato':'2',
+  'fresh garlic':'1 head','garlic':'1 head','garlic cloves':'1 head','garlic clove':'1 head',
+  'fresh ginger':'1 knob','ginger':'1 knob',
+  'celery':'1 bunch','avocado':'2','apple':'3',
+  'coleslaw mix':'1 bag (14 oz)','fresh spinach':'1 bag (5 oz)','fresh parsley':'1 bunch',
+  'lettuce':'1 head','butter lettuce leaves':'1 head',
+  // Dairy
+  'plain greek yogurt':'32 oz','greek yogurt':'32 oz','milk':'½ gallon','whole milk':'½ gallon',
+  'shredded cheddar':'8 oz bag','shredded cheese':'8 oz bag','shredded cheddar cheese':'8 oz bag',
+  'feta cheese':'4 oz block','cottage cheese':'16 oz','sour cream':'8 oz',
+  'whey protein powder':'check level','protein powder':'check level',
+  // Pantry
+  'jasmine rice':'2 lb bag','rice':'2 lb bag','brown rice':'2 lb bag','cooked rice':'2 lb bag (dry)',
+  'rolled oats':'1 canister','oats':'1 canister',
+  'whole grain pasta':'1 box','pasta':'1 box',
+  'canned chickpeas':'2 cans','chickpeas':'2 cans',
+  'canned crushed tomatoes':'2 cans','canned diced tomatoes':'2 cans',
+  'black beans':'2 cans','lentils':'1 lb bag',
+  'olive oil':'check level','extra virgin olive oil':'check level',
+  'sesame oil':'check level','cooking spray':'check level',
+  'natural peanut butter':'1 jar','peanut butter':'1 jar',
+  'honey':'check level','tahini':'check level',
+  'salsa':'1 jar','hot sauce':'check level','sriracha':'check level','hoisin sauce':'check level',
+  'soy sauce':'check level','low-sodium soy sauce':'check level',
+  'taco seasoning':'2 packets','cornmeal':'1 bag',
+  'dijon mustard':'check level','light mayo':'check level',
+  'apple cider vinegar':'check level','rice vinegar':'check level',
+  'tortillas':'1 pack','carb balance tortilla':'1 pack',
+  'hummus':'1 tub (or batch make)',
+  // Spices (check level only)
+  'garlic powder':'check level','smoked paprika':'check level','paprika':'check level',
+  'cumin':'check level','ground cumin':'check level','coriander':'check level',
+  'onion powder':'check level','black pepper':'check level','salt':'check level',
+  'oregano':'check level','dried oregano':'check level','italian seasoning':'check level',
+  'turmeric':'check level','cinnamon':'check level','allspice':'check level',
+  'tony chachere\'s creole':'check level','baking powder':'check level',
+  'all-purpose flour':'check level',
+  // Frozen
+  'frozen berries':'1 bag','frozen broccoli':'1 bag','frozen edamame':'1 bag',
+  'frozen peas + carrots':'1 bag','ice':'bag',
+};
+
 function buildMasterGrocery(){
-  // Scan ALL recipes and extract every unique ingredient with amounts
   const items={};
+  // Scan all recipes for unique ingredients
   RECIPES.forEach(recipe=>{
     recipe.ings.forEach(ing=>{
-      // Normalize key: lowercase, strip everything after comma or parenthesis
       const key=ing.n.toLowerCase().replace(/\s*[\(,].*/,'').trim();
-      if(!items[key]){
-        items[key]={
-          name:ing.n,
-          amt:ing.base+' '+ing.unit,
-          section:FRESHNESS_DB[key]?.sec||'Other',
-          sources:[recipe.title]
-        };
-      } else {
-        // Aggregate: track which recipes use it
-        if(!items[key].sources.includes(recipe.title))items[key].sources.push(recipe.title);
-      }
+      if(items[key])return; // already have it
+      // Look up practical grocery quantity
+      const lname=ing.n.toLowerCase().trim();
+      const qty=GROCERY_QTY[lname]||GROCERY_QTY[key]||null;
+      // Skip tiny spice/seasoning amounts — they're "check level" or already in pantry
+      if(!qty&&(ing.unit.includes('tsp')||ing.unit.includes('pinch')||ing.unit.includes('clove')))return;
+      items[key]={
+        name:ing.n.split(',')[0].split('(')[0].trim(), // clean name
+        amt:qty||(ing.base+' '+ing.unit),
+        section:FRESHNESS_DB[key]?.sec||'Other',
+      };
     });
   });
-  // Also add weekly staples that aren't in any recipe
+  // Weekly staples not in recipes
   const staples=[
     {name:'Whole wheat bread',amt:'1 loaf',section:'Pantry'},
     {name:'Carb Balance tortillas',amt:'1 pack',section:'Pantry'},
@@ -1588,7 +1640,7 @@ function buildMasterGrocery(){
   ];
   staples.forEach(s=>{
     const key=s.name.toLowerCase().replace(/\s*[\(,].*/,'').trim();
-    if(!items[key])items[key]={name:s.name,amt:s.amt,section:s.section,sources:['Weekly staple']};
+    if(!items[key])items[key]={name:s.name,amt:s.amt,section:s.section};
   });
   return Object.values(items);
 }
