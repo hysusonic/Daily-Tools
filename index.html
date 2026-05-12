@@ -399,7 +399,7 @@ body{padding-bottom:96px;padding-top:44px}
   </div>
   <div id="grocery-view" style="display:none">
     <div style="display:flex;gap:8px;margin-bottom:14px">
-      <button class="btn bp" style="flex:1" onclick="generateGroceryList()">Generate from meals</button>
+      <button class="btn bp" style="flex:1" onclick="generateGroceryList()">What do I need?</button>
       <button class="btn bg2" onclick="showAddGrocItem()">+ Add</button>
     </div>
     <div id="groc-use-soon"></div>
@@ -1555,22 +1555,69 @@ let groceryList=[],pantryItems=[];
 async function initGrocery(){const g=await sg('grocery-v1');if(g)groceryList=g;const p=await sg('pantry-v1');if(p)pantryItems=p;}
 async function saveGrocery(){await ss('grocery-v1',groceryList);}
 async function savePantry(){await ss('pantry-v1',pantryItems);}
-function generateGroceryList(){
+function buildMasterGrocery(){
+  // Scan ALL recipes and extract every unique ingredient with amounts
   const items={};
-  SLOTS.forEach(slot=>{
-    if(mealPicks[slot.id]===undefined)return;
-    const opt=slot.opts[mealPicks[slot.id]];
-    if(!opt.recipe)return;
-    const recipe=RECIPES.find(r=>r.id===opt.recipe);
-    if(!recipe)return;
+  RECIPES.forEach(recipe=>{
     recipe.ings.forEach(ing=>{
-      const key=ing.n.toLowerCase().split(',')[0].trim();
-      if(!items[key])items[key]={name:ing.n,amt:ing.base+' '+ing.unit,section:FRESHNESS_DB[key]?.sec||'Other',checked:false};
+      // Normalize key: lowercase, strip everything after comma or parenthesis
+      const key=ing.n.toLowerCase().replace(/\s*[\(,].*/,'').trim();
+      if(!items[key]){
+        items[key]={
+          name:ing.n,
+          amt:ing.base+' '+ing.unit,
+          section:FRESHNESS_DB[key]?.sec||'Other',
+          sources:[recipe.title]
+        };
+      } else {
+        // Aggregate: track which recipes use it
+        if(!items[key].sources.includes(recipe.title))items[key].sources.push(recipe.title);
+      }
     });
   });
-  // Multiply for ~5 weekdays
-  groceryList=Object.values(items).map(i=>({...i,id:Date.now().toString(36)+Math.random().toString(36).slice(2,5)}));
-  saveGrocery();renderGrocery();toast('Generated '+groceryList.length+' items');
+  // Also add weekly staples that aren't in any recipe
+  const staples=[
+    {name:'Whole wheat bread',amt:'1 loaf',section:'Pantry'},
+    {name:'Carb Balance tortillas',amt:'1 pack',section:'Pantry'},
+    {name:'String cheese',amt:'12 ct',section:'Dairy'},
+    {name:'Cottage cheese',amt:'16 oz',section:'Dairy'},
+    {name:'Frozen berries',amt:'1 bag',section:'Frozen'},
+    {name:'Frozen edamame',amt:'1 bag',section:'Frozen'},
+    {name:'Granola',amt:'1 bag',section:'Pantry'},
+    {name:'Whole wheat crackers',amt:'1 box',section:'Pantry'},
+  ];
+  staples.forEach(s=>{
+    const key=s.name.toLowerCase().replace(/\s*[\(,].*/,'').trim();
+    if(!items[key])items[key]={name:s.name,amt:s.amt,section:s.section,sources:['Weekly staple']};
+  });
+  return Object.values(items);
+}
+
+function generateGroceryList(){
+  const today=new Date();
+  const master=buildMasterGrocery();
+  // Build set of pantry item names that are still fresh (>1 day left)
+  const inPantry=new Set();
+  pantryItems.forEach(item=>{
+    const purchase=new Date(item.purchaseDate+'T12:00');
+    const daysOld=Math.floor((today-purchase)/86400000);
+    const remaining=item.freshDays-daysOld;
+    if(remaining>1){
+      inPantry.add(item.name.toLowerCase().replace(/\s*[\(,].*/,'').trim());
+    }
+  });
+  // Filter: only items NOT currently stocked in pantry
+  const needed=master.filter(item=>{
+    const key=item.name.toLowerCase().replace(/\s*[\(,].*/,'').trim();
+    return!inPantry.has(key);
+  });
+  if(needed.length===master.length){
+    toast('Full list from '+RECIPES.length+' recipes — check off as you shop');
+  } else {
+    toast(needed.length+' items to restock — '+inPantry.size+' still stocked');
+  }
+  groceryList=needed.map(i=>({name:i.name,amt:i.amt,section:i.section,checked:false,id:Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));
+  saveGrocery();renderGrocery();
 }
 function toggleGrocItem(id){const item=groceryList.find(i=>i.id===id);if(item)item.checked=!item.checked;saveGrocery();renderGrocery();}
 function delGrocItem(id){groceryList=groceryList.filter(i=>i.id!==id);saveGrocery();renderGrocery();}
