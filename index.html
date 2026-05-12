@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Daily Tools">
-<meta name="theme-color" content="#1a1612">
+<meta name="theme-color" content="#3B3228">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23302418'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🌿</text></svg>">
 <title>Daily Tools</title>
 <script>
@@ -23,24 +23,24 @@ if('serviceWorker' in navigator){
    EARTHY DARK THEME — Design Tokens
    ═══════════════════════════════════════ */
 :root{
-  /* Surfaces — warm walnut/chocolate */
-  --bg:#1a1612;--card:#28221a;--card-up:#332a20;--border:#3D3428;
-  /* Text — warm cream & tan */
-  --tx:#F0E6D3;--t2:#B8A88C;--t3:#8A7D6A;
+  /* Surfaces — warm latte/khaki (balanced, not dark) */
+  --bg:#3B3228;--card:#4A3F33;--card-up:#574A3C;--border:#6B5D4E;
+  /* Text — warm cream on brown */
+  --tx:#F5EDE0;--t2:#C8B99E;--t3:#9A8B76;
   /* Accent — Visible sage/olive */
-  --green:#8FB06A;--gl:#252E1C;--gd:#B5D48E;
+  --green:#8FB86C;--gl:#3A4530;--gd:#B5D48E;
   /* Warm Amber/Terracotta — pops */
-  --amber:#D4915C;--al:#302218;--ad:#E8AA74;
+  --amber:#D4915C;--al:#4A3828;--ad:#E8B080;
   /* Warm Denim Blue */
-  --blue:#7BA3B8;--bl:#1E2830;--bd:#9EC4D8;
+  --blue:#7BA3B8;--bl:#354550;--bd:#9EC4D8;
   /* Warm Mauve */
-  --purple:#9B8EBE;--pl:#252030;--pd:#B9AEDB;
+  --purple:#9B8EBE;--pl:#3D3650;--pd:#B9AEDB;
   /* Warm Rose */
-  --pink:#C47888;--pkl:#301E24;--pkd:#E09AAC;
+  --pink:#C47888;--pkl:#4A3038;--pkd:#E09AAC;
   /* Warm Red/Clay */
-  --red:#D06858;--rl:#301A16;--rd:#E89080;
-  /* Earthy extras — richer */
-  --moss:#5A7A4A;--walnut:#40342A;--terra:#C0804A;
+  --red:#D06858;--rl:#4A2E28;--rd:#E89080;
+  /* Earthy extras */
+  --moss:#6A8A50;--walnut:#5A4A3A;--terra:#C0804A;
   /* Layout */
   --r:16px;--rs:10px;
   /* Animation */
@@ -59,12 +59,12 @@ body{padding-bottom:96px;padding-top:44px}
 }
 
 /* ═══ Status Bar ═══ */
-.status-bar{position:fixed;top:0;left:0;right:0;height:36px;background:rgba(26,22,18,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:center;gap:16px;z-index:99;padding:0 16px;font-size:12px;font-weight:600}
+.status-bar{position:fixed;top:0;left:0;right:0;height:36px;background:rgba(59,50,40,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:center;gap:16px;z-index:99;padding:0 16px;font-size:12px;font-weight:600}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--t3);transition:background .3s}
 .status-dot.on{background:var(--green)}
 
 /* ═══ Bottom Nav ═══ */
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(40,34,26,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:6px 0 max(12px,env(safe-area-inset-bottom));z-index:100}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(59,50,40,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:6px 0 max(12px,env(safe-area-inset-bottom));z-index:100}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit;position:relative;transition:color var(--dur-fast)}
 .nb.on{color:var(--green)}
 .nb-ic{font-size:20px;line-height:1}
@@ -73,9 +73,8 @@ body{padding-bottom:96px;padding-top:44px}
 .nb .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--red);position:absolute;top:5px;right:calc(50% - 14px);animation:pulse 1.5s infinite}
 
 /* ═══ Pages & Cards ═══ */
-.pg{display:none;padding:16px 16px 8px}
-.pg.on{display:block;animation:pageFadeIn var(--dur-slow) var(--ease-out-expo) both}
-@keyframes pageFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.pg{display:none;padding:16px 16px 8px;opacity:0;transition:opacity .2s ease}
+.pg.on{display:block;opacity:1}
 .ptitle{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:3px;color:var(--tx)}
 .psub{font-size:14px;color:var(--t2);margin-bottom:16px;line-height:1.5}
 .card{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
@@ -95,7 +94,7 @@ body{padding-bottom:96px;padding-top:44px}
 /* ═══ Form / Input ═══ */
 .pbar{height:8px;background:var(--card-up);border-radius:8px;overflow:hidden;margin:8px 0}
 .pfill{height:100%;border-radius:8px;transition:width .6s var(--ease-out-expo)}
-.ibox{border-radius:var(--rs);padding:12px 14px;font-size:14px;line-height:1.6;margin-bottom:12px;border:1px solid}
+/* .ibox removed — unused */
 
 /* ═══ Sub-Tab Toggle ═══ */
 .ftab{flex:1;padding:9px 8px;border-radius:12px;border:none;background:none;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--t2);transition:all .15s}
@@ -201,9 +200,7 @@ body{padding-bottom:96px;padding-top:44px}
 .sblock.done .sb-time{color:var(--t3)}
 .sblock.done .sb-detail{color:var(--t3)}
 .sblock.now{border-left:3px solid var(--blue);background:rgba(123,163,184,.08)}
-.sblock--dragging{z-index:200;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px var(--green);transform:scale(1.03);opacity:.92;pointer-events:none}
-.drop-gap{height:0;transition:height .2s var(--ease-out-expo);border-radius:var(--rs)}
-.drop-gap--active{height:60px;background:rgba(143,176,106,.15);border:2px dashed var(--green);margin-bottom:8px}
+/* drag-drop CSS removed — not implemented */
 .sb-check{width:44px;height:44px;min-width:44px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s var(--ease-out-back)}
 .sb-body{flex:1}
 .sb-time{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:3px}
@@ -249,7 +246,7 @@ body{padding-bottom:96px;padding-top:44px}
 .supp-badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;background:var(--gl);color:var(--gd)}
 
 /* ═══ Card Entry Animation ═══ */
-.card-enter{opacity:0;transform:translateY(16px);animation:cardIn var(--dur-slow) var(--ease-out-expo) both}
+.card-enter{opacity:0;transform:translateY(8px);animation:cardIn var(--dur-norm) ease both}
 .card-enter:nth-child(1){animation-delay:0ms}
 .card-enter:nth-child(2){animation-delay:50ms}
 .card-enter:nth-child(3){animation-delay:100ms}
@@ -260,7 +257,7 @@ body{padding-bottom:96px;padding-top:44px}
 
 /* ═══ Check Bounce ═══ */
 .check-bounce{animation:checkBounce var(--dur-norm) var(--ease-out-back)}
-@keyframes checkBounce{0%{transform:scale(.6)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes checkBounce{0%{transform:scale(.85)}40%{transform:scale(1.1)}100%{transform:scale(1)}}
 
 /* ═══ Toast ═══ */
 .toast-wrap{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;flex-direction:column;align-items:center;gap:8px;padding:48px 12px 0;pointer-events:none}
@@ -271,9 +268,7 @@ body{padding-bottom:96px;padding-top:44px}
 @keyframes toastOut{to{opacity:0;transform:translateY(-40%) scale(.95)}}
 @keyframes toastTimer{from{width:100%}to{width:0%}}
 
-/* ═══ Progress Ring (subtle) ═══ */
-.progress-fill-anim{transform-origin:left;transform:scaleX(0);transition:transform var(--dur-crawl) var(--ease-out-expo)}
-.progress-fill-anim.active{transform:scaleX(var(--progress,0))}
+/* dead CSS removed: .progress-fill-anim, .ibox */
 
 /* ═══ Skeleton Shimmer ═══ */
 .skeleton{background:var(--card-up);border-radius:8px;position:relative;overflow:hidden}
@@ -381,32 +376,28 @@ body{padding-bottom:96px;padding-top:44px}
   </div>
 </div>
 
-<!-- ═══ PAGE: RECIPES ═══ -->
+<!-- ═══ PAGE: RECIPES & GROCERY (merged) ═══ -->
 <div class="pg" id="pg-recipes">
-  <div class="ptitle">Recipes</div>
-  <div class="psub">Tap a recipe to open it. Swap ingredients, scale servings.</div>
   <div style="display:flex;gap:0;background:var(--bg);border-radius:var(--r);padding:3px;margin-bottom:16px;border:.5px solid var(--border)">
-    <button class="ftab ftab-on" id="rtab-all" onclick="filterRecipes('all')">All</button>
-    <button class="ftab" id="rtab-batch" onclick="filterRecipes('batch')">Batch</button>
-    <button class="ftab" id="rtab-med" onclick="filterRecipes('med')">Med</button>
-    <button class="ftab" id="rtab-asian" onclick="filterRecipes('asian')">Asian</button>
+    <button class="ftab ftab-on" id="rtab-recipes" onclick="switchRecipeView('recipes')">📖 Recipes</button>
+    <button class="ftab" id="rtab-grocery" onclick="switchRecipeView('grocery')">🛒 Grocery</button>
+    <button class="ftab" id="rtab-pantry" onclick="switchRecipeView('pantry')">🏠 Pantry</button>
   </div>
-  <div id="recipe-list"></div>
-  <div id="recipe-detail" style="display:none">
-    <button class="btn bg2" style="margin-bottom:14px;padding:10px 16px" onclick="closeRecipe()">← All recipes</button>
-    <div id="recipe-content"></div>
+  <div id="recipes-view">
+    <div style="display:flex;gap:0;background:var(--card);border-radius:var(--rs);padding:2px;margin-bottom:12px;border:.5px solid var(--border)">
+      <button class="ftab ftab-on" id="rtab-all" onclick="filterRecipes('all')" style="font-size:12px;padding:7px 4px">All</button>
+      <button class="ftab" id="rtab-breakfast" onclick="filterRecipes('breakfast')" style="font-size:12px;padding:7px 4px">Breakfast</button>
+      <button class="ftab" id="rtab-lunch" onclick="filterRecipes('lunch')" style="font-size:12px;padding:7px 4px">Lunch</button>
+      <button class="ftab" id="rtab-dinner" onclick="filterRecipes('dinner')" style="font-size:12px;padding:7px 4px">Dinner</button>
+      <button class="ftab" id="rtab-snack" onclick="filterRecipes('snack')" style="font-size:12px;padding:7px 4px">Snack</button>
+    </div>
+    <div id="recipe-list"></div>
+    <div id="recipe-detail" style="display:none">
+      <button class="btn bg2" style="margin-bottom:14px;padding:10px 16px" onclick="closeRecipe()">← Back</button>
+      <div id="recipe-content"></div>
+    </div>
   </div>
-</div>
-
-<!-- ═══ PAGE: GROCERY & PANTRY (NEW) ═══ -->
-<div class="pg" id="pg-grocery">
-  <div class="ptitle">Grocery & Pantry</div>
-  <div class="psub">Auto-generate from meals, track freshness, never waste produce.</div>
-  <div style="display:flex;gap:0;background:var(--bg);border-radius:var(--r);padding:3px;margin-bottom:16px;border:.5px solid var(--border)">
-    <button class="ftab ftab-on" id="gtab-list" onclick="switchGrocTab('list')">🛒 List</button>
-    <button class="ftab" id="gtab-pantry" onclick="switchGrocTab('pantry')">🏠 Pantry</button>
-  </div>
-  <div id="groc-list-view">
+  <div id="grocery-view" style="display:none">
     <div style="display:flex;gap:8px;margin-bottom:14px">
       <button class="btn bp" style="flex:1" onclick="generateGroceryList()">Generate from meals</button>
       <button class="btn bg2" onclick="showAddGrocItem()">+ Add</button>
@@ -423,7 +414,7 @@ body{padding-bottom:96px;padding-top:44px}
       <button class="btn bg2" onclick="clearGrocery()">Clear</button>
     </div>
   </div>
-  <div id="groc-pantry-view" style="display:none">
+  <div id="pantry-view" style="display:none">
     <div id="pantry-expiring"></div>
     <div id="pantry-items"></div>
     <div id="pantry-empty" class="empty" style="display:none">
@@ -461,7 +452,6 @@ body{padding-bottom:96px;padding-top:44px}
   <button class="nb" onclick="gp('track',this)"><span class="nb-ic">⚖️</span><span class="nb-lb">Weight</span></button>
   <button class="nb" onclick="gp('mind',this)"><span class="nb-ic">🧠</span><span class="nb-lb">Mind</span><span class="pulse-dot" id="therapy-dot" style="display:none"></span></button>
   <button class="nb" onclick="gp('recipes',this)"><span class="nb-ic">📖</span><span class="nb-lb">Recipes</span></button>
-  <button class="nb" onclick="gp('grocery',this)"><span class="nb-ic">🛒</span><span class="nb-lb">Grocery</span></button>
   <button class="nb" onclick="gp('export',this)"><span class="nb-ic">📤</span><span class="nb-lb">Export</span></button>
 </nav>
 
@@ -512,7 +502,7 @@ function gp(id,btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   const pg=document.getElementById('pg-'+id);
-  if(pg){pg.classList.add('on');pg.style.animation='none';void pg.offsetHeight;pg.style.animation='';}
+  if(pg){pg.classList.add('on');}
   if(btn)btn.classList.add('on');
   window.scrollTo(0,0);
   if(id==='food'){renderMeals();}
@@ -520,15 +510,14 @@ function gp(id,btn){
   if(id==='mind'){renderJournal();renderTherapy();renderReview();const dow=now().getDay();if(dow===4||dow===5)switchMindTab('therapy');}
   if(id==='schedule'){renderSched();}
   if(id==='export'){document.getElementById('export-out').style.display='none';}
-  if(id==='recipes'){closeRecipe();renderRecipes();}
-  if(id==='grocery'){renderGrocery();renderPantry();}
+  if(id==='recipes'){switchRecipeView('recipes');}
 }
 function goToRecipe(recipeId){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('pg-recipes').classList.add('on');
   document.querySelectorAll('.nb').forEach(b=>{if(b.querySelector('.nb-lb').textContent==='Recipes')b.classList.add('on');});
-  window.scrollTo(0,0);renderRecipes();openRecipe(recipeId);
+  switchRecipeView('recipes');window.scrollTo(0,0);openRecipe(recipeId);
 }
 // switchFoodTab removed — supplements now inline in meal slots
 function switchMindTab(tab){
@@ -540,13 +529,19 @@ function switchMindTab(tab){
   document.getElementById('mind-tab-review').classList.toggle('ftab-on',tab==='review');
   if(tab==='journal')reAnimateCards(document.getElementById('j-prompts'));
 }
-function switchGrocTab(tab){
-  document.getElementById('groc-list-view').style.display=tab==='list'?'block':'none';
-  document.getElementById('groc-pantry-view').style.display=tab==='pantry'?'block':'none';
-  document.getElementById('gtab-list').classList.toggle('ftab-on',tab==='list');
-  document.getElementById('gtab-pantry').classList.toggle('ftab-on',tab==='pantry');
-  if(tab==='list')renderGrocery();
-  if(tab==='pantry')renderPantry();
+function switchRecipeView(view){
+  const rv=document.getElementById('recipes-view');
+  const gv=document.getElementById('grocery-view');
+  const pv=document.getElementById('pantry-view');
+  if(rv)rv.style.display=view==='recipes'?'block':'none';
+  if(gv)gv.style.display=view==='grocery'?'block':'none';
+  if(pv)pv.style.display=view==='pantry'?'block':'none';
+  document.getElementById('rtab-recipes').classList.toggle('ftab-on',view==='recipes');
+  document.getElementById('rtab-grocery').classList.toggle('ftab-on',view==='grocery');
+  document.getElementById('rtab-pantry').classList.toggle('ftab-on',view==='pantry');
+  if(view==='recipes'){closeRecipe();renderRecipes();}
+  if(view==='grocery')renderGrocery();
+  if(view==='pantry')renderPantry();
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1157,14 +1152,30 @@ function closeRecipe(){
 }
 function changeRecipeSrv(delta){recipeSrvs[activeRecipe]=Math.max(1,Math.min(20,recipeSrvs[activeRecipe]+delta));renderRecipeDetail();}
 function swapIng(ingIdx,altIdx){recipeSwaps[activeRecipe+'|'+ingIdx]=altIdx;renderRecipeDetail();}
+// Meal type mapping for recipe grouping
+const RECIPE_MEALS={
+  eggs_oats:'breakfast',egg_wrap:'breakfast',cornmeal_porridge:'breakfast',
+  shake:'snack',eggs:'snack',
+  hummus:'snack',tuna:'lunch',chicken:'lunch',beef:'lunch',
+  greek_bowl:'lunch',lentil_soup:'lunch',pasta:'lunch',sesame_bowl:'lunch',
+  shawarma_bowl:'lunch',chicken_kebab:'lunch',
+  fish:'dinner',fish_tacos:'dinner',wrap:'dinner',stirfry:'dinner',
+  coleslaw:'dinner',broccoli:'dinner',shakshuka:'dinner',lettuce_wraps:'dinner',
+  beef_kofta:'dinner',falafel_bowl:'dinner',
+  fried_rice:'dinner',ginger_chicken:'dinner',
+  stuffed_peppers:'dinner',
+};
 function filterRecipes(f){
   recipeFilter=f;
   document.querySelectorAll('[id^="rtab-"]').forEach(b=>b.classList.remove('ftab-on'));
-  document.getElementById('rtab-'+f).classList.add('ftab-on');
+  const tab=document.getElementById('rtab-'+f);if(tab)tab.classList.add('ftab-on');
   renderRecipes();
 }
 function renderRecipes(){
-  const filtered=recipeFilter==='all'?RECIPES:RECIPES.filter(r=>(r.tags||[]).includes(recipeFilter));
+  const filtered=recipeFilter==='all'?RECIPES:RECIPES.filter(r=>{
+    if(['breakfast','lunch','dinner','snack'].includes(recipeFilter))return RECIPE_MEALS[r.id]===recipeFilter;
+    return(r.tags||[]).includes(recipeFilter);
+  });
   let html='';
   filtered.forEach(r=>{
     html+=`<div class="card-enter" onclick="openRecipe('${r.id}')" style="background:${r.bg};border:1.5px solid ${r.color}30;border-radius:var(--r);padding:18px 20px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:opacity .1s" ontouchstart="this.style.opacity='.75'" ontouchend="this.style.opacity='1'">
