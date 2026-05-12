@@ -6,8 +6,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Daily Tools">
-<meta name="theme-color" content="#181c14">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23384830'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🌿</text></svg>">
+<meta name="theme-color" content="#1a1612">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23302418'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>🌿</text></svg>">
 <title>Daily Tools</title>
 <script>
 if('serviceWorker' in navigator){
@@ -23,24 +23,24 @@ if('serviceWorker' in navigator){
    EARTHY DARK THEME — Design Tokens
    ═══════════════════════════════════════ */
 :root{
-  /* Surfaces */
-  --bg:#181c14;--card:#222820;--card-up:#2a3224;--border:#3a4434;
-  /* Text */
-  --tx:#e8e3d4;--t2:#9a9484;--t3:#6b6960;
-  /* Accent — Olive/Sage */
-  --green:#7c9a5e;--gl:#1f2a18;--gd:#a3c47c;
-  /* Warm Amber/Terracotta */
-  --amber:#c49a5c;--al:#2a2218;--ad:#ddb87a;
-  /* Steel Blue */
-  --blue:#6b8fa6;--bl:#1a2530;--bd:#8fb8d4;
-  /* Muted Purple */
-  --purple:#8a7eb0;--pl:#1e1a2a;--pd:#a9a0cc;
-  /* Dusty Rose */
-  --pink:#b0687a;--pkl:#2a1a20;--pkd:#d08a9c;
-  /* Muted Red */
-  --red:#c45c5c;--rl:#2a1616;--rd:#e08080;
-  /* Earthy extras */
-  --moss:#4a6340;--walnut:#3a3028;--terra:#a0704a;
+  /* Surfaces — warm walnut/chocolate */
+  --bg:#1a1612;--card:#28221a;--card-up:#332a20;--border:#3D3428;
+  /* Text — warm cream & tan */
+  --tx:#F0E6D3;--t2:#B8A88C;--t3:#8A7D6A;
+  /* Accent — Visible sage/olive */
+  --green:#8FB06A;--gl:#252E1C;--gd:#B5D48E;
+  /* Warm Amber/Terracotta — pops */
+  --amber:#D4915C;--al:#302218;--ad:#E8AA74;
+  /* Warm Denim Blue */
+  --blue:#7BA3B8;--bl:#1E2830;--bd:#9EC4D8;
+  /* Warm Mauve */
+  --purple:#9B8EBE;--pl:#252030;--pd:#B9AEDB;
+  /* Warm Rose */
+  --pink:#C47888;--pkl:#301E24;--pkd:#E09AAC;
+  /* Warm Red/Clay */
+  --red:#D06858;--rl:#301A16;--rd:#E89080;
+  /* Earthy extras — richer */
+  --moss:#5A7A4A;--walnut:#40342A;--terra:#C0804A;
   /* Layout */
   --r:16px;--rs:10px;
   /* Animation */
@@ -59,12 +59,12 @@ body{padding-bottom:96px;padding-top:44px}
 }
 
 /* ═══ Status Bar ═══ */
-.status-bar{position:fixed;top:0;left:0;right:0;height:36px;background:rgba(24,28,20,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:center;gap:16px;z-index:99;padding:0 16px;font-size:12px;font-weight:600}
+.status-bar{position:fixed;top:0;left:0;right:0;height:36px;background:rgba(26,22,18,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:center;gap:16px;z-index:99;padding:0 16px;font-size:12px;font-weight:600}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--t3);transition:background .3s}
 .status-dot.on{background:var(--green)}
 
 /* ═══ Bottom Nav ═══ */
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(34,40,32,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:6px 0 max(12px,env(safe-area-inset-bottom));z-index:100}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(40,34,26,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid var(--border);display:flex;padding:6px 0 max(12px,env(safe-area-inset-bottom));z-index:100}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;border:none;background:none;cursor:pointer;color:var(--t3);font-family:inherit;position:relative;transition:color var(--dur-fast)}
 .nb.on{color:var(--green)}
 .nb-ic{font-size:20px;line-height:1}
@@ -144,7 +144,8 @@ body{padding-bottom:96px;padding-top:44px}
 .ttag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;margin-top:2px;flex-shrink:0}
 .tq{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.4}
 .thint{font-size:12px;color:var(--t2);margin-bottom:7px;line-height:1.4;font-style:italic}
-.tarea{width:100%;border:.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:15px;line-height:1.5;font-family:inherit;resize:none;background:var(--bg);color:var(--tx);outline:none;min-height:72px}
+.tarea{width:100%;border:.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:15px;line-height:1.5;font-family:inherit;resize:none;background:var(--bg);color:var(--tx);outline:none;min-height:72px;transition:border-color .2s}
+.tarea:focus{border-color:var(--green)}
 
 /* ═══ Recipes ═══ */
 .rhdr{border-radius:var(--r);padding:20px;margin-bottom:12px;border:.5px solid}
@@ -199,10 +200,10 @@ body{padding-bottom:96px;padding-top:44px}
 .sblock.done .sb-name{text-decoration:line-through;color:var(--t3)}
 .sblock.done .sb-time{color:var(--t3)}
 .sblock.done .sb-detail{color:var(--t3)}
-.sblock.now{border-left:3px solid var(--blue);background:rgba(107,143,166,.06)}
+.sblock.now{border-left:3px solid var(--blue);background:rgba(123,163,184,.08)}
 .sblock--dragging{z-index:200;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px var(--green);transform:scale(1.03);opacity:.92;pointer-events:none}
 .drop-gap{height:0;transition:height .2s var(--ease-out-expo);border-radius:var(--rs)}
-.drop-gap--active{height:60px;background:rgba(124,154,94,.15);border:2px dashed var(--green);margin-bottom:8px}
+.drop-gap--active{height:60px;background:rgba(143,176,106,.15);border:2px dashed var(--green);margin-bottom:8px}
 .sb-check{width:44px;height:44px;min-width:44px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s var(--ease-out-back)}
 .sb-body{flex:1}
 .sb-time{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:3px}
@@ -224,15 +225,28 @@ body{padding-bottom:96px;padding-top:44px}
 .pantry-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-bottom:.5px solid var(--border)}
 .pantry-item:last-child{border-bottom:none}
 .fresh-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.fresh-green{background:#7c9a5e}
-.fresh-yellow{background:#c49a5c}
-.fresh-red{background:#c45c5c}
-.fresh-gray{background:#6b6960}
+.fresh-green{background:#8FB06A}
+.fresh-yellow{background:#D4915C}
+.fresh-red{background:#D06858}
+.fresh-gray{background:#8A7D6A}
 .pantry-name{font-size:15px;font-weight:500;flex:1}
 .pantry-days{font-size:12px;font-weight:600;white-space:nowrap}
-.use-soon{background:rgba(196,92,92,.12);border:.5px solid rgba(196,92,92,.3);border-radius:var(--rs);padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.use-soon{background:rgba(208,104,88,.12);border:.5px solid rgba(208,104,88,.3);border-radius:var(--rs);padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .use-soon-icon{font-size:20px}
 .use-soon-text{font-size:13px;font-weight:600;color:var(--rd);flex:1}
+
+/* ═══ Inline Supplement Rows ═══ */
+.slot-supps{border-top:.5px solid var(--border);margin-top:8px;padding-top:8px}
+.slot-supp{display:flex;align-items:center;gap:12px;padding:10px 16px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:opacity .15s}
+.slot-supp:active{opacity:.7}
+.slot-supp.done .ss-name{text-decoration:line-through;color:var(--t3)}
+.ss-cb{width:32px;height:32px;min-width:32px;border-radius:50%;border:2px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease-out-back);flex-shrink:0}
+.ss-icon{font-size:14px;margin-right:4px;opacity:.6}
+.ss-name{font-size:14px;font-weight:500;color:var(--t2)}
+.ss-dose{font-size:12px;color:var(--t3)}
+.bedtime-slot{border:2px dashed var(--border);border-radius:var(--r);padding:14px 16px;margin-top:8px;background:rgba(40,34,26,.5)}
+.bedtime-hd{font-size:13px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.supp-badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;background:var(--gl);color:var(--gd)}
 
 /* ═══ Card Entry Animation ═══ */
 .card-enter{opacity:0;transform:translateY(16px);animation:cardIn var(--dur-slow) var(--ease-out-expo) both}
@@ -263,7 +277,7 @@ body{padding-bottom:96px;padding-top:44px}
 
 /* ═══ Skeleton Shimmer ═══ */
 .skeleton{background:var(--card-up);border-radius:8px;position:relative;overflow:hidden}
-.skeleton::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(232,227,212,.05) 50%,transparent 100%);animation:shimmer 1.5s infinite;transform:translateX(-100%)}
+.skeleton::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(240,230,211,.06) 50%,transparent 100%);animation:shimmer 1.5s infinite;transform:translateX(-100%)}
 @keyframes shimmer{to{transform:translateX(100%)}}
 
 /* ═══ Save Warning ═══ */
@@ -291,28 +305,13 @@ body{padding-bottom:96px;padding-top:44px}
      PAGE: FOOD (MEALS + SUPPLEMENTS)
      ═══════════════════════════════════════ -->
 <div class="pg on" id="pg-food">
-  <div style="display:flex;gap:0;background:var(--bg);border-radius:var(--r);padding:3px;margin-bottom:16px;border:.5px solid var(--border)">
-    <button id="food-tab-meals" class="ftab ftab-on" onclick="switchFoodTab('meals')">🍽️ Meals</button>
-    <button id="food-tab-supps" class="ftab" onclick="switchFoodTab('supps')">💊 Supplements</button>
-  </div>
-  <div id="food-meals">
-    <div class="psub" style="margin-bottom:12px">Tap a meal to select it — it logs automatically. Switch your pick any time and the log updates.</div>
-    <button class="btn bg2" style="margin-bottom:12px;width:100%" onclick="copyYesterdayMeals()">📋 Same as yesterday</button>
-    <div id="meal-slots"></div>
-    <div class="day-totals" id="day-totals"></div>
-    <div class="sectitle" style="margin-top:16px">Today's food log</div>
-    <div id="meal-log"></div>
-    <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearMealLog()">Clear log</button>
-  </div>
-  <div id="food-supps" style="display:none">
-    <div class="dstrip">
-      <div id="sd-lbl" style="font-size:14px;color:var(--t2)"></div>
-      <div class="dnav"><button onclick="sNav(-1)">‹</button><button onclick="sNav(1)">›</button></div>
-    </div>
-    <div id="s-score"></div>
-    <div id="s-list"></div>
-    <button class="btn bg2 bfull" style="margin-top:8px" onclick="resetSupps()">Reset today</button>
-  </div>
+  <div class="psub" style="margin-bottom:12px">Tap a meal to select. Supplements show at their scheduled time — check them off independently.</div>
+  <button class="btn bg2" style="margin-bottom:12px;width:100%" onclick="copyYesterdayMeals()">📋 Same as yesterday</button>
+  <div id="meal-slots"></div>
+  <div class="day-totals" id="day-totals"></div>
+  <div class="sectitle" style="margin-top:16px">Today's food log</div>
+  <div id="meal-log"></div>
+  <button class="btn bg2 bfull" style="margin-top:8px" onclick="clearMealLog()">Clear log</button>
 </div>
 
 <!-- ═══ PAGE: SCHEDULE ═══ -->
@@ -501,15 +500,22 @@ function toast(msg,dur){
   setTimeout(()=>{t.classList.add('dismiss');t.addEventListener('animationend',()=>t.remove(),{once:true});},dur);
 }
 
+// ═══ Animation Utilities ═══
+function reAnimateCards(ct){if(!ct)return;var cs=ct.querySelectorAll('.card-enter');cs.forEach(function(c){c.style.animation='none';});void ct.offsetHeight;cs.forEach(function(c){c.style.animation='';});}
+function animateProgressBars(ct){if(!ct)return;var bs=ct.querySelectorAll('.pfill');bs.forEach(function(b){var tw=b.style.width;b.style.width='0%';b.style.transition='none';requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.transition='width .6s var(--ease-out-expo)';b.style.width=tw;});});});}
+function bounceCheck(el){if(!el)return;el.classList.remove('check-bounce');void el.offsetHeight;el.classList.add('check-bounce');el.addEventListener('animationend',function(){el.classList.remove('check-bounce');},{once:true});}
+function countUp(el,tgt,dur){if(!el)return;dur=dur||600;var s=performance.now();var to=typeof tgt==='number'?tgt:parseFloat(tgt)||0;if(to===0){el.textContent='0';return;}var ii=Number.isInteger(to);function tk(n){var e=n-s;var p=Math.min(e/dur,1);var ea=1-Math.pow(1-p,3);var c=to*ea;el.textContent=ii?Math.round(c):c.toFixed(1);if(p<1)requestAnimationFrame(tk);}requestAnimationFrame(tk);}
+function countUpAll(ct){if(!ct)return;ct.querySelectorAll('[data-countup]').forEach(function(el){countUp(el,parseFloat(el.getAttribute('data-countup'))||0);});}
+
 // Page navigation
 function gp(id,btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   const pg=document.getElementById('pg-'+id);
-  if(pg){pg.classList.add('on');pg.style.animation='none';requestAnimationFrame(()=>{pg.style.animation='';});}
+  if(pg){pg.classList.add('on');pg.style.animation='none';void pg.offsetHeight;pg.style.animation='';}
   if(btn)btn.classList.add('on');
   window.scrollTo(0,0);
-  if(id==='food'){renderMeals();renderSupps();}
+  if(id==='food'){renderMeals();}
   if(id==='track'){renderWeight();}
   if(id==='mind'){renderJournal();renderTherapy();renderReview();const dow=now().getDay();if(dow===4||dow===5)switchMindTab('therapy');}
   if(id==='schedule'){renderSched();}
@@ -524,12 +530,7 @@ function goToRecipe(recipeId){
   document.querySelectorAll('.nb').forEach(b=>{if(b.querySelector('.nb-lb').textContent==='Recipes')b.classList.add('on');});
   window.scrollTo(0,0);renderRecipes();openRecipe(recipeId);
 }
-function switchFoodTab(tab){
-  document.getElementById('food-meals').style.display=tab==='meals'?'block':'none';
-  document.getElementById('food-supps').style.display=tab==='supps'?'block':'none';
-  document.getElementById('food-tab-meals').classList.toggle('ftab-on',tab==='meals');
-  document.getElementById('food-tab-supps').classList.toggle('ftab-on',tab==='supps');
-}
+// switchFoodTab removed — supplements now inline in meal slots
 function switchMindTab(tab){
   document.getElementById('mind-journal').style.display=tab==='journal'?'block':'none';
   document.getElementById('mind-therapy').style.display=tab==='therapy'?'block':'none';
@@ -537,6 +538,7 @@ function switchMindTab(tab){
   document.getElementById('mind-tab-journal').classList.toggle('ftab-on',tab==='journal');
   document.getElementById('mind-tab-therapy').classList.toggle('ftab-on',tab==='therapy');
   document.getElementById('mind-tab-review').classList.toggle('ftab-on',tab==='review');
+  if(tab==='journal')reAnimateCards(document.getElementById('j-prompts'));
 }
 function switchGrocTab(tab){
   document.getElementById('groc-list-view').style.display=tab==='list'?'block':'none';
@@ -574,53 +576,13 @@ function pruneOldSupps(){
   for(const k in sState){if(k.split('|')[0]>=cutoff)pruned[k]=sState[k];}
   sState=pruned;saveSupps();
 }
-async function initSupps(){const v=await sg('supps-v1');if(v)sState=v;pruneOldSupps();renderSupps();}
+async function initSupps(){const v=await sg('supps-v1');if(v)sState=v;pruneOldSupps();}
 async function saveSupps(){await ss('supps-v1',sState);}
-function sNav(n){sDay=addD(sDay,n);renderSupps();}
+function sNav(n){sDay=addD(sDay,n);renderMeals();}
 function skKey(d,id){return dKey(d)+'|'+id;}
-function toggleSupp(id){sState[skKey(sDay,id)]=!sState[skKey(sDay,id)];saveSupps();renderSupps();}
-function resetSupps(){SUPPS.forEach(g=>g.items.forEach(s=>{sState[skKey(sDay,s.id)]=false;}));saveSupps();renderSupps();}
-function renderSupps(){
-  const isT=dKey(sDay)===dKey(now());
-  document.getElementById('sd-lbl').textContent=isT?'Today — '+fmtDate(sDay):fmtDate(sDay);
-  let tot=0,tk=0;
-  SUPPS.forEach(g=>g.items.forEach(s=>{tot++;if(sState[skKey(sDay,s.id)])tk++;}));
-  const pct=tot?Math.round(tk/tot*100):0;
-  const sc=pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
-  document.getElementById('s-score').innerHTML=`
-    <div class="card" style="margin-bottom:16px;padding:14px 16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <div style="font-size:15px;font-weight:600">${tk} of ${tot} taken</div>
-        <div style="font-size:16px;font-weight:700;color:${sc}">${pct}%</div>
-      </div>
-      <div class="pbar"><div class="pfill" style="width:${pct}%;background:${sc}"></div></div>
-      ${pct===100?'<div style="font-size:13px;color:var(--green);margin-top:6px;font-weight:600">✓ All supplements taken</div>':''}
-    </div>`;
-  let html='';
-  SUPPS.forEach(g=>{
-    const gtk=g.items.filter(s=>sState[skKey(sDay,s.id)]).length;
-    html+=`<div style="margin-bottom:20px"><div class="sghd">
-      <span class="sgname">${g.g}</span>
-      <span class="sgbadge" style="background:${g.bg};color:${g.c}">${g.t} · ${gtk}/${g.items.length}</span>
-    </div><div class="wrap" style="margin-bottom:0">`;
-    g.items.forEach(s=>{
-      const done=!!sState[skKey(sDay,s.id)];
-      html+=`<div class="si${done?' tk':''}" onclick="toggleSupp('${s.id}')">
-        <div class="sicb" style="${done?'background:'+g.c+';border-color:'+g.c:''}">
-          ${done?chkSvg():''}
-        </div>
-        <div style="flex:1">
-          <div class="sin">${s.n}</div>
-          <div class="sidose">${s.dose}</div>
-          ${s.note?'<div class="sinote">'+s.note+'</div>':''}
-        </div>
-      </div>`;
-    });
-    html+='</div></div>';
-  });
-  document.getElementById('s-list').innerHTML=html;
-  if(typeof updateStatusBar==='function') updateStatusBar();
-}
+function toggleSupp(id){toggleSuppInline(id);}
+function resetSupps(){const today=dKey(now());SUPPS.forEach(g=>g.items.forEach(s=>{sState[today+'|'+s.id]=false;}));saveSupps();renderMeals();}
+function renderSupps(){renderMeals();}
 
 /* ═══════════════════════════════════════════════════════════
    REGION 3: WEIGHT TRACKING
@@ -694,27 +656,27 @@ function drawChart(){
   const W=canvas.parentElement.clientWidth-32;const H=180;
   canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
   ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
-  if(wtLog.length<2){ctx.fillStyle='#9a9484';ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText('Log 2+ weigh-ins to see your chart',W/2,H/2);return;}
+  if(wtLog.length<2){ctx.fillStyle='#B8A88C';ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText('Log 2+ weigh-ins to see your chart',W/2,H/2);return;}
   const vals=wtLog.map(e=>e.weight);
   const minV=Math.min(...vals,WTGOAL)-3,maxV=Math.max(...vals,wtLog[0].weight)+3;
   const p={t:20,b:28,l:42,r:16},cW=W-p.l-p.r,cH=H-p.t-p.b;
   const xP=i=>p.l+(i/(wtLog.length-1))*cW;
   const yP=v=>p.t+((maxV-v)/(maxV-minV))*cH;
-  ctx.beginPath();ctx.strokeStyle='rgba(124,154,94,.35)';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.strokeStyle='rgba(143,176,106,.4)';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
   const gy=yP(WTGOAL);ctx.moveTo(p.l,gy);ctx.lineTo(W-p.r,gy);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle='#7c9a5e';ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText('Goal 180',p.l+3,gy-5);
-  ctx.fillStyle='#9a9484';ctx.font='10px system-ui';ctx.textAlign='right';
+  ctx.fillStyle='#8FB06A';ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText('Goal 180',p.l+3,gy-5);
+  ctx.fillStyle='#B8A88C';ctx.font='10px system-ui';ctx.textAlign='right';
   [180,190,200,210,220,233].forEach(v=>{if(v>=minV&&v<=maxV)ctx.fillText(v,p.l-4,yP(v)+4);});
   ctx.beginPath();
   wtLog.forEach((e,i)=>i===0?ctx.moveTo(xP(i),yP(e.weight)):ctx.lineTo(xP(i),yP(e.weight)));
-  ctx.strokeStyle='#6b8fa6';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+  ctx.strokeStyle='#7BA3B8';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
   wtLog.forEach((e,i)=>{
     const x=xP(i),y=yP(e.weight);
-    ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);ctx.fillStyle='#6b8fa6';ctx.fill();
-    ctx.fillStyle='#6b8fa6';ctx.font='bold 11px system-ui';ctx.textAlign='center';
+    ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);ctx.fillStyle='#7BA3B8';ctx.fill();
+    ctx.fillStyle='#7BA3B8';ctx.font='bold 11px system-ui';ctx.textAlign='center';
     if(i===0||i===wtLog.length-1||wtLog.length<=8)ctx.fillText(e.weight.toFixed(1),x,y-10);
   });
-  ctx.fillStyle='#9a9484';ctx.font='10px system-ui';ctx.textAlign='center';
+  ctx.fillStyle='#B8A88C';ctx.font='10px system-ui';ctx.textAlign='center';
   const step=Math.max(1,Math.floor(wtLog.length/5));
   wtLog.forEach((e,i)=>{if(i%step===0||i===wtLog.length-1)ctx.fillText(new Date(e.date+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}),xP(i),H-6);});
 }
@@ -756,13 +718,14 @@ function renderJournal(){
   }
   if(lastEntryDate){
     const daysAgo=Math.floor((now()-new Date(lastEntryDate+'T12:00'))/86400000);
-    if(daysAgo>1)html+=`<div style="background:var(--al);color:var(--ad);padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:12px;border:.5px solid rgba(196,154,92,.3)">Last entry: ${daysAgo} days ago</div>`;
+    if(daysAgo>1)html+=`<div style="background:var(--al);color:var(--ad);padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:12px;border:.5px solid rgba(212,145,92,.3)">Last entry: ${daysAgo} days ago</div>`;
   }
   const saved=(jState[wkKey(jDay)]&&jState[wkKey(jDay)][dKey(jDay)])||{};
   prompts.forEach((p,i)=>{
     html+=`<div class="pc card-enter"><div class="pnum">Prompt ${i+1} of 3</div><div class="pq">${p.q}</div><div class="ph">${p.h}</div><textarea class="pta jta" placeholder="Write anything — even just a word…">${saved[i]||''}</textarea></div>`;
   });
   document.getElementById('j-prompts').innerHTML=html;
+  reAnimateCards(document.getElementById('j-prompts'));
 }
 
 const THQS=[
@@ -778,7 +741,7 @@ function pruneOldTherapy(){const cutoff=wkKey(addD(now(),-182));const pruned={};
 async function initTherapy(){const v=await sg('therapy-v1');if(v)thState=v;pruneOldTherapy();renderTherapy();}
 async function saveTherapy(){const wk=wkKey(now());if(!thState[wk])thState[wk]={};document.querySelectorAll('.thta').forEach((ta,i)=>{thState[wk][i]=ta.value;});await ss('therapy-v1',thState);toast('Therapy prep saved');}
 async function clearTherapy(){delete thState[wkKey(now())];await ss('therapy-v1',thState);renderTherapy();}
-function getNextFri(){const d=now(),day=d.getDay(),days=day<=5?5-day:12-day;return addD(d,days).toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});}
+function getNextFri(){const d=now(),day=d.getDay(),days=(5-day+7)%7||7;return addD(d,days).toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});}
 function renderTherapy(){
   const wk=wkKey(now()),saved=thState[wk]||{};
   document.getElementById('th-badge').innerHTML=`<span style="font-size:12px;font-weight:700;background:var(--pl);color:var(--pd);padding:4px 12px;border-radius:20px">Next session: ${getNextFri()} · Week ${wkNum(now())}</span>`;
@@ -817,7 +780,7 @@ function renderReview(){
    REGION 5: RECIPES
    ═══════════════════════════════════════════════════════════ */
 const RECIPES=[
-  {id:'hummus',emoji:'🧆',title:'Homemade Hummus',subtitle:'High protein · High fiber · ~10 min',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:4,srvUnit:'serving (~¼ cup)',tags:['batch'],
+  {id:'hummus',emoji:'🧆',title:'Homemade Hummus',subtitle:'High protein · High fiber · ~10 min',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:4,srvUnit:'serving (~¼ cup)',tags:['batch'],
     macros:{cal:180,p:7,c:18,f:10,fiber:4},
     ings:[
       {n:'Chickpeas, drained & rinsed',base:1,unit:'can (15 oz)',scale:true,note:'Reserve 3 tbsp liquid',alts:[{name:'White beans (cannellini)',note:'Milder, creamier.'},{name:'Edamame (shelled)',note:'Higher protein.'}]},
@@ -831,7 +794,7 @@ const RECIPES=[
     ],
     steps:['Drain and rinse chickpeas, reserve 3 tbsp liquid.','Add chickpeas, tahini, lemon juice, garlic, olive oil, cumin, salt to food processor.','Blend 1 min. Scrape down sides.','Drizzle in reserved liquid 1 tbsp at a time with processor running.','Blend 3–4 min until very smooth. Adjust seasoning.','Transfer to bowl, drizzle olive oil, dust paprika.'],
     tips:'Peel chickpeas for extra creamy · Fridge up to 5 days · Freeze in ice cube trays'},
-  {id:'tuna',emoji:'🐟',title:'Batch Tuna Salad',subtitle:'No cook · 5 min · 4 days fridge',color:'#6b8fa6',bg:'rgba(107,143,166,.12)',baseSrv:4,srvUnit:'serving (~½ cup)',tags:['batch'],
+  {id:'tuna',emoji:'🐟',title:'Batch Tuna Salad',subtitle:'No cook · 5 min · 4 days fridge',color:'#7BA3B8',bg:'rgba(123,163,184,.14)',baseSrv:4,srvUnit:'serving (~½ cup)',tags:['batch'],
     macros:{cal:220,p:28,c:6,f:9,fiber:1},
     ings:[
       {n:'Canned tuna in water, drained',base:4,unit:'cans (5 oz)',scale:true,note:'Drain well',alts:[]},
@@ -845,7 +808,7 @@ const RECIPES=[
     ],
     steps:['Drain all tuna cans well.','Flake into a bowl with a fork.','Add yogurt, mayo, mustard, lemon juice. Mix.','Add celery, onion, pepper. Stir.','Taste and adjust. Portion into airtight container.'],
     tips:'Serve on bread, crackers, rice cakes, or lettuce wraps · Tuna melt: top with cheddar, panini press 3 min'},
-  {id:'chicken',emoji:'🍗',title:'Batch Air Fryer Chicken',subtitle:'Batch cook · 20 min · 4 days fridge',color:'#7c9a5e',bg:'rgba(124,154,94,.12)',baseSrv:6,srvUnit:'serving (~5–6 oz)',tags:['batch'],
+  {id:'chicken',emoji:'🍗',title:'Batch Air Fryer Chicken',subtitle:'Batch cook · 20 min · 4 days fridge',color:'#8FB06A',bg:'rgba(143,176,106,.14)',baseSrv:6,srvUnit:'serving (~5–6 oz)',tags:['batch'],
     macros:{cal:280,p:38,c:3,f:12,fiber:0},
     ings:[
       {n:'Boneless skinless chicken thighs',base:3,unit:'lbs',scale:true,note:'Pat dry',alts:[{name:'Chicken breast',note:'Leaner, pull at exactly 165°F.'}]},
@@ -858,7 +821,7 @@ const RECIPES=[
     ],
     steps:['Pat chicken dry with paper towels.','Coat in olive oil. Mix seasonings and rub evenly.','Preheat air fryer 400°F 3 min.','Single layer in basket. Air fry 400°F 18–22 min, flip at 10.','Internal temp must reach 165°F.','Rest 5 min before slicing. Portion and label.'],
     tips:'Two-flavor hack: half taco seasoning, half Cajun · Reheat: air fryer 375°F 6–8 min'},
-  {id:'beef',emoji:'🥩',title:'Taco-Seasoned Ground Beef',subtitle:'Batch cook · 15 min · 4 days fridge',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:5,srvUnit:'serving (~5–6 oz)',tags:['batch'],
+  {id:'beef',emoji:'🥩',title:'Taco-Seasoned Ground Beef',subtitle:'Batch cook · 15 min · 4 days fridge',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:5,srvUnit:'serving (~5–6 oz)',tags:['batch'],
     macros:{cal:290,p:32,c:4,f:16,fiber:1},
     ings:[
       {n:'Lean ground beef (93/7)',base:1.5,unit:'lbs',scale:true,alts:[{name:'Ground turkey (93%)',note:'Lower fat, similar macros.'}]},
@@ -868,12 +831,12 @@ const RECIPES=[
     ],
     steps:['Heat skillet medium-high. Add oil if very lean.','Add beef, break up, cook 7–9 min until no pink.','Drain excess fat.','Add seasoning and water. Stir to coat.','Simmer 5 min until liquid absorbs. Portion.'],
     tips:'Over rice + beans + salsa + cheese = done in 3 min · Freeze flat in bags'},
-  {id:'eggs',emoji:'🥚',title:'Batch Hard Boiled Eggs',subtitle:'15 min total · 5 days fridge',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:12,srvUnit:'egg',tags:['batch'],
+  {id:'eggs',emoji:'🥚',title:'Batch Hard Boiled Eggs',subtitle:'15 min total · 5 days fridge',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:12,srvUnit:'egg',tags:['batch'],
     macros:{cal:78,p:6,c:1,f:5,fiber:0},
     ings:[{n:'Large eggs',base:12,unit:'eggs',scale:true,alts:[]},{n:'Water (to cover)',base:1,unit:'pot',scale:false,alts:[]},{n:'Ice bath',base:1,unit:'bowl',scale:false,alts:[]}],
     steps:['Place eggs in pot, cover with cold water by 1 inch.','Bring to rolling boil, uncovered.','Reduce to medium. Cook exactly 10 min.','Transfer immediately to ice bath. Sit 5 min.','Peel under cold running water. Store unpeeled up to 5 days.'],
     tips:'10 min = perfect yolk · Air fryer: 250°F 15 min, ice bath right after'},
-  {id:'broccoli',emoji:'🥦',title:'Batch Air Fryer Broccoli',subtitle:'12 min · 4 days fridge',color:'#7c9a5e',bg:'rgba(124,154,94,.12)',baseSrv:4,srvUnit:'serving (~1 cup)',tags:['batch'],
+  {id:'broccoli',emoji:'🥦',title:'Batch Air Fryer Broccoli',subtitle:'12 min · 4 days fridge',color:'#8FB06A',bg:'rgba(143,176,106,.14)',baseSrv:4,srvUnit:'serving (~1 cup)',tags:['batch'],
     macros:{cal:80,p:3,c:8,f:4,fiber:3},
     ings:[
       {n:'Broccoli crowns',base:2,unit:'large heads (~4 cups)',scale:true,alts:[{name:'Frozen broccoli',note:'375°F 14–16 min from frozen.'}]},
@@ -884,7 +847,7 @@ const RECIPES=[
     ],
     steps:['Cut into similar-sized florets.','Toss in oil, garlic, salt, pepper.','Air fry 375°F 10–12 min, shake at 6.','Done when tips are lightly charred.'],
     tips:'Reheat: air fryer 350°F 4–5 min · Squeeze lemon before serving'},
-  {id:'shake',emoji:'🥤',title:'Protein Shake',subtitle:'2 min · post-workout refuel',color:'#8a7eb0',bg:'rgba(138,126,176,.12)',baseSrv:1,srvUnit:'shake',tags:[],
+  {id:'shake',emoji:'🥤',title:'Protein Shake',subtitle:'2 min · post-workout refuel',color:'#9B8EBE',bg:'rgba(155,142,190,.14)',baseSrv:1,srvUnit:'shake',tags:[],
     macros:{cal:370,p:35,c:36,f:10,fiber:2},
     ings:[
       {n:'Whey protein powder (vanilla)',base:1,unit:'scoop (~30g)',scale:true,alts:[]},
@@ -895,7 +858,7 @@ const RECIPES=[
     ],
     steps:['Add liquid first.','Add protein, banana, peanut butter.','Ice last.','Blend 20–30 sec until smooth.'],
     tips:'Drink within 30–45 min of workout · CoQ10 absorbs with the fat here'},
-  {id:'eggs_oats',emoji:'🍳',title:'Scrambled Eggs + Oats',subtitle:'Breakfast · 5 min · highest protein',color:'#7c9a5e',bg:'rgba(124,154,94,.12)',baseSrv:1,srvUnit:'serving',tags:[],
+  {id:'eggs_oats',emoji:'🍳',title:'Scrambled Eggs + Oats',subtitle:'Breakfast · 5 min · highest protein',color:'#8FB06A',bg:'rgba(143,176,106,.14)',baseSrv:1,srvUnit:'serving',tags:[],
     macros:{cal:520,p:42,c:48,f:16,fiber:6},
     ings:[
       {n:'Large eggs',base:3,unit:'eggs',scale:true,alts:[]},
@@ -906,7 +869,7 @@ const RECIPES=[
     ],
     steps:['Oats: ½ cup + 1 cup water, microwave 90 sec.','Whisk eggs with salt and pepper.','Cook in buttered pan over medium-low, pull slowly.','Remove while slightly wet — residual heat finishes them.','Stir protein and PB into oats. Plate together.'],
     tips:'Low and slow = creamy eggs · Never cook protein powder'},
-  {id:'egg_wrap',emoji:'🌯',title:'Egg & Cheese Wrap',subtitle:'Breakfast · 6 min · panini press',color:'#b0687a',bg:'rgba(176,104,122,.12)',baseSrv:1,srvUnit:'wrap',tags:[],
+  {id:'egg_wrap',emoji:'🌯',title:'Egg & Cheese Wrap',subtitle:'Breakfast · 6 min · panini press',color:'#C47888',bg:'rgba(196,120,136,.14)',baseSrv:1,srvUnit:'wrap',tags:[],
     macros:{cal:510,p:38,c:38,f:20,fiber:4},
     ings:[
       {n:'Large eggs',base:3,unit:'eggs',scale:true,alts:[]},
@@ -917,7 +880,7 @@ const RECIPES=[
     ],
     steps:['Preheat panini press 3 min.','Scramble eggs in buttered pan, medium-low.','Add cheese on hot eggs to melt.','Lay tortilla, add eggs to lower third, hot sauce, fold and roll.','Press seam-down 3–4 min until golden.'],
     tips:'Don\'t overfill — press works best tight'},
-  {id:'wrap',emoji:'🌯',title:'Panini Beef Wrap',subtitle:'5 min · panini press',color:'#b0687a',bg:'rgba(176,104,122,.12)',baseSrv:1,srvUnit:'wrap',tags:[],
+  {id:'wrap',emoji:'🌯',title:'Panini Beef Wrap',subtitle:'5 min · panini press',color:'#C47888',bg:'rgba(196,120,136,.14)',baseSrv:1,srvUnit:'wrap',tags:[],
     macros:{cal:720,p:48,c:62,f:28,fiber:8},
     ings:[
       {n:'Batch taco beef',base:7,unit:'oz',scale:true,alts:[{name:'Batch chicken (shredded)',note:'Different flavor, same method.'}]},
@@ -928,7 +891,7 @@ const RECIPES=[
     ],
     steps:['Preheat press medium-high.','Warm beef 45 sec in microwave.','Lay tortilla, add beef, cheese, salsa. Leave 1" border.','Fold sides, roll tight. Press seam-down 3–4 min.','Rest 1 min, slice diagonal. Add avocado.'],
     tips:'Brush outside with olive oil for extra crunch'},
-  {id:'stirfry',emoji:'🥢',title:'Steak Stir Fry',subtitle:'15 min · flank steak + veg',color:'#c45c5c',bg:'rgba(196,92,92,.12)',baseSrv:2,srvUnit:'serving',tags:['asian'],
+  {id:'stirfry',emoji:'🥢',title:'Steak Stir Fry',subtitle:'15 min · flank steak + veg',color:'#D06858',bg:'rgba(208,104,88,.14)',baseSrv:2,srvUnit:'serving',tags:['asian'],
     macros:{cal:620,p:44,c:58,f:20,fiber:5},
     ings:[
       {n:'Flank steak, thinly sliced',base:1,unit:'lb',scale:true,note:'Freeze 20 min for easier slicing',alts:[{name:'Batch chicken (shredded)',note:'Already cooked — add at end.'}]},
@@ -943,7 +906,7 @@ const RECIPES=[
     ],
     steps:['Slice steak thin against the grain.','Marinate in soy, garlic, ginger, sesame oil 10+ min.','Heat oil in wok over HIGH heat until shimmering.','Sear beef in single layer 90 sec, then stir fry 1–2 min. Remove.','Same pan: stir fry broccoli and pepper 3–4 min.','Return beef, toss 30 sec. Serve over rice.'],
     tips:'High heat is everything — cold pan = bland and soggy'},
-  {id:'fish',emoji:'🐠',title:'Air Fryer Fish Fillets',subtitle:'11 min · cornmeal Cajun',color:'#6b8fa6',bg:'rgba(107,143,166,.12)',baseSrv:2,srvUnit:'serving (2 fillets)',tags:[],
+  {id:'fish',emoji:'🐠',title:'Air Fryer Fish Fillets',subtitle:'11 min · cornmeal Cajun',color:'#7BA3B8',bg:'rgba(123,163,184,.14)',baseSrv:2,srvUnit:'serving (2 fillets)',tags:[],
     macros:{cal:320,p:44,c:14,f:9,fiber:1},
     ings:[
       {n:'Tilapia fillets',base:2,unit:'fillets (~5–6 oz)',scale:true,note:'Pat completely dry',alts:[{name:'Cod fillets',note:'Flakier, done faster ~9 min.'}]},
@@ -954,7 +917,7 @@ const RECIPES=[
     ],
     steps:['Pat fillets completely dry.','Mix cornmeal, Tony\'s, garlic on a plate.','Press fillets into coating both sides.','Air fry 400°F 10–12 min, flip at 6.','Done when golden and flakes with a fork.'],
     tips:'Heavier coating = less fish taste · Serve with coleslaw + rice'},
-  {id:'fish_tacos',emoji:'🌮',title:'Fish Tacos',subtitle:'15 min · shredded · best taste masker',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:2,srvUnit:'serving (3 tacos)',tags:[],
+  {id:'fish_tacos',emoji:'🌮',title:'Fish Tacos',subtitle:'15 min · shredded · best taste masker',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:2,srvUnit:'serving (3 tacos)',tags:[],
     macros:{cal:520,p:40,c:52,f:14,fiber:6},
     ings:[
       {n:'Tilapia fillets',base:2,unit:'fillets',scale:true,alts:[]},
@@ -969,7 +932,7 @@ const RECIPES=[
     ],
     steps:['Coat fillets in cornmeal + taco seasoning. Air fry 400°F 10–12 min.','Shred with two forks while hot.','Squeeze lime and add more taco seasoning. Toss.','Warm tortillas 20 sec.','Build: fish, coleslaw, cheese, salsa, sour cream.'],
     tips:'Shredding + lime + seasoning kills the fish flavor completely'},
-  {id:'coleslaw',emoji:'🥗',title:'Fish Night Coleslaw',subtitle:'No cook · 5 min · 3 days fridge',color:'#4a6340',bg:'rgba(74,99,64,.12)',baseSrv:4,srvUnit:'serving',tags:[],
+  {id:'coleslaw',emoji:'🥗',title:'Fish Night Coleslaw',subtitle:'No cook · 5 min · 3 days fridge',color:'#5A7A4A',bg:'rgba(90,122,74,.14)',baseSrv:4,srvUnit:'serving',tags:[],
     macros:{cal:60,p:1,c:9,f:2,fiber:2},
     ings:[
       {n:'Coleslaw mix',base:1,unit:'bag (14 oz)',scale:true,alts:[]},
@@ -980,7 +943,7 @@ const RECIPES=[
     ],
     steps:['Whisk vinegar, mayo, honey, salt, pepper.','Add coleslaw mix, toss thoroughly.','Let sit 5 min.'],
     tips:'Improves as it sits · Asian version: rice vinegar + sesame oil + soy sauce'},
-  {id:'pasta',emoji:'🍝',title:'Burnout Box Pasta',subtitle:'Emergency meal · 12 min',color:'#4a6340',bg:'rgba(74,99,64,.12)',baseSrv:1,srvUnit:'serving',tags:[],
+  {id:'pasta',emoji:'🍝',title:'Burnout Box Pasta',subtitle:'Emergency meal · 12 min',color:'#5A7A4A',bg:'rgba(90,122,74,.14)',baseSrv:1,srvUnit:'serving',tags:[],
     macros:{cal:580,p:38,c:72,f:12,fiber:8},
     ings:[
       {n:'Whole grain pasta',base:3,unit:'oz dry',scale:true,alts:[]},
@@ -992,7 +955,7 @@ const RECIPES=[
     steps:['Boil salted water. Cook pasta 8–10 min al dente.','Drain. Toss with olive oil, garlic, splash of pasta water.','Add cheese, toss until melted.','Top with reheated batch protein.'],
     tips:'This is the burnout meal — no judgment · Fastest: Ben\'s Ready Rice + protein + hot sauce'},
   // ── MEDITERRANEAN RECIPES (NEW) ──
-  {id:'greek_bowl',emoji:'🥙',title:'Greek Chicken Bowl',subtitle:'Mediterranean · 5 min assembly · no cook',color:'#7c9a5e',bg:'rgba(124,154,94,.12)',baseSrv:1,srvUnit:'bowl',tags:['med'],
+  {id:'greek_bowl',emoji:'🥙',title:'Greek Chicken Bowl',subtitle:'Mediterranean · 5 min assembly · no cook',color:'#8FB06A',bg:'rgba(143,176,106,.14)',baseSrv:1,srvUnit:'bowl',tags:['med'],
     macros:{cal:580,p:46,c:48,f:20,fiber:5},
     ings:[
       {n:'Batch air fryer chicken, sliced',base:6,unit:'oz',scale:true,alts:[]},
@@ -1006,7 +969,7 @@ const RECIPES=[
     ],
     steps:['Microwave rice 90 sec. Slice batch chicken.','Layer: rice, chicken, cucumber, tomatoes.','Top with hummus dollop and feta.','Drizzle olive oil + lemon, sprinkle oregano.'],
     tips:'Uses batch chicken + batch hummus = zero cooking · Great for lunch meal prep'},
-  {id:'shakshuka',emoji:'🍳',title:'Shakshuka',subtitle:'Mediterranean · 15 min · one pan',color:'#c45c5c',bg:'rgba(196,92,92,.12)',baseSrv:2,srvUnit:'serving',tags:['med'],
+  {id:'shakshuka',emoji:'🍳',title:'Shakshuka',subtitle:'Mediterranean · 15 min · one pan',color:'#D06858',bg:'rgba(208,104,88,.14)',baseSrv:2,srvUnit:'serving',tags:['med'],
     macros:{cal:380,p:22,c:28,f:18,fiber:6},
     ings:[
       {n:'Canned crushed tomatoes',base:1,unit:'can (14 oz)',scale:true,alts:[]},
@@ -1021,7 +984,7 @@ const RECIPES=[
     ],
     steps:['Heat oil in skillet over medium. Sauté pepper 3 min.','Add garlic, cumin, paprika. Stir 30 sec.','Pour in tomatoes. Season. Simmer 5 min.','Make 4 wells. Crack an egg into each.','Cover and cook 5–7 min until whites set, yolks still soft.','Crumble feta on top. Eat with bread or rice.'],
     tips:'One-pan meal with great protein from eggs · Dip bread in the sauce'},
-  {id:'lentil_soup',emoji:'🥣',title:'Mediterranean Lentil Soup',subtitle:'Mediterranean · 30 min · batch cookable',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:4,srvUnit:'bowl',tags:['med','batch'],
+  {id:'lentil_soup',emoji:'🥣',title:'Mediterranean Lentil Soup',subtitle:'Mediterranean · 30 min · batch cookable',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:4,srvUnit:'bowl',tags:['med','batch'],
     macros:{cal:310,p:18,c:48,f:6,fiber:12},
     ings:[
       {n:'Brown or green lentils, rinsed',base:1,unit:'cup dry',scale:true,alts:[]},
@@ -1036,7 +999,7 @@ const RECIPES=[
     ],
     steps:['Heat oil. Sauté onion 3 min, add garlic + cumin 30 sec.','Add lentils, tomatoes, broth. Bring to boil.','Reduce to simmer. Cook 20–25 min until lentils tender.','Stir in spinach until wilted (1 min).','Add lemon juice. Season to taste.'],
     tips:'Freezes great in portions · 12g fiber per bowl · Add sriracha for heat'},
-  {id:'stuffed_peppers',emoji:'🫑',title:'Stuffed Bell Pepper Bowl',subtitle:'Mediterranean · 20 min · deconstructed',color:'#c45c5c',bg:'rgba(196,92,92,.12)',baseSrv:2,srvUnit:'bowl',tags:['med'],
+  {id:'stuffed_peppers',emoji:'🫑',title:'Stuffed Bell Pepper Bowl',subtitle:'Mediterranean · 20 min · deconstructed',color:'#D06858',bg:'rgba(208,104,88,.14)',baseSrv:2,srvUnit:'bowl',tags:['med'],
     macros:{cal:590,p:38,c:52,f:22,fiber:7},
     ings:[
       {n:'Bell peppers, halved',base:2,unit:'peppers',scale:true,alts:[]},
@@ -1049,7 +1012,7 @@ const RECIPES=[
     steps:['Halve peppers, remove seeds. Air fry 375°F 8 min to soften.','Mix beef, rice, tomatoes, Italian seasoning.','Fill pepper halves with mixture. Top with cheese.','Air fry 375°F 8–10 min until cheese melts and bubbles.'],
     tips:'Deconstructed in a bowl works too — skip the pepper baking if short on time'},
   // ── ASIAN RECIPES (NEW) ──
-  {id:'fried_rice',emoji:'🍚',title:'Chicken Fried Rice',subtitle:'Asian · 10 min · uses batch chicken',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:2,srvUnit:'serving',tags:['asian'],
+  {id:'fried_rice',emoji:'🍚',title:'Chicken Fried Rice',subtitle:'Asian · 10 min · uses batch chicken',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:2,srvUnit:'serving',tags:['asian'],
     macros:{cal:520,p:36,c:58,f:14,fiber:3},
     ings:[
       {n:'Batch chicken, diced small',base:8,unit:'oz',scale:true,alts:[]},
@@ -1064,7 +1027,7 @@ const RECIPES=[
     ],
     steps:['Heat oil in wok/skillet over HIGH heat.','Scramble eggs, push to side.','Add garlic, frozen veg, stir 2 min.','Add cold rice. Press flat, let it sear 2 min without stirring.','Add chicken, soy sauce, sesame oil. Toss everything.','Top with scallions. Serve immediately.'],
     tips:'Day-old rice is key — fresh rice gets mushy · High heat, don\'t stir too much'},
-  {id:'sesame_bowl',emoji:'🥗',title:'Asian Sesame Chicken Bowl',subtitle:'Asian · 5 min assembly · no cook',color:'#6b8fa6',bg:'rgba(107,143,166,.12)',baseSrv:1,srvUnit:'bowl',tags:['asian'],
+  {id:'sesame_bowl',emoji:'🥗',title:'Asian Sesame Chicken Bowl',subtitle:'Asian · 5 min assembly · no cook',color:'#7BA3B8',bg:'rgba(123,163,184,.14)',baseSrv:1,srvUnit:'bowl',tags:['asian'],
     macros:{cal:560,p:42,c:54,f:18,fiber:4},
     ings:[
       {n:'Batch chicken, sliced',base:6,unit:'oz',scale:true,alts:[]},
@@ -1079,7 +1042,7 @@ const RECIPES=[
     ],
     steps:['Microwave rice 90 sec. Slice batch chicken.','Whisk soy sauce, sesame oil, rice vinegar, sriracha.','Layer: rice, chicken, cucumber.','Drizzle dressing. Top with scallions and sesame seeds.'],
     tips:'No-cook assembly like Greek bowl but Asian flavor · Swap chicken for batch beef'},
-  {id:'ginger_chicken',emoji:'🍗',title:'Ginger Garlic Chicken',subtitle:'Asian · 25 min · air fryer batch',color:'#c49a5c',bg:'rgba(196,154,92,.12)',baseSrv:4,srvUnit:'serving',tags:['asian','batch'],
+  {id:'ginger_chicken',emoji:'🍗',title:'Ginger Garlic Chicken',subtitle:'Asian · 25 min · air fryer batch',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:4,srvUnit:'serving',tags:['asian','batch'],
     macros:{cal:300,p:40,c:8,f:12,fiber:0},
     ings:[
       {n:'Chicken thighs (boneless)',base:2,unit:'lbs',scale:true,note:'Pat dry',alts:[]},
@@ -1092,7 +1055,7 @@ const RECIPES=[
     ],
     steps:['Mix soy sauce, ginger, garlic, honey, sesame oil.','Marinate chicken 15 min (or overnight in fridge).','Air fry 400°F 18–22 min, flip at 10. Brush extra marinade at 15 min.','Rest 5 min. Slice and top with scallions.'],
     tips:'Double as batch protein — keeps 4 days · The glaze caramelizes beautifully in air fryer'},
-  {id:'lettuce_wraps',emoji:'🥬',title:'Chicken Lettuce Wraps',subtitle:'Asian · 10 min · light dinner',color:'#7c9a5e',bg:'rgba(124,154,94,.12)',baseSrv:2,srvUnit:'serving (3 wraps)',tags:['asian'],
+  {id:'lettuce_wraps',emoji:'🥬',title:'Chicken Lettuce Wraps',subtitle:'Asian · 10 min · light dinner',color:'#8FB06A',bg:'rgba(143,176,106,.14)',baseSrv:2,srvUnit:'serving (3 wraps)',tags:['asian'],
     macros:{cal:380,p:36,c:22,f:16,fiber:3},
     ings:[
       {n:'Batch chicken, finely diced',base:10,unit:'oz',scale:true,alts:[]},
@@ -1106,6 +1069,78 @@ const RECIPES=[
     ],
     steps:['Heat skillet medium-high. Add sesame oil and garlic 30 sec.','Add diced chicken, soy sauce, hoisin. Stir fry 3 min to heat and coat.','Spoon into lettuce cups.','Top with scallions and sriracha.'],
     tips:'Low carb option — skip rice entirely · Great way to use up batch chicken'},
+  // ── MEDITERRANEAN: SHAWARMA, KOFTA, KEBAB, FALAFEL ──
+  {id:'shawarma_bowl',emoji:'🥙',title:'Chicken Shawarma Bowl',subtitle:'Mediterranean · 25 min · air fryer',color:'#D4915C',bg:'rgba(212,145,92,.14)',baseSrv:4,srvUnit:'serving',tags:['med','batch'],
+    macros:{cal:585,p:47,c:54,f:17,fiber:5},
+    ings:[
+      {n:'Boneless skinless chicken thighs',base:2,unit:'lb',scale:true,alts:[{name:'Chicken breast',note:'Leaner but drier, reduce cook time 2 min.'}]},
+      {n:'Cumin',base:1,unit:'tbsp',scale:true,alts:[]},
+      {n:'Paprika',base:1,unit:'tbsp',scale:true,alts:[{name:'Smoked paprika',note:'Deeper flavor.'}]},
+      {n:'Turmeric',base:1,unit:'tsp',scale:true,alts:[]},
+      {n:'Cinnamon',base:0.5,unit:'tsp',scale:true,alts:[]},
+      {n:'Garlic powder + coriander',base:1,unit:'tsp each',scale:true,alts:[]},
+      {n:'Salt + pepper',base:1,unit:'tsp + ½ tsp',scale:false,alts:[]},
+      {n:'Olive oil',base:1,unit:'tbsp',scale:true,alts:[]},
+      {n:'Lemon juice',base:2,unit:'tbsp',scale:true,alts:[]},
+      {n:'Greek yogurt (sauce)',base:0.5,unit:'cup',scale:true,alts:[{name:'Tahini',note:'3 tbsp tahini + water instead.'}]},
+      {n:'Garlic cloves (sauce)',base:2,unit:'cloves',scale:true,alts:[]},
+      {n:'Jasmine rice (dry)',base:1.5,unit:'cup',scale:true,alts:[{name:'Cauliflower rice',note:'Cuts carbs to ~20g, cal to ~420.'}]},
+      {n:'Cucumber + cherry tomatoes',base:1,unit:'cup each, diced',scale:true,alts:[]},
+      {n:'Red onion (thinly sliced)',base:0.25,unit:'medium',scale:true,alts:[{name:'Pickled red onion',note:'More tang.'}]},
+    ],
+    steps:['Mix all spices. Toss chicken with spice mix, olive oil, lemon juice. Marinate 15 min or overnight.','Cook rice.','Air fry 380°F 14–16 min, flip halfway. Rest 5 min, slice into strips.','Sauce: mix yogurt, minced garlic, salt, lemon squeeze.','Bowl: rice, shawarma chicken, cucumber-tomato salad, red onion, drizzle sauce.'],
+    tips:'Batch Monday: cook all chicken + rice separately. Sauce keeps 5 days. Reheat chicken in air fryer 350°F 3 min. Add sumac on top for extra flavor.'},
+  {id:'beef_kofta',emoji:'🧆',title:'Beef Kofta',subtitle:'Mediterranean · 20 min · air fryer',color:'#C0804A',bg:'rgba(192,128,74,.14)',baseSrv:4,srvUnit:'serving (3 logs)',tags:['med','batch'],
+    macros:{cal:610,p:42,c:55,f:22,fiber:4},
+    ings:[
+      {n:'Ground beef (90/10)',base:1.5,unit:'lb',scale:true,alts:[{name:'Ground turkey (93/7)',note:'Saves ~4g fat/serving.'}]},
+      {n:'Yellow onion (grated)',base:1,unit:'medium',scale:true,note:'Squeeze out excess liquid',alts:[]},
+      {n:'Fresh parsley (chopped)',base:0.25,unit:'cup',scale:true,alts:[{name:'Dried parsley',note:'Use 1 tbsp.'}]},
+      {n:'Cumin + coriander + paprika',base:1.5,unit:'tsp + 1 tsp + 1 tsp',scale:true,alts:[]},
+      {n:'Cinnamon + allspice',base:0.5,unit:'tsp + ¼ tsp',scale:true,alts:[]},
+      {n:'Garlic powder + salt + pepper',base:1,unit:'tsp + 1 tsp + ½ tsp',scale:false,alts:[]},
+      {n:'Jasmine rice (dry)',base:1.5,unit:'cup',scale:true,alts:[{name:'Whole wheat pita',note:'1 pita/serving instead of rice.'}]},
+      {n:'Greek yogurt (sauce)',base:0.5,unit:'cup',scale:true,alts:[{name:'Tahini sauce',note:'3 tbsp tahini + lemon + water.'}]},
+      {n:'Lemon juice',base:1,unit:'tbsp',scale:true,alts:[]},
+      {n:'Cucumber + tomato (side)',base:1,unit:'each, diced',scale:true,alts:[]},
+    ],
+    steps:['Grate onion, squeeze dry. Mix beef, onion, parsley, all spices.','Shape into 12 oval logs (~3 inches). Refrigerate 10 min if soft.','Air fry 400°F 10–12 min, flip halfway. Internal 160°F.','Cook rice. Make yogurt sauce with lemon and salt.','Plate: rice, 3 kofta, cucumber-tomato salad, yogurt sauce.'],
+    tips:'Shape all Monday, freeze half on sheet pan then bag. Air fry from frozen: +3–4 min. Grated onion keeps them juicy without breadcrumbs.'},
+  {id:'chicken_kebab',emoji:'🍢',title:'Chicken Kebab Bowl',subtitle:'Mediterranean · 25 min · air fryer',color:'#D06858',bg:'rgba(208,104,88,.14)',baseSrv:4,srvUnit:'serving',tags:['med','batch'],
+    macros:{cal:560,p:48,c:48,f:16,fiber:6},
+    ings:[
+      {n:'Chicken breast, 1-inch cubes',base:2,unit:'lb',scale:true,alts:[{name:'Chicken thighs',note:'Juicier, +3g fat/serving.'}]},
+      {n:'Olive oil',base:2,unit:'tbsp',scale:true,alts:[]},
+      {n:'Lemon juice',base:3,unit:'tbsp',scale:true,alts:[]},
+      {n:'Garlic (minced)',base:3,unit:'cloves',scale:true,alts:[]},
+      {n:'Dried oregano',base:1,unit:'tbsp',scale:true,alts:[]},
+      {n:'Cumin + paprika',base:1,unit:'tsp each',scale:true,alts:[]},
+      {n:'Salt + pepper',base:1,unit:'tsp + ½ tsp',scale:false,alts:[]},
+      {n:'Hummus',base:0.75,unit:'cup',scale:true,alts:[{name:'Batch hummus',note:'From your hummus recipe.'}]},
+      {n:'Jasmine rice (dry)',base:1.5,unit:'cup',scale:true,alts:[{name:'Quinoa',note:'+4g protein, nuttier.'}]},
+      {n:'Bell peppers + red onion (chunked)',base:2,unit:'peppers + 1 onion',scale:true,alts:[]},
+      {n:'Cucumber + cherry tomatoes',base:1,unit:'each, diced',scale:true,alts:[]},
+    ],
+    steps:['Cube chicken. Mix olive oil, lemon, garlic, oregano, cumin, paprika, salt, pepper. Marinate 15 min or overnight.','Cook rice.','Air fry chicken cubes 400°F 12–14 min, shake halfway.','Toss chunked peppers and onion with oil. Air fry 400°F 5–6 min.','Bowl: rice, chicken, roasted veggies, cucumber, tomatoes, hummus.'],
+    tips:'Cut chicken and veggies Monday, marinate overnight. Reheat in air fryer 350°F 2–3 min. Hummus is both sauce and protein boost.'},
+  {id:'falafel_bowl',emoji:'🧆',title:'Air Fryer Falafel Bowl',subtitle:'Mediterranean · 30 min · air fryer',color:'#5A7A4A',bg:'rgba(90,122,74,.14)',baseSrv:4,srvUnit:'serving (4 falafel)',tags:['med','batch'],
+    macros:{cal:620,p:26,c:72,f:24,fiber:14},
+    ings:[
+      {n:'Canned chickpeas (drained)',base:2,unit:'cans (15 oz)',scale:true,note:'Pat VERY dry — critical',alts:[]},
+      {n:'Yellow onion (rough chopped)',base:1,unit:'medium',scale:true,alts:[]},
+      {n:'Garlic cloves',base:4,unit:'cloves',scale:true,alts:[]},
+      {n:'Fresh parsley',base:0.5,unit:'cup',scale:true,alts:[{name:'Fresh cilantro',note:'Different but equally good.'}]},
+      {n:'Cumin + coriander',base:1.5,unit:'tsp + 1 tsp',scale:true,alts:[]},
+      {n:'Salt + pepper + baking powder',base:1,unit:'tsp + ½ tsp + ½ tsp',scale:false,alts:[]},
+      {n:'All-purpose flour',base:3,unit:'tbsp',scale:true,alts:[{name:'Chickpea flour',note:'Gluten-free, better binding.'}]},
+      {n:'Olive oil spray',base:1,unit:'coat',scale:false,alts:[]},
+      {n:'Hummus',base:0.75,unit:'cup',scale:true,alts:[]},
+      {n:'Jasmine rice (dry)',base:1.5,unit:'cup',scale:true,alts:[{name:'Warm pita',note:'1 per serving.'}]},
+      {n:'Tahini + lemon (drizzle)',base:3,unit:'tbsp tahini + 1 tbsp lemon',scale:true,alts:[]},
+      {n:'Cucumber + tomatoes + pickled onion',base:1,unit:'cup each',scale:true,alts:[]},
+    ],
+    steps:['Drain chickpeas, pat very dry with paper towels.','Pulse chickpeas, onion, garlic, parsley, spices in food processor — coarse, NOT paste. Stir in baking powder and flour.','Shape into 16 patties (4/serving). Refrigerate 10 min if soft.','Spray basket and falafel. Air fry 375°F 12–14 min, flip halfway.','Make tahini drizzle: whisk tahini, lemon, salt, 2–3 tbsp water.','Bowl: rice, 4 falafel, hummus, cucumber, tomatoes, pickled onion, tahini drizzle.'],
+    tips:'Shape all Monday, freeze extras on sheet pan then bag. From frozen: 375°F 15–16 min. Dry chickpeas = crispy falafel. Add 2 hard boiled eggs on the side to hit 40g+ protein.'},
 ];
 
 let activeRecipe=null,recipeSrvs={},recipeSwaps={},recipeFilter='all';
@@ -1146,6 +1181,7 @@ function renderRecipes(){
     </div>`;
   });
   document.getElementById('recipe-list').innerHTML=html;
+  reAnimateCards(document.getElementById('recipe-list'));
 }
 function renderRecipeDetail(){
   const r=RECIPES.find(x=>x.id===activeRecipe);const srv=recipeSrvs[r.id];const ratio=srv/r.baseSrv;
@@ -1224,35 +1260,45 @@ function pickSwap(swapKey,ingIdx,altIdx){
 /* ═══════════════════════════════════════════════════════════
    REGION 6: MEALS
    ═══════════════════════════════════════════════════════════ */
-const MEAL_GOAL={cal:2595,p:168,c:297,f:79,fiber:38};
+const MEAL_GOAL={cal:2550,p:178,c:300,f:71,fiber:36};
+// Which supplement group (SUPPS array index) belongs to which meal slot
+const SLOT_SUPPS={
+  breakfast:[0],  // Morning group: D3, B-Complex, Zinc, Omega-3
+  lunch:[1],      // Lunch group: CoQ10
+  dinner:[2],     // Dinner group: Losartan
+};
+// Bedtime supps (group index 3: Magnesium) rendered separately after dinner
+const BEDTIME_SUPP_GROUP=3;
 const SLOTS=[
-  {id:'breakfast',name:'Breakfast',time:'7:40 AM',color:'#7c9a5e',bg:'rgba(124,154,94,.12)',opts:[
+  {id:'breakfast',name:'Breakfast',time:'7:40 AM',color:'#8FB06A',bg:'rgba(143,176,106,.14)',opts:[
     {n:'Scrambled eggs + oats',desc:'3 eggs, ½ cup oats, 1 scoop protein, 1 tbsp PB',tool:'Stove',time:'5 min',cal:520,p:42,c:48,f:16,fiber:6,recipe:'eggs_oats'},
     {n:'Greek yogurt power bowl',desc:'1 cup yogurt, ½ banana, 2 tbsp granola, 1 tbsp PB, honey',tool:'No cook',time:'2 min',cal:490,p:34,c:54,f:14,fiber:4},
     {n:'Egg & cheese wrap',desc:'3 eggs scrambled, cheddar, Carb Balance tortilla — panini press',tool:'Press',time:'6 min',cal:510,p:38,c:38,f:20,fiber:4,recipe:'egg_wrap'},
     {n:'Protein pancakes',desc:'½ cup mix, 1 scoop protein, 1 egg, ¼ cup milk — 3-4 small pancakes',tool:'Stove',time:'10 min',cal:480,p:36,c:52,f:10,fiber:3},
   ]},
-  {id:'snack1',name:'Snack 1',time:'11:30 AM',color:'#6b8fa6',bg:'rgba(107,143,166,.12)',opts:[
+  {id:'snack1',name:'Snack 1',time:'11:30 AM',color:'#7BA3B8',bg:'rgba(123,163,184,.14)',opts:[
     {n:'Greek yogurt + berries',desc:'1 cup yogurt, ½ cup frozen berries, drizzle honey',tool:'No cook',time:'1 min',cal:240,p:20,c:28,f:6,fiber:3},
     {n:'Tuna + crackers',desc:'½ cup batch tuna on whole wheat crackers',tool:'No cook',time:'1 min',cal:230,p:22,c:20,f:6,fiber:2,recipe:'tuna'},
     {n:'String cheese + apple',desc:'2 mozzarella sticks, 1 medium apple',tool:'No cook',time:'0 min',cal:220,p:14,c:24,f:8,fiber:4},
     {n:'Carrots + hummus',desc:'1 cup baby carrots, 3 tbsp batch hummus',tool:'No cook',time:'0 min',cal:180,p:6,c:24,f:6,fiber:6,recipe:'hummus'},
   ]},
-  {id:'lunch',name:'Lunch',time:'1:00 PM',color:'#4a6340',bg:'rgba(74,99,64,.12)',opts:[
+  {id:'lunch',name:'Lunch',time:'1:00 PM',color:'#5A7A4A',bg:'rgba(90,122,74,.14)',opts:[
     {n:'Chicken rice bowl',desc:'6 oz batch chicken, 1 cup rice, 1 cup broccoli, sauce',tool:'Microwave',time:'3 min',cal:640,p:48,c:68,f:14,fiber:5,recipe:'chicken'},
     {n:'Tuna salad sandwich',desc:'¾ cup tuna on Dave\'s Killer Bread, lettuce, tomato',tool:'No cook',time:'2 min',cal:580,p:40,c:56,f:16,fiber:6,recipe:'tuna'},
     {n:'Beef taco bowl',desc:'6 oz beef, rice, black beans, salsa, cheese, sour cream',tool:'Microwave',time:'3 min',cal:680,p:46,c:70,f:20,fiber:9,recipe:'beef'},
     {n:'Greek chicken bowl',desc:'6 oz chicken, rice, cucumber, tomato, feta, hummus',tool:'No cook',time:'5 min',cal:580,p:46,c:48,f:20,fiber:5,recipe:'greek_bowl'},
     {n:'Lentil soup',desc:'1 bowl batch lentil soup — microwave 2 min',tool:'Microwave',time:'2 min',cal:310,p:18,c:48,f:6,fiber:12,recipe:'lentil_soup'},
     {n:'Burnout box pasta',desc:'Penne + batch protein + cheese + hot sauce',tool:'Stove',time:'12 min',cal:580,p:38,c:72,f:12,fiber:8,recipe:'pasta'},
+    {n:'Shawarma bowl',desc:'Spiced chicken, rice, cucumber-tomato, yogurt-garlic sauce',tool:'Air fryer',time:'25 min',cal:585,p:47,c:54,f:17,fiber:5,recipe:'shawarma_bowl'},
+    {n:'Chicken kebab bowl',desc:'Lemon-herb chicken cubes, roasted peppers, hummus, rice',tool:'Air fryer',time:'25 min',cal:560,p:48,c:48,f:16,fiber:6,recipe:'chicken_kebab'},
   ]},
-  {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#c49a5c',bg:'rgba(196,154,92,.12)',opts:[
+  {id:'snack2',name:'Snack 2',time:'4:30 PM',color:'#D4915C',bg:'rgba(212,145,92,.14)',opts:[
     {n:'Protein shake',desc:'1 scoop whey, 1 cup milk, ½ banana, 1 tbsp PB',tool:'Blender',time:'2 min',cal:370,p:35,c:36,f:10,fiber:2,recipe:'shake'},
     {n:'Hard boiled eggs + banana',desc:'2 batch eggs, 1 banana — grab from fridge',tool:'No cook',time:'0 min',cal:260,p:16,c:28,f:8,fiber:3,recipe:'eggs'},
     {n:'Cottage cheese bowl',desc:'1 cup cottage cheese, ½ cup pineapple',tool:'No cook',time:'1 min',cal:230,p:24,c:20,f:4,fiber:1},
     {n:'Edamame',desc:'1 cup frozen edamame — microwave 3 min, salt',tool:'Microwave',time:'3 min',cal:190,p:17,c:14,f:8,fiber:8},
   ]},
-  {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#a0704a',bg:'rgba(160,112,74,.12)',opts:[
+  {id:'dinner',name:'Dinner',time:'7:00 PM',color:'#C0804A',bg:'rgba(192,128,74,.14)',opts:[
     {n:'Air fryer chicken + broccoli',desc:'7 oz chicken, 1 cup broccoli, 1 cup rice, sauce',tool:'Air fryer',time:'10 min',cal:680,p:52,c:68,f:16,fiber:6,recipe:'chicken'},
     {n:'Air fryer fish + rice',desc:'2 tilapia fillets Cajun coated, rice, coleslaw',tool:'Air fryer',time:'11 min',cal:640,p:44,c:66,f:18,fiber:5,recipe:'fish'},
     {n:'Fish tacos',desc:'Shredded tilapia + lime, tortillas, salsa, cheese',tool:'Air fryer',time:'15 min',cal:520,p:40,c:52,f:14,fiber:6,recipe:'fish_tacos'},
@@ -1260,6 +1306,9 @@ const SLOTS=[
     {n:'Steak stir fry + rice',desc:'Flank steak, soy-ginger, broccoli, bell pepper, rice',tool:'Stove',time:'15 min',cal:620,p:44,c:58,f:20,fiber:5,recipe:'stirfry'},
     {n:'Shakshuka + bread',desc:'Eggs in spiced tomato, bell pepper, feta',tool:'Stove',time:'15 min',cal:380,p:22,c:28,f:18,fiber:6,recipe:'shakshuka'},
     {n:'Chicken lettuce wraps',desc:'Diced chicken, hoisin, soy, lettuce cups',tool:'Stove',time:'10 min',cal:380,p:36,c:22,f:16,fiber:3,recipe:'lettuce_wraps'},
+    {n:'Shawarma bowl',desc:'Spiced chicken strips, rice, cucumber-tomato, yogurt sauce',tool:'Air fryer',time:'25 min',cal:585,p:47,c:54,f:17,fiber:5,recipe:'shawarma_bowl'},
+    {n:'Beef kofta plate',desc:'Seasoned beef logs, rice, yogurt sauce, fresh salad',tool:'Air fryer',time:'20 min',cal:610,p:42,c:55,f:22,fiber:4,recipe:'beef_kofta'},
+    {n:'Falafel bowl',desc:'Crispy chickpea falafel, hummus, tahini, pickled onion, rice',tool:'Air fryer',time:'30 min',cal:620,p:26,c:72,f:24,fiber:14,recipe:'falafel_bowl'},
   ]},
 ];
 let mealPicks={},mealLogToday=[],mealExpanded={};
@@ -1269,10 +1318,12 @@ async function initMeals(){
   renderMeals();
 }
 async function copyYesterdayMeals(){
-  const prev=await sg('meals-prev-v1');if(!prev||!prev.picks||!Object.keys(prev.picks).length){toast('No meals from yesterday');return;}
+  const prev=await sg('meals-prev-v1');if(!prev||!prev.picks||!Object.keys(prev.picks).length){toast('No recent meals to copy');return;}
+  const daysAgo=prev.date?Math.floor((now()-new Date(prev.date+'T12:00'))/86400000):99;
+  if(daysAgo>3){toast('Last saved meals are '+daysAgo+' days old — too stale');return;}
   mealPicks={...prev.picks};mealLogToday=[];
   SLOTS.forEach(slot=>{const idx=mealPicks[slot.id];if(idx!==undefined){const opt=slot.opts[idx];mealLogToday.push({name:opt.n,slot:slot.name,cal:opt.cal,p:opt.p,c:opt.c,f:opt.f,fiber:opt.fiber,ts:Date.now()});}});
-  saveMeals();renderMeals();toast('Copied yesterday\'s meals');
+  saveMeals();renderMeals();toast(daysAgo<=1?'Copied yesterday\'s meals':'Copied meals from '+daysAgo+' days ago');
 }
 async function saveMeals(){await ss('meals-v1',{date:dKey(now()),picks:mealPicks,log:mealLogToday});}
 function pickMeal(slotId,idx){
@@ -1287,18 +1338,67 @@ function clearMealLog(){mealLogToday=[];mealPicks={};saveMeals();renderMeals();}
 function getMealTotals(){let cal=0,p=0,c=0,f=0,fiber=0;SLOTS.forEach(slot=>{if(mealPicks[slot.id]===undefined)return;const opt=slot.opts[mealPicks[slot.id]];cal+=opt.cal;p+=opt.p;c+=opt.c;f+=opt.f;fiber+=opt.fiber;});return{cal,p,c,f,fiber};}
 function getLogTotals(){return mealLogToday.reduce((a,e)=>({cal:a.cal+e.cal,p:a.p+e.p,c:a.c+e.c,f:a.f+e.f,fiber:a.fiber+e.fiber}),{cal:0,p:0,c:0,f:0,fiber:0});}
 function toggleSlot(slotId){mealExpanded[slotId]=!mealExpanded[slotId];renderMeals();}
+function renderSuppsForSlot(slotId){
+  const groups=SLOT_SUPPS[slotId];if(!groups)return'';
+  const today=dKey(now());let sh='<div class="slot-supps">';
+  groups.forEach(gi=>{
+    const g=SUPPS[gi];if(!g)return;
+    g.items.forEach(s=>{
+      const done=!!sState[today+'|'+s.id];
+      sh+=`<div class="slot-supp${done?' done':''}" onclick="toggleSuppInline('${s.id}')">
+        <div class="ss-cb" style="${done?'background:var(--green);border-color:var(--green)':''}">${done?chkSvg(10):''}</div>
+        <div style="flex:1"><div class="ss-name"><span class="ss-icon">💊</span>${s.n}</div><div class="ss-dose">${s.dose}</div></div>
+      </div>`;
+    });
+  });
+  sh+='</div>';return sh;
+}
+function renderBedtimeSupps(){
+  const g=SUPPS[BEDTIME_SUPP_GROUP];if(!g)return'';
+  const today=dKey(now());const tk=g.items.filter(s=>sState[today+'|'+s.id]).length;
+  let h=`<div class="bedtime-slot"><div class="bedtime-hd">🌙 Bedtime — ${g.t} <span class="supp-badge">${tk}/${g.items.length}</span></div>`;
+  g.items.forEach(s=>{
+    const done=!!sState[today+'|'+s.id];
+    h+=`<div class="slot-supp${done?' done':''}" onclick="toggleSuppInline('${s.id}')">
+      <div class="ss-cb" style="${done?'background:var(--blue);border-color:var(--blue)':''}">${done?chkSvg(10):''}</div>
+      <div style="flex:1"><div class="ss-name"><span class="ss-icon">💊</span>${s.n}</div><div class="ss-dose">${s.dose}</div></div>
+    </div>`;
+  });
+  h+='</div>';return h;
+}
+function toggleSuppInline(id){
+  const today=dKey(now());const key=today+'|'+id;const wasOff=!sState[key];
+  sState[key]=!sState[key];saveSupps();renderMeals();
+  if(wasOff){setTimeout(()=>{const els=document.querySelectorAll('.slot-supp');els.forEach(el=>{if(el.getAttribute('onclick')&&el.getAttribute('onclick').indexOf("'"+id+"'")>=0){bounceCheck(el.querySelector('.ss-cb'));}});},50);}
+  if(typeof updateStatusBar==='function')updateStatusBar();
+}
+function getSlotSuppCount(slotId){
+  const groups=SLOT_SUPPS[slotId];if(!groups)return{tk:0,tot:0};
+  const today=dKey(now());let tk=0,tot=0;
+  groups.forEach(gi=>{const g=SUPPS[gi];if(!g)return;g.items.forEach(s=>{tot++;if(sState[today+'|'+s.id])tk++;});});
+  return{tk,tot};
+}
 function renderMeals(){
   let html='';
   SLOTS.forEach(slot=>{
     const pidx=mealPicks[slot.id]!==undefined?mealPicks[slot.id]:-1;
     const isOpen=!!mealExpanded[slot.id];const pickedOpt=pidx>=0?slot.opts[pidx]:null;
-    html+=`<div class="meal-slot"><div onclick="toggleSlot('${slot.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border-radius:var(--r);border:.5px solid var(--border);cursor:pointer">
+    const sc=getSlotSuppCount(slot.id);const hasSups=sc.tot>0;
+    html+=`<div class="meal-slot card-enter"><div onclick="toggleSlot('${slot.id}')" style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border-radius:${isOpen||hasSups?'var(--r) var(--r) 0 0':'var(--r)'};border:.5px solid var(--border);cursor:pointer">
       <div style="font-size:18px;color:${slot.color};transition:transform .2s;transform:rotate(${isOpen?'90':'0'}deg)">›</div>
       <div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between">
-        <span style="font-size:15px;font-weight:700;color:${slot.color}">${slot.name}</span><span class="slot-time-badge">${slot.time}</span>
+        <span style="font-size:15px;font-weight:700;color:${slot.color}">${slot.name}</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          ${hasSups?`<span class="supp-badge">💊 ${sc.tk}/${sc.tot}</span>`:''}
+          <span class="slot-time-badge">${slot.time}</span>
+        </div>
       </div>
       ${pickedOpt?`<div style="font-size:13px;color:var(--t2);margin-top:4px"><span style="color:${slot.color}">✓</span> ${pickedOpt.n} <span class="mpill" style="font-size:11px;padding:2px 7px">${pickedOpt.cal} cal</span></div>`:`<div style="font-size:13px;color:var(--t3);margin-top:4px">No meal selected</div>`}
       </div></div>`;
+    // Inline supplements for this slot
+    if(hasSups){
+      html+=`<div style="background:var(--card);border:.5px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:0 0 6px">${renderSuppsForSlot(slot.id)}</div>`;
+    }
     if(isOpen){
       html+='<div style="margin-top:6px">';
       slot.opts.forEach((opt,i)=>{
@@ -1317,7 +1417,10 @@ function renderMeals(){
     }
     html+='</div>';
   });
+  // Bedtime supplements after all meal slots
+  html+=renderBedtimeSupps();
   document.getElementById('meal-slots').innerHTML=html;
+  // Card stagger only on page entry, not every state update (avoids forced reflow jank)
   const plan=getMealTotals();const log=getLogTotals();const useLog=mealLogToday.length>0;const totals=useLog?log:plan;
   const calPct=Math.min(100,Math.round(totals.cal/MEAL_GOAL.cal*100));
   const calColor=calPct<85?'var(--green)':calPct<=105?'var(--amber)':'var(--red)';
@@ -1327,9 +1430,12 @@ function renderMeals(){
     <div class="cal-bar-wrap"><div class="cal-bar-lbl"><span style="font-weight:600">Calories</span><span style="color:${calColor};font-weight:700">${totals.cal} <span style="color:var(--t2);font-weight:400">/ ${MEAL_GOAL.cal}</span></span></div><div class="pbar"><div class="pfill" style="width:${calPct}%;background:${calColor}"></div></div></div>
     <div class="cal-bar-wrap"><div class="cal-bar-lbl"><span style="font-weight:600">Protein</span><span style="color:${pPct>=100?'var(--green)':'var(--blue)'};font-weight:700">${totals.p}g <span style="color:var(--t2);font-weight:400">/ ${MEAL_GOAL.p}g</span></span></div><div class="pbar"><div class="pfill" style="width:${pPct}%;background:${pPct>=100?'var(--green)':'var(--blue)'}"></div></div></div>
     <div class="dt-macgrid" style="margin-top:12px">
-      <div class="dtm"><div class="dtm-v" style="color:var(--blue)">${totals.c}g</div><div class="dtm-l">Carbs / ${MEAL_GOAL.c}g</div></div>
-      <div class="dtm"><div class="dtm-v" style="color:var(--amber)">${totals.f}g</div><div class="dtm-l">Fat / ${MEAL_GOAL.f}g</div></div>
+      <div class="dtm"><div class="dtm-v" style="color:var(--blue)"><span data-countup="${totals.c}">${totals.c}</span>g</div><div class="dtm-l">Carbs / ${MEAL_GOAL.c}g</div></div>
+      <div class="dtm"><div class="dtm-v" style="color:var(--amber)"><span data-countup="${totals.f}">${totals.f}</span>g</div><div class="dtm-l">Fat / ${MEAL_GOAL.f}g</div></div>
+      <div class="dtm" style="grid-column:1/-1"><div class="dtm-v" style="color:var(--green)"><span data-countup="${totals.fiber}">${totals.fiber}</span>g</div><div class="dtm-l">Fiber / ${MEAL_GOAL.fiber}g</div></div>
     </div>`;
+  animateProgressBars(document.getElementById('day-totals'));
+  countUpAll(document.getElementById('day-totals'));
   let logHtml='';
   if(!mealLogToday.length){logHtml='<div style="text-align:center;padding:20px;color:var(--t3);font-size:14px">Nothing logged yet — tap a meal above.</div>';}
   else{[...mealLogToday].reverse().forEach((e,ri)=>{const idx=mealLogToday.length-1-ri;logHtml+=`<div class="log-row"><div style="flex:1"><div class="log-name">${e.name}</div><div class="log-meta">${e.slot} · ${fmtTime(e.ts)}</div></div><span class="log-cal">+${e.cal}</span><span class="log-del" onclick="delMealLog(${idx})">✕</span></div>`;});}
@@ -1341,49 +1447,49 @@ function renderMeals(){
    REGION 7: SCHEDULE
    ═══════════════════════════════════════════════════════════ */
 const SDAYS=[
-  {id:'mon',label:'Mon',full:'Monday',sub:'Work · Gym after work',color:'#6b8fa6',blocks:[
+  {id:'mon',label:'Mon',full:'Monday',sub:'Work · Gym after work',color:'#7BA3B8',blocks:[
     {t:'7:00 AM',n:'Wake up — phone face down',d:'Feet on floor in 5 min.',cat:'morning'},{t:'7:05–7:20',n:'Morning reset',d:'Water, brush teeth, get dressed.',cat:'morning'},{t:'7:20–7:40',n:'Journal — 3 prompts',d:'',cat:'self'},{t:'7:40–8:00',n:'Breakfast + supplements',d:'D3, B-complex, zinc, omega-3.',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'Phone in pocket.',cat:'dog'},
     {t:'8:25–10:45',n:'Skill block — Coding',d:'2+ hours. Phone in another room.',cat:'self'},{t:'11:00–5:00',n:'WORK',d:'Snack 1 at 11:30. Lunch at 1:00.',cat:'work'},{t:'5:00 PM',n:'Work ends → GYM',d:'Go straight. Don\'t sit down.',cat:'fitness'},{t:'5:15–6:45',n:'GYM — Push',d:'Full effort.',cat:'fitness'},{t:'6:45–7:00',n:'Snack 2 + CoQ10',d:'',cat:'food'},
     {t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},{t:'8:00–8:25',n:'Evening dog walk 🐕',d:'',cat:'dog'},{t:'8:25–9:30',n:'Leisure',d:'Bounded. Ends at 9:30.',cat:'free'},{t:'9:30 PM',n:'PHONE TO CHARGER',d:'Across the room.',cat:'sleep'},{t:'10:30 PM',n:'Magnesium + lights out',d:'',cat:'sleep'},
   ]},
-  {id:'tue',label:'Tue',full:'Tuesday',sub:'Work · Rest · Career coach 9 AM',color:'#8a7eb0',blocks:[
+  {id:'tue',label:'Tue',full:'Tuesday',sub:'Work · Rest · Career coach 9 AM',color:'#9B8EBE',blocks:[
     {t:'7:00 AM',n:'Wake up',d:'',cat:'morning'},{t:'7:20–7:40',n:'Journal',d:'',cat:'self'},{t:'7:40–8:00',n:'Breakfast + supplements',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'9:00–10:00',n:'Career coach session',d:'Fixed.',cat:'fixed'},
     {t:'10:15–11:00',n:'Financial literacy',d:'',cat:'self'},{t:'11:00–5:00',n:'WORK — rest day',d:'',cat:'work'},{t:'5:30–6:30',n:'Creative — art/music',d:'',cat:'creative'},{t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},
     {t:'8:25–9:30',n:'Leisure',d:'',cat:'free'},{t:'9:30 PM',n:'PHONE TO CHARGER',d:'',cat:'sleep'},{t:'10:30 PM',n:'Magnesium + lights out',d:'',cat:'sleep'},
   ]},
-  {id:'wed',label:'Wed',full:'Wednesday',sub:'Work · Gym after work',color:'#6b8fa6',blocks:[
+  {id:'wed',label:'Wed',full:'Wednesday',sub:'Work · Gym after work',color:'#7BA3B8',blocks:[
     {t:'7:00 AM',n:'Wake up',d:'',cat:'morning'},{t:'7:20–7:40',n:'Journal',d:'',cat:'self'},{t:'7:40–8:00',n:'Breakfast + supplements',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'8:25–9:00',n:'Mindfulness',d:'20–30 min.',cat:'self'},
     {t:'9:00–10:45',n:'Language or reading',d:'',cat:'self'},{t:'11:00–5:00',n:'WORK',d:'',cat:'work'},{t:'5:00 PM',n:'GYM → Pull + Legs',d:'',cat:'fitness'},{t:'5:15–6:45',n:'GYM',d:'Full effort.',cat:'fitness'},{t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},
     {t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'8:25–9:30',n:'Leisure',d:'',cat:'free'},{t:'9:30 PM',n:'PHONE TO CHARGER',d:'',cat:'sleep'},{t:'10:30 PM',n:'Magnesium + lights out',d:'',cat:'sleep'},
   ]},
-  {id:'thu',label:'Thu',full:'Thursday',sub:'Work · Rest day',color:'#4a6340',blocks:[
+  {id:'thu',label:'Thu',full:'Thursday',sub:'Work · Rest day',color:'#5A7A4A',blocks:[
     {t:'7:00 AM',n:'Wake up',d:'',cat:'morning'},{t:'7:20–7:40',n:'Journal',d:'',cat:'self'},{t:'7:40–8:00',n:'Breakfast + supplements',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'8:25–10:45',n:'Skill block — free choice',d:'',cat:'self'},
     {t:'11:00–5:00',n:'WORK — rest day',d:'',cat:'work'},{t:'5:30–6:30',n:'Creative — writing',d:'',cat:'creative'},{t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'8:25–9:30',n:'Leisure',d:'',cat:'free'},
     {t:'9:30 PM',n:'PHONE TO CHARGER',d:'',cat:'sleep'},{t:'10:30 PM',n:'Magnesium + lights out',d:'',cat:'sleep'},
   ]},
-  {id:'fri',label:'Fri',full:'Friday',sub:'Day off · Therapy 9 AM · Gym · Social',color:'#b0687a',blocks:[
+  {id:'fri',label:'Fri',full:'Friday',sub:'Day off · Therapy 9 AM · Gym · Social',color:'#C47888',blocks:[
     {t:'7:30 AM',n:'Wake up (later)',d:'',cat:'morning'},{t:'7:40–8:00',n:'Breakfast + supplements',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'8:25–8:55',n:'Pre-therapy journal',d:'',cat:'self'},{t:'9:00–10:00',n:'THERAPY',d:'Fixed.',cat:'fixed'},
     {t:'10:15–11:45',n:'GYM',d:'Best energy day.',cat:'fitness'},{t:'12:15–1:00',n:'Lunch',d:'Post-gym meal.',cat:'food'},{t:'1:00–3:00',n:'Deep skill block',d:'',cat:'self'},{t:'3:00–5:00',n:'Free afternoon',d:'',cat:'free'},{t:'6:00 PM+',n:'SOCIAL NIGHT',d:'',cat:'social'},
     {t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},{t:'11:30 PM',n:'Wind down',d:'',cat:'sleep'},
   ]},
-  {id:'sat',label:'Sat',full:'Saturday',sub:'Day off · Creative + social',color:'#c49a5c',blocks:[
+  {id:'sat',label:'Sat',full:'Saturday',sub:'Day off · Creative + social',color:'#D4915C',blocks:[
     {t:'8:00 AM',n:'Wake up',d:'',cat:'morning'},{t:'8:00–8:30',n:'Breakfast + supplements',d:'',cat:'food'},{t:'8:30–8:55',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'9:00–10:00',n:'Outdoor activity',d:'Walk, hike, swim.',cat:'fitness'},{t:'10:20–12:20',n:'Creative deep work',d:'2 hours.',cat:'creative'},
     {t:'12:20–1:00',n:'Lunch',d:'',cat:'food'},{t:'1:00–3:00',n:'Finance + errands',d:'',cat:'admin'},{t:'3:00–6:00',n:'Free time',d:'',cat:'free'},{t:'6:00 PM+',n:'Social — dinner/hangout',d:'',cat:'social'},{t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},
     {t:'8:00 PM',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'11:30 PM',n:'Wind down',d:'',cat:'sleep'},
   ]},
-  {id:'sun',label:'Sun',full:'Sunday',sub:'Reset day · Instacart · Early bed',color:'#7c9a5e',blocks:[
+  {id:'sun',label:'Sun',full:'Sunday',sub:'Reset day · Instacart · Early bed',color:'#8FB06A',blocks:[
     {t:'8:00 AM',n:'Wake up',d:'',cat:'morning'},{t:'8:00–8:30',n:'Breakfast + supplements',d:'',cat:'food'},{t:'8:30–8:55',n:'Dog walk 🐕',d:'',cat:'dog'},{t:'9:00–10:00',n:'Weekly review',d:'',cat:'self'},{t:'10:00–12:00',n:'Free morning',d:'',cat:'free'},
     {t:'12:00–1:00',n:'Lunch',d:'',cat:'food'},{t:'3:00 PM',n:'Instacart order',d:'Check pantry first.',cat:'admin'},{t:'4:00–5:00',n:'Batch cook prep',d:'Clean air fryer, clear counter.',cat:'food'},{t:'7:00 PM',n:'Dinner + Mag + Losartan',d:'',cat:'food'},{t:'8:00–8:25',n:'Dog walk 🐕',d:'',cat:'dog'},
     {t:'9:00 PM',n:'PHONE TO CHARGER — Sunday curfew',d:'',cat:'sleep'},
   ]},
 ];
-const SCAT={morning:{bg:'var(--al)',c:'var(--ad)'},self:{bg:'var(--gl)',c:'var(--gd)'},food:{bg:'rgba(124,154,94,.15)',c:'#a3c47c'},dog:{bg:'var(--al)',c:'var(--ad)'},work:{bg:'rgba(107,105,96,.12)',c:'var(--t2)'},fitness:{bg:'var(--bl)',c:'var(--bd)'},fixed:{bg:'var(--pl)',c:'var(--pd)'},creative:{bg:'var(--pkl)',c:'var(--pkd)'},social:{bg:'var(--al)',c:'var(--ad)'},free:{bg:'rgba(107,105,96,.12)',c:'var(--t2)'},sleep:{bg:'rgba(107,105,96,.15)',c:'var(--t2)'},admin:{bg:'var(--rl)',c:'var(--rd)'}};
+const SCAT={morning:{bg:'var(--al)',c:'var(--ad)'},self:{bg:'var(--gl)',c:'var(--gd)'},food:{bg:'rgba(143,176,106,.15)',c:'#B5D48E'},dog:{bg:'var(--al)',c:'var(--ad)'},work:{bg:'rgba(138,125,106,.12)',c:'var(--t2)'},fitness:{bg:'var(--bl)',c:'var(--bd)'},fixed:{bg:'var(--pl)',c:'var(--pd)'},creative:{bg:'var(--pkl)',c:'var(--pkd)'},social:{bg:'var(--al)',c:'var(--ad)'},free:{bg:'rgba(138,125,106,.12)',c:'var(--t2)'},sleep:{bg:'rgba(138,125,106,.15)',c:'var(--t2)'},admin:{bg:'var(--rl)',c:'var(--rd)'}};
 let schedDay=(['sun','mon','tue','wed','thu','fri','sat'])[new Date().getDay()];
 let schedChecked={};
 async function initSched(){const saved=await sg('sched-v1');if(saved){if(saved.date===dKey(now()))schedChecked=saved.checked||{};}renderSched();}
 async function saveSched(){await ss('sched-v1',{date:dKey(now()),checked:schedChecked});}
 function switchSchedDay(id){schedDay=id;renderSched();}
-function toggleSchedBlock(key){schedChecked[key]=!schedChecked[key];saveSched();renderSched();}
+function toggleSchedBlock(key){var wasOff=!schedChecked[key];schedChecked[key]=!schedChecked[key];saveSched();renderSched();if(wasOff){var blocks=document.querySelectorAll('.sblock');blocks.forEach(function(bl){if(bl.getAttribute('onclick')&&bl.getAttribute('onclick').indexOf("'"+key+"'")>=0){var cb=bl.querySelector('.sb-check');bounceCheck(cb);}});}}
 function resetSched(){const day=SDAYS.find(d=>d.id===schedDay);day.blocks.forEach((_,i)=>{schedChecked[schedDay+'|'+i]=false;});saveSched();renderSched();}
 function renderSched(){
   const day=SDAYS.find(d=>d.id===schedDay);const todayId=(['sun','mon','tue','wed','thu','fri','sat'])[new Date().getDay()];
@@ -1391,7 +1497,8 @@ function renderSched(){
   document.getElementById('sched-day-tabs').innerHTML=SDAYS.map(d=>`<button class="sday-tab${d.id===schedDay?' on':''}" style="${d.id===schedDay?'background:'+d.color+';border-color:'+d.color:''}" onclick="switchSchedDay('${d.id}')">${d.label}${d.id===todayId&&d.id!==schedDay?' •':''}</button>`).join('');
   const total=day.blocks.length;const done=day.blocks.filter((_,i)=>schedChecked[schedDay+'|'+i]).length;
   const pct=Math.round(done/total*100);const pcol=pct===100?'var(--green)':pct>=50?'var(--amber)':'var(--blue)';
-  document.getElementById('sched-progress').innerHTML=`<div class="card" style="padding:14px 16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-size:15px;font-weight:600">${done} of ${total}</div><div style="font-size:16px;font-weight:700;color:${pcol}">${pct}%</div></div><div class="pbar"><div class="pfill" style="width:${pct}%;background:${pcol}"></div></div>${pct===100?'<div style="font-size:13px;color:var(--green);margin-top:6px;font-weight:600">✓ Full day complete</div>':''}</div>`;
+  document.getElementById('sched-progress').innerHTML=`<div class="card" style="padding:14px 16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-size:15px;font-weight:600">${done} of ${total}</div><div style="font-size:16px;font-weight:700;color:${pcol}"><span data-countup="${pct}">${pct}</span>%</div></div><div class="pbar"><div class="pfill" style="width:${pct}%;background:${pcol}"></div></div>${pct===100?'<div style="font-size:13px;color:var(--green);margin-top:6px;font-weight:600">✓ Full day complete</div>':''}</div>`;
+  animateProgressBars(document.getElementById('sched-progress'));countUpAll(document.getElementById('sched-progress'));
   // Find current block
   let nowBlockIdx=-1;const isToday=schedDay===todayId;
   if(isToday){const nw=new Date(),nm=nw.getHours()*60+nw.getMinutes();let lk=7;
@@ -1456,7 +1563,20 @@ function generateGroceryList(){
 }
 function toggleGrocItem(id){const item=groceryList.find(i=>i.id===id);if(item)item.checked=!item.checked;saveGrocery();renderGrocery();}
 function delGrocItem(id){groceryList=groceryList.filter(i=>i.id!==id);saveGrocery();renderGrocery();}
-function showAddGrocItem(){const name=prompt('Item name:');if(!name)return;const amt=prompt('Amount (e.g. "2 lbs"):');groceryList.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),name,amt:amt||'',section:'Other',checked:false});saveGrocery();renderGrocery();}
+function showAddGrocItem(){
+  const existing=document.getElementById('groc-add-form');
+  if(existing){existing.remove();return;}
+  const form=document.createElement('div');form.id='groc-add-form';
+  form.innerHTML=`<div class="card" style="padding:14px"><div style="font-size:14px;font-weight:600;margin-bottom:8px">Add item</div><input id="groc-add-name" type="text" placeholder="Item name" style="width:100%;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg);color:var(--tx);font-size:15px;font-family:inherit;margin-bottom:8px;outline:none"><input id="groc-add-amt" type="text" placeholder="Amount (e.g. 2 lbs)" style="width:100%;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg);color:var(--tx);font-size:15px;font-family:inherit;margin-bottom:10px;outline:none"><div style="display:flex;gap:8px"><button class="btn bp" style="flex:1" onclick="addGrocItemFromForm()">Add</button><button class="btn bg2" onclick="document.getElementById('groc-add-form').remove()">Cancel</button></div></div>`;
+  document.getElementById('groc-items').before(form);
+  document.getElementById('groc-add-name').focus();
+}
+function addGrocItemFromForm(){
+  const name=document.getElementById('groc-add-name').value.trim();if(!name)return;
+  const amt=document.getElementById('groc-add-amt').value.trim();
+  groceryList.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),name,amt:amt||'',section:'Other',checked:false});
+  saveGrocery();document.getElementById('groc-add-form').remove();renderGrocery();toast('Added: '+name);
+}
 function moveToPantry(){
   const checked=groceryList.filter(i=>i.checked);
   checked.forEach(item=>{
